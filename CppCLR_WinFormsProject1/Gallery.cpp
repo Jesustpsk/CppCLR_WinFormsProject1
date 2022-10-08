@@ -11,6 +11,7 @@ using std::vector;
 using std::string;
 using namespace msclr::interop;
 using namespace CppCLRWinFormsProject;
+vector <Gallery> Gallery::vec_Gal;
 
 string Gallery::time_now(){
 	time_t     now = time(0);
@@ -41,7 +42,7 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			String^ description = Microsoft::VisualBasic::Interaction::InputBox("¬ведите комментарий к фото:", "", "", 100, 100);
 			string std_name = marshal_as<string>("Picture " + Convert::ToString(imageList->Images->Count));
 			string std_description = marshal_as<string>(description);
-			vec_Gal.push_back(Gallery(std_name, std_description, std_time));
+			Gal.vec_Gal.push_back(Gallery(std_name, std_description, std_time));
 				
 			item->ImageIndex = imageList->Images->Count - 1;
 			listViewImages->EndUpdate();
@@ -50,35 +51,77 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 		}
 	}
 	I_GLOBAL = SIZE_GLOBAL;
-	//vec_Gal.resize(SIZE_GLOBAL);
 }
 
-void Gallery::ChangePictureName()
+void Gallery::ChangePictureName(int ind)
 {
-    
+	Gallery Gal;
+	String^ NewName = Microsoft::VisualBasic::Interaction::InputBox("¬ведите новое им€ фото:", "New Name", "", 100, 100);
+	string NName = marshal_as<string>(NewName);
+	Gal.vec_Gal.at(ind).PictureName = NName;
 }
 
-void Gallery::ChangePictureDescription()
+void Gallery::ChangePictureDescription(int ind)
 {
-    throw gcnew System::NotImplementedException();
+	Gallery Gal;
+	String^ NewDescription = Microsoft::VisualBasic::Interaction::InputBox("¬ведите новое описание фото:", "New Description", "", 100, 100);
+	string NDesc = marshal_as<string>(NewDescription);
+	Gal.vec_Gal.at(ind).PictureDescription = NDesc;
 }
 
-void Gallery::ShowPictureDate()
+void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
-    throw gcnew System::NotImplementedException();
+	//Gallery Gal;
+	//
+	//OpenFileDialog^ ofd = gcnew OpenFileDialog();
+	//ofd->Filter = "Image Files(*.JPG; *.PNG) |*.JPG; *.PNG|All files (*.*)|*.*";
+	//ofd->FilterIndex = 2;
+	//ofd->RestoreDirectory = true;
+	//String^ image = ofd->FileName;
+	//if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK){
+	//	//imageList->Images->RemoveAt(ind);
+	//	//imageList->Images[ind] = Image::FromFile(image);
+	//	
+	//	//listViewImages->BeginUpdate();
+	//	//listViewImages->Items[ind]->
+	//	//listViewImages->Refresh();
+	//}
+
+	//
 }
 
-void Gallery::DeletePicture()
+void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
-    throw gcnew System::NotImplementedException();
+	/*Gallery Gal;
+	Gal.vec_Gal.erase(vec_Gal.begin() + ind);
+	SIZE_GLOBAL--;
+	I_GLOBAL--;
+
+	ImageList^ IList = gcnew ImageList();
+	ListView^ LView = gcnew ListView();
+	for (int i = 0, j = 0; i < imageList->Images->Count; i++) {
+		if ((imageList->Images->Count - 1) != ind) {
+			IList->Images[i] = imageList->Images[j];
+			j++;
+		}
+	}
+	for (int i = 0, j = 0; i < listViewImages->Items->Count; i++) {
+		if ((listViewImages->Items->Count - 1) != ind) {
+			LView->Items[i] = listViewImages->Items[j];
+			j++;
+		}
+	}
+	imageList = IList;
+	listViewImages = LView;*/
 }
 
 void Gallery::GetStats(int ind)
 {
+	Gallery Gal;
 	String^ answ = "";
-	String^ name = marshal_as<String^>(vec_Gal.at(ind).PictureName);
-	String^ date = marshal_as<String^>(vec_Gal.at(ind).PictureDate);
-	String^ description = marshal_as<String^>(vec_Gal.at(ind).PictureDescription);
+	String^ name = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureName);
+	String^ date = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureDate);
+	String^ description = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureDescription);
 
 	answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description;
 	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);

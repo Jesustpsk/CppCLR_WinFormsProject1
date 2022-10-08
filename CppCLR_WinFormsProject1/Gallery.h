@@ -26,14 +26,14 @@ public:
 	}
 	int SIZE_GLOBAL = 0;
 	int I_GLOBAL = 0;
-	vector <Gallery> vec_Gal;
+	static vector <Gallery> vec_Gal;
 
 	string time_now();
 	void addImage(array <String^>^ images, ImageList ^, ListView ^);
-	void ChangePictureName();
-	void ChangePictureDescription();
-	void ShowPictureDate();
-	void DeletePicture();
+	void ChangePictureName(int ind);
+	void ChangePictureDescription(int ind);
+	void ChangePicture(int ind, ImageList^, ListView^);
+	void DeletePicture(int ind, ImageList^, ListView^);
 	void GetStats(int ind);
 
 private:

@@ -27,22 +27,42 @@ System::Void CppCLRWinFormsProject::Form1::contextMenuStrip1_Opening(System::Obj
 
 System::Void CppCLRWinFormsProject::Form1::changePictureNameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic name
 {
-	return System::Void();
+	Gallery Gal;
+	int ind = listViewImages->SelectedIndices[0];
+	if (listViewImages->SelectedIndices->Count > 1)
+		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	else
+		Gal.ChangePictureName(ind);
 }
 
 System::Void CppCLRWinFormsProject::Form1::changePictureDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic description
 {
-	return System::Void();
+	Gallery Gal;
+	int ind = listViewImages->SelectedIndices[0];
+	if (listViewImages->SelectedIndices->Count > 1)
+		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	else
+		Gal.ChangePictureDescription(ind);
 }
 
 System::Void CppCLRWinFormsProject::Form1::changePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic
 {
-	return System::Void();
+	Gallery Gal;
+	int ind = listViewImages->SelectedIndices[0];
+	if (listViewImages->SelectedIndices->Count > 1)
+		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	else
+		Gal.ChangePicture(ind, this->imageList, this->listViewImages);
 }
 
 System::Void CppCLRWinFormsProject::Form1::deletePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context delete pic
 {
-	return System::Void();
+	Gallery Gal;
+	int ind = listViewImages->SelectedIndices[0];
+	if (listViewImages->SelectedIndices->Count > 1)
+		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	else
+		Gal.DeletePicture(ind, this->imageList, this->listViewImages);
 }
 
 System::Void CppCLRWinFormsProject::Form1::showPictureStatsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Show picture stats
