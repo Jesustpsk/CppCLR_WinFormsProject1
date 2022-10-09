@@ -46,6 +46,11 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ optionsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ getInfoAboutAlbumToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ searchByToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ searchByNumberToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ searchByDescriptionToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ searchByCreationDateToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ modifiedDateToolStripMenuItem;
 
 
 
@@ -78,6 +83,11 @@ namespace CppCLRWinFormsProject {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->optionsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->getInfoAboutAlbumToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->searchByToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->searchByNumberToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->searchByDescriptionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->searchByCreationDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modifiedDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -165,7 +175,10 @@ namespace CppCLRWinFormsProject {
 			// 
 			// optionsToolStripMenuItem
 			// 
-			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->getInfoAboutAlbumToolStripMenuItem });
+			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->getInfoAboutAlbumToolStripMenuItem,
+					this->searchByToolStripMenuItem
+			});
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
 			this->optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->optionsToolStripMenuItem->Text = L"Options";
@@ -176,6 +189,44 @@ namespace CppCLRWinFormsProject {
 			this->getInfoAboutAlbumToolStripMenuItem->Size = System::Drawing::Size(187, 22);
 			this->getInfoAboutAlbumToolStripMenuItem->Text = L"Get info about album";
 			this->getInfoAboutAlbumToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getInfoAboutAlbumToolStripMenuItem_Click);
+			// 
+			// searchByToolStripMenuItem
+			// 
+			this->searchByToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->searchByNumberToolStripMenuItem,
+					this->searchByDescriptionToolStripMenuItem, this->searchByCreationDateToolStripMenuItem, this->modifiedDateToolStripMenuItem
+			});
+			this->searchByToolStripMenuItem->Name = L"searchByToolStripMenuItem";
+			this->searchByToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->searchByToolStripMenuItem->Text = L"Search by...";
+			// 
+			// searchByNumberToolStripMenuItem
+			// 
+			this->searchByNumberToolStripMenuItem->Name = L"searchByNumberToolStripMenuItem";
+			this->searchByNumberToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->searchByNumberToolStripMenuItem->Text = L"Number";
+			this->searchByNumberToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByNumberToolStripMenuItem_Click);
+			// 
+			// searchByDescriptionToolStripMenuItem
+			// 
+			this->searchByDescriptionToolStripMenuItem->Name = L"searchByDescriptionToolStripMenuItem";
+			this->searchByDescriptionToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->searchByDescriptionToolStripMenuItem->Text = L"Description";
+			this->searchByDescriptionToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByDescriptionToolStripMenuItem_Click);
+			// 
+			// searchByCreationDateToolStripMenuItem
+			// 
+			this->searchByCreationDateToolStripMenuItem->Name = L"searchByCreationDateToolStripMenuItem";
+			this->searchByCreationDateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->searchByCreationDateToolStripMenuItem->Text = L"Creation date";
+			this->searchByCreationDateToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByCreationDateToolStripMenuItem_Click);
+			// 
+			// modifiedDateToolStripMenuItem
+			// 
+			this->modifiedDateToolStripMenuItem->Name = L"modifiedDateToolStripMenuItem";
+			this->modifiedDateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->modifiedDateToolStripMenuItem->Text = L"Modified date";
+			this->modifiedDateToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::modifiedDateToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -205,5 +256,9 @@ namespace CppCLRWinFormsProject {
 		System::Void deletePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void showPictureStatsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void getInfoAboutAlbumToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void searchByNumberToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void searchByDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void searchByCreationDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void modifiedDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

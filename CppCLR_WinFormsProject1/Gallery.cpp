@@ -13,7 +13,6 @@ using namespace msclr::interop;
 using namespace CppCLRWinFormsProject;
 vector <Gallery> Gallery::vec_Gal;
 vector <string> Gallery::Changes;
-vector <string> Gallery::Add;
 
 string Gallery::time_now(){
 	time_t     now = time(0);
@@ -51,19 +50,20 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			listViewImages->EndUpdate();
 			listViewImages->LargeImageList = imageList;
 			listViewImages->Refresh();
-			Gal.Add.push_back(std_time);
 		}
 	}
 }
 
-void Gallery::ChangePictureName(int ind)
+void Gallery::ChangePictureName(int ind, ListView^ listViewImages)
 {
 	Gallery Gal;
 	String^ NewName = Microsoft::VisualBasic::Interaction::InputBox("Введите новое имя фото:", "New Name", "", 100, 100);
 	string NName = marshal_as<string>(NewName);
 	Gal.vec_Gal.at(ind).PictureName = NName;
+	listViewImages->Items[ind]->Text = NewName;
 	string time = time_now();
 	Gal.Changes.push_back(time);
+	Gal.vec_Gal.at(ind).PictureModified = time;
 }
 
 void Gallery::ChangePictureDescription(int ind)
@@ -74,6 +74,7 @@ void Gallery::ChangePictureDescription(int ind)
 	Gal.vec_Gal.at(ind).PictureDescription = NDesc;
 	string time = time_now();
 	Gal.Changes.push_back(time);
+	Gal.vec_Gal.at(ind).PictureModified = time;
 }
 
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -120,6 +121,7 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	}
 	string time = time_now();
 	Gal.Changes.push_back(time);
+	Gal.vec_Gal.at(ind).PictureModified = time;
 }
 
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -174,11 +176,64 @@ void Gallery::GetInfo()
 {
 	Gallery Gal;
 	String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
-	String^ LastAdd = marshal_as<String^>(Gal.Add.at(Gal.Add.size() - 1));
+	String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
 	String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
 	String^ answ = "";
 	answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
 	MessageBox::Show(answ, "Gallery Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+}
+
+
+
+void Gallery::Search_Num(ListView^ listViewImages)
+{
+	for(int i = 0; i < listViewImages->Items->Count; i++)
+		listViewImages->Items[i]->Selected = false;
+	Gallery Gal;
+	String^ Num = Microsoft::VisualBasic::Interaction::InputBox("Введите номер изображения для поиска: ", "Input number", "", 100, 100);
+	int num = Convert::ToInt32(Num);
+	num--;
+	
+	listViewImages->Items[num]->Selected = true;
+}
+
+void Gallery::Search_Desc(ListView^ listViewImages)
+{
+	for (int i = 0; i < listViewImages->Items->Count; i++)
+		listViewImages->Items[i]->Selected = false;
+	Gallery Gal;
+	String^ Description = Microsoft::VisualBasic::Interaction::InputBox("Введите описание изображения для поиска: ", "Input description", "", 100, 100);
+	string std_desc = marshal_as<string>(Description);
+	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+		if (Gal.vec_Gal[i].PictureDescription.find(std_desc) != -1)
+			listViewImages->Items[i]->Selected = true;
+	}
+}
+
+void Gallery::Search_Creation(ListView^ listViewImages)
+{
+	for (int i = 0; i < listViewImages->Items->Count; i++)
+		listViewImages->Items[i]->Selected = false;
+	Gallery Gal;
+	String^ Creation = Microsoft::VisualBasic::Interaction::InputBox("Введите дату создания изображения для поиска: \nFormat: YYYY-MM-DD HH:MM:SS", "Input creation date", "", 100, 100);
+	string std_creat = marshal_as<string>(Creation);
+	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+		if (Gal.vec_Gal[i].PictureDate == std_creat)
+			listViewImages->Items[i]->Selected = true;
+	}
+}
+
+void Gallery::Search_Modified(ListView^ listViewImages)
+{
+	for (int i = 0; i < listViewImages->Items->Count; i++)
+		listViewImages->Items[i]->Selected = false;
+	Gallery Gal;
+	String^ Modified = Microsoft::VisualBasic::Interaction::InputBox("Введите дату изменения изображения для поиска: \nFormat: YYYY-MM-DD HH:MM:SS", "Input modified date", "", 100, 100);
+	string std_mod = marshal_as<string>(Modified);
+	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+		if ((Gal.vec_Gal[i].PictureModified == std_mod) && (Gal.vec_Gal[i].PictureModified != ""))
+			listViewImages->Items[i]->Selected = true;
+	}
 }
 
 

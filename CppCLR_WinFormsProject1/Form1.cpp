@@ -32,7 +32,7 @@ System::Void CppCLRWinFormsProject::Form1::changePictureNameToolStripMenuItem_Cl
 	if (listViewImages->SelectedIndices->Count > 1)
 		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	else
-		Gal.ChangePictureName(ind);
+		Gal.ChangePictureName(ind, this->listViewImages);
 }
 
 System::Void CppCLRWinFormsProject::Form1::changePictureDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic description
@@ -79,4 +79,30 @@ System::Void CppCLRWinFormsProject::Form1::getInfoAboutAlbumToolStripMenuItem_Cl
 {
 	Gallery Gal;
 	Gal.GetInfo();
+}
+
+//SEARCH
+
+System::Void CppCLRWinFormsProject::Form1::searchByNumberToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY NUMBER
+{
+	Gallery Gal;
+	Gal.Search_Num(this->listViewImages);
+}
+
+System::Void CppCLRWinFormsProject::Form1::searchByDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY DESCRIPTION
+{
+	Gallery Gal;
+	Gal.Search_Desc(this->listViewImages);
+}
+
+System::Void CppCLRWinFormsProject::Form1::searchByCreationDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY CREATION DATE
+{
+	Gallery Gal;
+	Gal.Search_Creation(this->listViewImages);
+}
+
+System::Void CppCLRWinFormsProject::Form1::modifiedDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY MODIFIED DATE
+{
+	Gallery Gal;
+	Gal.Search_Modified(this->listViewImages);
 }

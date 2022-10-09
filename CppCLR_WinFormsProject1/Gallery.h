@@ -21,25 +21,30 @@ public:
 		PictureDescription = PicDes_value;
 		PictureDate = PicDate_value;
 		PicturePath = PicPath_value;
+		PictureModified = "";
 	}
 	~Gallery() {
 
 	}
 	static vector <Gallery> vec_Gal;
 	static vector <string> Changes;
-	static vector <string> Add;
 	string time_now();
 	void addImage(array <String^>^ images, ImageList ^, ListView ^);
-	void ChangePictureName(int ind);
+	void ChangePictureName(int ind, ListView^);
 	void ChangePictureDescription(int ind);
 	void ChangePicture(int ind, ImageList^, ListView^);
 	void DeletePicture(int ind, ImageList^, ListView^);
 	void GetStats(int ind);
 	void GetInfo();
+	void Search_Num(ListView^);
+	void Search_Desc(ListView^);
+	void Search_Creation(ListView^);
+	void Search_Modified(ListView^);
 
 private:
 	string PictureName;
 	string PictureDescription;
 	string PictureDate;
 	string PicturePath;
+	string PictureModified;
 };
