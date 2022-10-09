@@ -16,10 +16,11 @@ public:
 		PictureDescription = "";
 		PictureDate = "";
 	}
-	Gallery(string PicName_value, string PicDes_value, string PicDate_value) {
+	Gallery(string PicName_value, string PicDes_value, string PicDate_value, string PicPath_value) {
 		PictureName = PicName_value;
 		PictureDescription = PicDes_value;
 		PictureDate = PicDate_value;
+		PicturePath = PicPath_value;
 	}
 	~Gallery() {
 
@@ -40,4 +41,5 @@ private:
 	string PictureName;
 	string PictureDescription;
 	string PictureDate;
+	string PicturePath;
 };

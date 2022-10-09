@@ -42,7 +42,9 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			String^ description = Microsoft::VisualBasic::Interaction::InputBox("¬ведите комментарий к фото:", "", "", 100, 100);
 			string std_name = marshal_as<string>("Picture " + Convert::ToString(imageList->Images->Count));
 			string std_description = marshal_as<string>(description);
-			Gal.vec_Gal.push_back(Gallery(std_name, std_description, std_time));
+			String^ path = images[i];
+			string std_path = marshal_as<string>(path);
+			Gal.vec_Gal.push_back(Gallery(std_name, std_description, std_time, std_path));
 				
 			item->ImageIndex = imageList->Images->Count - 1;
 			listViewImages->EndUpdate();
@@ -92,27 +94,37 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
-	/*Gallery Gal;
+	Gallery Gal;
+
+	ImageList^ IList = gcnew ImageList();
+	IList->ColorDepth = ColorDepth::Depth32Bit;
+	ListView^ LView = gcnew ListView();
+	for (int i = 0; i < imageList->Images->Count; i++) {
+		if (i != ind) {
+			string path = Gal.vec_Gal[i].PicturePath;
+			Image^ img = Image::FromFile(marshal_as<String^>(path));
+			IList->Images->Add(img);
+		}
+	}
 	Gal.vec_Gal.erase(vec_Gal.begin() + ind);
 	SIZE_GLOBAL--;
 	I_GLOBAL--;
 
-	ImageList^ IList = gcnew ImageList();
-	ListView^ LView = gcnew ListView();
-	for (int i = 0, j = 0; i < imageList->Images->Count; i++) {
-		if ((imageList->Images->Count - 1) != ind) {
-			IList->Images[i] = imageList->Images[j];
-			j++;
-		}
+	imageList->Images->Clear();
+	for (int i = 0; i < IList->Images->Count; i++) {
+		string path = Gal.vec_Gal[i].PicturePath;
+		Image^ img = Image::FromFile(marshal_as<String^>(path));
+		imageList->Images->Add(img);
 	}
-	for (int i = 0, j = 0; i < listViewImages->Items->Count; i++) {
-		if ((listViewImages->Items->Count - 1) != ind) {
-			LView->Items[i] = listViewImages->Items[j];
-			j++;
-		}
+
+	listViewImages->BeginUpdate();
+	listViewImages->Items->Clear();
+	for (int i = 0; i < imageList->Images->Count; i++) {
+		ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal[i].PictureName), i));
+		item->ImageIndex = i;
 	}
-	imageList = IList;
-	listViewImages = LView;*/
+	listViewImages->EndUpdate();
+	listViewImages->Refresh();
 }
 
 void Gallery::GetStats(int ind)
