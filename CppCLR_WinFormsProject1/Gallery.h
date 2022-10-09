@@ -43,6 +43,7 @@ public:
 	void Search_Creation(ListView^);
 	void Search_Modified(ListView^);
 	void Search_Unfinished(ListView^);
+	void ViewMode(ListView^, PictureBox^);
 
 private:
 	string PictureName;

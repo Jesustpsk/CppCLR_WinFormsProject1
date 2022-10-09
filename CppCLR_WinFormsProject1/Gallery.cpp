@@ -180,7 +180,6 @@ void Gallery::GetInfo()
 	String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
 	String^ answ = "";
 	answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
-	MessageBox::Show(answ, "Gallery Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 
 
@@ -245,6 +244,18 @@ void Gallery::Search_Unfinished(ListView^ listViewImages)
 	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
 		if ((Gal.vec_Gal[i].PictureDescription == "") || (Gal.vec_Gal[i].PictureDescription == " "))
 			listViewImages->Items[i]->Selected = true;
+	}
+}
+
+void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
+{
+	Gallery Gal;
+	
+	if (listViewImages->SelectedIndices->Count > 0) {
+		int ind = listViewImages->SelectedIndices[0];
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(ind).PicturePath));
+		PB->SizeMode = PictureBoxSizeMode::StretchImage;
+		PB->Refresh();
 	}
 }
 

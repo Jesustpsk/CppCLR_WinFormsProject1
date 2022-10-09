@@ -22,6 +22,13 @@ namespace CppCLRWinFormsProject {
 			//TODO: Add the constructor code here
 			//
 		}
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ button5;
+	public:
+		static bool BtnMode = false;
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -52,6 +59,7 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ searchByCreationDateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ modifiedDateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ unfinishedImagesToolStripMenuItem;
+	private: System::Windows::Forms::Button^ button1;
 
 
 
@@ -90,8 +98,15 @@ namespace CppCLRWinFormsProject {
 			this->searchByCreationDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modifiedDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->unfinishedImagesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// listViewImages
@@ -100,7 +115,7 @@ namespace CppCLRWinFormsProject {
 			this->listViewImages->HideSelection = false;
 			this->listViewImages->Location = System::Drawing::Point(12, 27);
 			this->listViewImages->Name = L"listViewImages";
-			this->listViewImages->Size = System::Drawing::Size(885, 438);
+			this->listViewImages->Size = System::Drawing::Size(886, 438);
 			this->listViewImages->TabIndex = 0;
 			this->listViewImages->UseCompatibleStateImageBehavior = false;
 			// 
@@ -206,52 +221,118 @@ namespace CppCLRWinFormsProject {
 			// searchByNumberToolStripMenuItem
 			// 
 			this->searchByNumberToolStripMenuItem->Name = L"searchByNumberToolStripMenuItem";
-			this->searchByNumberToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->searchByNumberToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->searchByNumberToolStripMenuItem->Text = L"Number";
 			this->searchByNumberToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByNumberToolStripMenuItem_Click);
 			// 
 			// searchByDescriptionToolStripMenuItem
 			// 
 			this->searchByDescriptionToolStripMenuItem->Name = L"searchByDescriptionToolStripMenuItem";
-			this->searchByDescriptionToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->searchByDescriptionToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->searchByDescriptionToolStripMenuItem->Text = L"Description";
 			this->searchByDescriptionToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByDescriptionToolStripMenuItem_Click);
 			// 
 			// searchByCreationDateToolStripMenuItem
 			// 
 			this->searchByCreationDateToolStripMenuItem->Name = L"searchByCreationDateToolStripMenuItem";
-			this->searchByCreationDateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->searchByCreationDateToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->searchByCreationDateToolStripMenuItem->Text = L"Creation date";
 			this->searchByCreationDateToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByCreationDateToolStripMenuItem_Click);
 			// 
 			// modifiedDateToolStripMenuItem
 			// 
 			this->modifiedDateToolStripMenuItem->Name = L"modifiedDateToolStripMenuItem";
-			this->modifiedDateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->modifiedDateToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->modifiedDateToolStripMenuItem->Text = L"Modified date";
 			this->modifiedDateToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::modifiedDateToolStripMenuItem_Click);
 			// 
 			// unfinishedImagesToolStripMenuItem
 			// 
 			this->unfinishedImagesToolStripMenuItem->Name = L"unfinishedImagesToolStripMenuItem";
-			this->unfinishedImagesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->unfinishedImagesToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->unfinishedImagesToolStripMenuItem->Text = L"Unfinished images";
 			this->unfinishedImagesToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::unfinishedImagesToolStripMenuItem_Click);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(110, 471);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(92, 37);
+			this->button1->TabIndex = 3;
+			this->button1->Text = L"Photo View Mode";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Location = System::Drawing::Point(484, 27);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(400, 400);
+			this->pictureBox1->TabIndex = 4;
+			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &Form1::pictureBox1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(484, 434);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(28, 23);
+			this->button2->TabIndex = 5;
+			this->button2->Text = L"<<";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(856, 434);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(28, 23);
+			this->button3->TabIndex = 6;
+			this->button3->Text = L">>";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(594, 434);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->TabIndex = 7;
+			this->button4->Text = L"Prev";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(697, 434);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(75, 23);
+			this->button5->TabIndex = 8;
+			this->button5->Text = L"Next";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(910, 521);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->btnAddImgage);
 			this->Controls->Add(this->listViewImages);
+			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button5);
+			this->Controls->Add(this->button3);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"Form1";
 			this->contextMenuStrip1->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -271,5 +352,12 @@ namespace CppCLRWinFormsProject {
 		System::Void searchByCreationDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void modifiedDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void unfinishedImagesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {};
+
+		System::Void button2_Click(System::Object^ sender, System::EventArgs^ e); //first img
+		System::Void button3_Click(System::Object^ sender, System::EventArgs^ e); //last img
+		System::Void button4_Click(System::Object^ sender, System::EventArgs^ e); //prev img
+		System::Void button5_Click(System::Object^ sender, System::EventArgs^ e); //next img
 };
 }

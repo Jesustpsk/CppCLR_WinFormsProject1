@@ -112,3 +112,41 @@ System::Void CppCLRWinFormsProject::Form1::unfinishedImagesToolStripMenuItem_Cli
 	Gallery Gal;
 	Gal.Search_Unfinished(this->listViewImages);
 }
+
+//VIEW MODE
+
+System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Gallery Gal;
+	if (BtnMode == false) {
+		this->listViewImages->Width /= 2.;
+		BtnMode = true;
+		Gal.ViewMode(this->listViewImages, this->pictureBox1);
+	}
+	else if (BtnMode == true) {
+		this->listViewImages->Width *= 2.;
+		BtnMode = false;
+	}
+}
+
+
+
+System::Void CppCLRWinFormsProject::Form1::button2_Click(System::Object^ sender, System::EventArgs^ e) //on first img
+{
+	return System::Void();
+}
+
+System::Void CppCLRWinFormsProject::Form1::button3_Click(System::Object^ sender, System::EventArgs^ e) //on last img
+{
+	return System::Void();
+}
+
+System::Void CppCLRWinFormsProject::Form1::button4_Click(System::Object^ sender, System::EventArgs^ e) //prev img
+{
+	return System::Void();
+}
+
+System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender, System::EventArgs^ e) //next img
+{
+	return System::Void();
+}
