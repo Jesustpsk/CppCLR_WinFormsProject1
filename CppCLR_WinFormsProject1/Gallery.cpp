@@ -13,6 +13,7 @@ using namespace msclr::interop;
 using namespace CppCLRWinFormsProject;
 vector <Gallery> Gallery::vec_Gal;
 vector <string> Gallery::Changes;
+int Gallery::PicView_ind = 0;
 
 string Gallery::time_now(){
 	time_t     now = time(0);
@@ -251,9 +252,53 @@ void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 {
 	Gallery Gal;
 	
-	if (listViewImages->SelectedIndices->Count > 0) {
-		int ind = listViewImages->SelectedIndices[0];
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(ind).PicturePath));
+	if (listViewImages->Items->Count > 0) {
+		Gal.PicView_ind = 0;
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(PicView_ind).PicturePath));
+		PB->SizeMode = PictureBoxSizeMode::StretchImage;
+		PB->Refresh();
+	}
+}
+
+void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB)
+{
+	Gallery Gal;
+	if (Gal.PicView_ind != 0) {
+		Gal.PicView_ind = 0;
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(0).PicturePath));
+		PB->SizeMode = PictureBoxSizeMode::StretchImage;
+		PB->Refresh();
+	}
+}
+
+void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB)
+{
+	Gallery Gal;
+	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
+		Gal.PicView_ind = Gal.vec_Gal.size() - 1;
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PicturePath));
+		PB->SizeMode = PictureBoxSizeMode::StretchImage;
+		PB->Refresh();
+	}
+}
+
+void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB)
+{
+	Gallery Gal;
+	if (Gal.PicView_ind != 0) {
+		Gal.PicView_ind--;
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
+		PB->SizeMode = PictureBoxSizeMode::StretchImage;
+		PB->Refresh();
+	}
+}
+
+void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB)
+{
+	Gallery Gal;
+	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
+		Gal.PicView_ind++;
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 	}

@@ -30,20 +30,31 @@ public:
 	}
 	static vector <Gallery> vec_Gal;
 	static vector <string> Changes;
+	static int PicView_ind;
+
 	string time_now();
+
 	void addImage(array <String^>^ images, ImageList ^, ListView ^);
+
 	void ChangePictureName(int ind, ListView^);
 	void ChangePictureDescription(int ind);
 	void ChangePicture(int ind, ImageList^, ListView^);
 	void DeletePicture(int ind, ImageList^, ListView^);
 	void GetStats(int ind);
 	void GetInfo();
+
 	void Search_Num(ListView^);
 	void Search_Desc(ListView^);
 	void Search_Creation(ListView^);
 	void Search_Modified(ListView^);
 	void Search_Unfinished(ListView^);
+
 	void ViewMode(ListView^, PictureBox^);
+
+	void GoToFirst(ListView^, PictureBox^);
+	void GoToLast(ListView^, PictureBox^);
+	void Prev_Img(ListView^, PictureBox^);
+	void Next_Img(ListView^, PictureBox^);
 
 private:
 	string PictureName;

@@ -133,20 +133,24 @@ System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender,
 
 System::Void CppCLRWinFormsProject::Form1::button2_Click(System::Object^ sender, System::EventArgs^ e) //on first img
 {
-	return System::Void();
+	Gallery Gal;
+	Gal.GoToFirst(this->listViewImages, this->pictureBox1);
 }
 
 System::Void CppCLRWinFormsProject::Form1::button3_Click(System::Object^ sender, System::EventArgs^ e) //on last img
 {
-	return System::Void();
+	Gallery Gal;
+	Gal.GoToLast(this->listViewImages, this->pictureBox1);
 }
 
 System::Void CppCLRWinFormsProject::Form1::button4_Click(System::Object^ sender, System::EventArgs^ e) //prev img
 {
-	return System::Void();
+	Gallery Gal;
+	Gal.Prev_Img(this->listViewImages, this->pictureBox1);
 }
 
 System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender, System::EventArgs^ e) //next img
 {
-	return System::Void();
+	Gallery Gal;
+	Gal.Next_Img(this->listViewImages, this->pictureBox1);
 }
