@@ -73,23 +73,7 @@ void Gallery::ChangePictureDescription(int ind)
 
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
-	//Gallery Gal;
-	//
-	//OpenFileDialog^ ofd = gcnew OpenFileDialog();
-	//ofd->Filter = "Image Files(*.JPG; *.PNG) |*.JPG; *.PNG|All files (*.*)|*.*";
-	//ofd->FilterIndex = 2;
-	//ofd->RestoreDirectory = true;
-	//String^ image = ofd->FileName;
-	//if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK){
-	//	//imageList->Images->RemoveAt(ind);
-	//	//imageList->Images[ind] = Image::FromFile(image);
-	//	
-	//	//listViewImages->BeginUpdate();
-	//	//listViewImages->Items[ind]->
-	//	//listViewImages->Refresh();
-	//}
-
-	//
+	
 }
 
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -134,8 +118,9 @@ void Gallery::GetStats(int ind)
 	String^ name = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureName);
 	String^ date = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureDate);
 	String^ description = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureDescription);
+	String^ path = marshal_as<String^>(Gal.vec_Gal.at(ind).PicturePath);
 
-	answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description;
+	answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description + "\nPath: " + path;
 	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 
