@@ -51,6 +51,7 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ searchByDescriptionToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ searchByCreationDateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ modifiedDateToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ unfinishedImagesToolStripMenuItem;
 
 
 
@@ -88,6 +89,7 @@ namespace CppCLRWinFormsProject {
 			this->searchByDescriptionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->searchByCreationDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modifiedDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->unfinishedImagesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -192,9 +194,10 @@ namespace CppCLRWinFormsProject {
 			// 
 			// searchByToolStripMenuItem
 			// 
-			this->searchByToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->searchByToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->searchByNumberToolStripMenuItem,
-					this->searchByDescriptionToolStripMenuItem, this->searchByCreationDateToolStripMenuItem, this->modifiedDateToolStripMenuItem
+					this->searchByDescriptionToolStripMenuItem, this->searchByCreationDateToolStripMenuItem, this->modifiedDateToolStripMenuItem,
+					this->unfinishedImagesToolStripMenuItem
 			});
 			this->searchByToolStripMenuItem->Name = L"searchByToolStripMenuItem";
 			this->searchByToolStripMenuItem->Size = System::Drawing::Size(187, 22);
@@ -228,6 +231,13 @@ namespace CppCLRWinFormsProject {
 			this->modifiedDateToolStripMenuItem->Text = L"Modified date";
 			this->modifiedDateToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::modifiedDateToolStripMenuItem_Click);
 			// 
+			// unfinishedImagesToolStripMenuItem
+			// 
+			this->unfinishedImagesToolStripMenuItem->Name = L"unfinishedImagesToolStripMenuItem";
+			this->unfinishedImagesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->unfinishedImagesToolStripMenuItem->Text = L"Unfinished images";
+			this->unfinishedImagesToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::unfinishedImagesToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -260,5 +270,6 @@ namespace CppCLRWinFormsProject {
 		System::Void searchByDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void searchByCreationDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void modifiedDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void unfinishedImagesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

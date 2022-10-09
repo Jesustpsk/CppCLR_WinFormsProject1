@@ -106,3 +106,9 @@ System::Void CppCLRWinFormsProject::Form1::modifiedDateToolStripMenuItem_Click(S
 	Gallery Gal;
 	Gal.Search_Modified(this->listViewImages);
 }
+
+System::Void CppCLRWinFormsProject::Form1::unfinishedImagesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Gallery Gal;
+	Gal.Search_Unfinished(this->listViewImages);
+}

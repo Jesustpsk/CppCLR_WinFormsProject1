@@ -236,4 +236,16 @@ void Gallery::Search_Modified(ListView^ listViewImages)
 	}
 }
 
+void Gallery::Search_Unfinished(ListView^ listViewImages)
+{
+	for (int i = 0; i < listViewImages->Items->Count; i++)
+		listViewImages->Items[i]->Selected = false;
+	Gallery Gal;
+	
+	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+		if ((Gal.vec_Gal[i].PictureDescription == "") || (Gal.vec_Gal[i].PictureDescription == " "))
+			listViewImages->Items[i]->Selected = true;
+	}
+}
+
 

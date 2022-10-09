@@ -15,6 +15,8 @@ public:
 		PictureName = "";
 		PictureDescription = "";
 		PictureDate = "";
+		PicturePath = "";
+		PictureModified = "";
 	}
 	Gallery(string PicName_value, string PicDes_value, string PicDate_value, string PicPath_value) {
 		PictureName = PicName_value;
@@ -40,6 +42,7 @@ public:
 	void Search_Desc(ListView^);
 	void Search_Creation(ListView^);
 	void Search_Modified(ListView^);
+	void Search_Unfinished(ListView^);
 
 private:
 	string PictureName;
