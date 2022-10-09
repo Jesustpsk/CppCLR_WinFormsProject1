@@ -43,6 +43,9 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::ToolStripMenuItem^ changePictureToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ deletePictureToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ showPictureStatsToolStripMenuItem;
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ optionsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ getInfoAboutAlbumToolStripMenuItem;
 
 
 
@@ -65,23 +68,27 @@ namespace CppCLRWinFormsProject {
 			this->components = (gcnew System::ComponentModel::Container());
 			this->listViewImages = (gcnew System::Windows::Forms::ListView());
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->showPictureStatsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->changePictureNameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->changePictureDescriptionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->changePictureToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->deletePictureToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->btnAddImgage = (gcnew System::Windows::Forms::Button());
 			this->imageList = (gcnew System::Windows::Forms::ImageList(this->components));
-			this->showPictureStatsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->optionsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->getInfoAboutAlbumToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuStrip1->SuspendLayout();
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// listViewImages
 			// 
 			this->listViewImages->ContextMenuStrip = this->contextMenuStrip1;
 			this->listViewImages->HideSelection = false;
-			this->listViewImages->Location = System::Drawing::Point(12, 12);
+			this->listViewImages->Location = System::Drawing::Point(12, 27);
 			this->listViewImages->Name = L"listViewImages";
-			this->listViewImages->Size = System::Drawing::Size(885, 453);
+			this->listViewImages->Size = System::Drawing::Size(885, 438);
 			this->listViewImages->TabIndex = 0;
 			this->listViewImages->UseCompatibleStateImageBehavior = false;
 			// 
@@ -93,8 +100,15 @@ namespace CppCLRWinFormsProject {
 					this->deletePictureToolStripMenuItem
 			});
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
-			this->contextMenuStrip1->Size = System::Drawing::Size(218, 136);
+			this->contextMenuStrip1->Size = System::Drawing::Size(218, 114);
 			this->contextMenuStrip1->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &Form1::contextMenuStrip1_Opening);
+			// 
+			// showPictureStatsToolStripMenuItem
+			// 
+			this->showPictureStatsToolStripMenuItem->Name = L"showPictureStatsToolStripMenuItem";
+			this->showPictureStatsToolStripMenuItem->Size = System::Drawing::Size(217, 22);
+			this->showPictureStatsToolStripMenuItem->Text = L"Show picture stats";
+			this->showPictureStatsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::showPictureStatsToolStripMenuItem_Click);
 			// 
 			// changePictureNameToolStripMenuItem
 			// 
@@ -140,24 +154,45 @@ namespace CppCLRWinFormsProject {
 			this->imageList->ImageSize = System::Drawing::Size(100, 100);
 			this->imageList->TransparentColor = System::Drawing::Color::Transparent;
 			// 
-			// showPictureStatsToolStripMenuItem
+			// menuStrip1
 			// 
-			this->showPictureStatsToolStripMenuItem->Name = L"showPictureStatsToolStripMenuItem";
-			this->showPictureStatsToolStripMenuItem->Size = System::Drawing::Size(217, 22);
-			this->showPictureStatsToolStripMenuItem->Text = L"Show picture stats";
-			this->showPictureStatsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::showPictureStatsToolStripMenuItem_Click);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->optionsToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(910, 24);
+			this->menuStrip1->TabIndex = 2;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// optionsToolStripMenuItem
+			// 
+			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->getInfoAboutAlbumToolStripMenuItem });
+			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
+			this->optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->optionsToolStripMenuItem->Text = L"Options";
+			// 
+			// getInfoAboutAlbumToolStripMenuItem
+			// 
+			this->getInfoAboutAlbumToolStripMenuItem->Name = L"getInfoAboutAlbumToolStripMenuItem";
+			this->getInfoAboutAlbumToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->getInfoAboutAlbumToolStripMenuItem->Text = L"Get info about album";
+			this->getInfoAboutAlbumToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getInfoAboutAlbumToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(910, 521);
+			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->btnAddImgage);
 			this->Controls->Add(this->listViewImages);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"Form1";
 			this->contextMenuStrip1->ResumeLayout(false);
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -169,5 +204,6 @@ namespace CppCLRWinFormsProject {
 		System::Void changePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void deletePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void showPictureStatsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		System::Void getInfoAboutAlbumToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

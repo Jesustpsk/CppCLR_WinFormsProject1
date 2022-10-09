@@ -74,3 +74,9 @@ System::Void CppCLRWinFormsProject::Form1::showPictureStatsToolStripMenuItem_Cli
 	else
 		Gal.GetStats(ind);
 }
+
+System::Void CppCLRWinFormsProject::Form1::getInfoAboutAlbumToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Get info about album
+{
+	Gallery Gal;
+	Gal.GetInfo();
+}

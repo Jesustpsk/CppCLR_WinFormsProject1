@@ -12,6 +12,8 @@ using std::string;
 using namespace msclr::interop;
 using namespace CppCLRWinFormsProject;
 vector <Gallery> Gallery::vec_Gal;
+vector <string> Gallery::Changes;
+vector <string> Gallery::Add;
 
 string Gallery::time_now(){
 	time_t     now = time(0);
@@ -26,19 +28,19 @@ string Gallery::time_now(){
 void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^listViewImages)
 {
 	Gallery Gal;
-	string std_time = time_now();
+	
 
 	int size = images->Length;
 
 	for (int i = 0; i < size; i++) {
-		
+		string std_time = time_now();
 		if (images[i] != "")
 		{
 			imageList->Images->Add(Image::FromFile(images[i]));
 			listViewImages->BeginUpdate();
 			ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem("Picture " + Convert::ToString(imageList->Images->Count), imageList->Images->Count - 1));
 			
-			String^ description = Microsoft::VisualBasic::Interaction::InputBox("Введите комментарий к фото:", "", "", 100, 100);
+			String^ description = Microsoft::VisualBasic::Interaction::InputBox("Введите комментарий к фото:", "Input description", "", 100, 100);
 			string std_name = marshal_as<string>("Picture " + Convert::ToString(imageList->Images->Count));
 			string std_description = marshal_as<string>(description);
 			String^ path = images[i];
@@ -49,6 +51,7 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			listViewImages->EndUpdate();
 			listViewImages->LargeImageList = imageList;
 			listViewImages->Refresh();
+			Gal.Add.push_back(std_time);
 		}
 	}
 }
@@ -59,6 +62,8 @@ void Gallery::ChangePictureName(int ind)
 	String^ NewName = Microsoft::VisualBasic::Interaction::InputBox("Введите новое имя фото:", "New Name", "", 100, 100);
 	string NName = marshal_as<string>(NewName);
 	Gal.vec_Gal.at(ind).PictureName = NName;
+	string time = time_now();
+	Gal.Changes.push_back(time);
 }
 
 void Gallery::ChangePictureDescription(int ind)
@@ -67,6 +72,8 @@ void Gallery::ChangePictureDescription(int ind)
 	String^ NewDescription = Microsoft::VisualBasic::Interaction::InputBox("Введите новое описание фото:", "New Description", "", 100, 100);
 	string NDesc = marshal_as<string>(NewDescription);
 	Gal.vec_Gal.at(ind).PictureDescription = NDesc;
+	string time = time_now();
+	Gal.Changes.push_back(time);
 }
 
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -111,6 +118,8 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 		listViewImages->EndUpdate();
 		listViewImages->Refresh();
 	}
+	string time = time_now();
+	Gal.Changes.push_back(time);
 }
 
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -144,6 +153,8 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	}
 	listViewImages->EndUpdate();
 	listViewImages->Refresh();
+	string time = time_now();
+	Gal.Changes.push_back(time);
 }
 
 void Gallery::GetStats(int ind)
@@ -157,6 +168,17 @@ void Gallery::GetStats(int ind)
 
 	answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description + "\nPath: " + path;
 	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
+}
+
+void Gallery::GetInfo()
+{
+	Gallery Gal;
+	String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
+	String^ LastAdd = marshal_as<String^>(Gal.Add.at(Gal.Add.size() - 1));
+	String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
+	String^ answ = "";
+	answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
+	MessageBox::Show(answ, "Gallery Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 
 

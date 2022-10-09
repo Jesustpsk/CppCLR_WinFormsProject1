@@ -26,7 +26,8 @@ public:
 
 	}
 	static vector <Gallery> vec_Gal;
-
+	static vector <string> Changes;
+	static vector <string> Add;
 	string time_now();
 	void addImage(array <String^>^ images, ImageList ^, ListView ^);
 	void ChangePictureName(int ind);
@@ -34,6 +35,7 @@ public:
 	void ChangePicture(int ind, ImageList^, ListView^);
 	void DeletePicture(int ind, ImageList^, ListView^);
 	void GetStats(int ind);
+	void GetInfo();
 
 private:
 	string PictureName;
