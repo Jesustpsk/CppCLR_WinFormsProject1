@@ -25,8 +25,6 @@ public:
 	~Gallery() {
 
 	}
-	int SIZE_GLOBAL = 0;
-	int I_GLOBAL = 0;
 	static vector <Gallery> vec_Gal;
 
 	string time_now();

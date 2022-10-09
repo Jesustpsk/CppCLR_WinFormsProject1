@@ -29,9 +29,8 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 	string std_time = time_now();
 
 	int size = images->Length;
-	SIZE_GLOBAL += images->Length;
 
-	for (int i = I_GLOBAL; i < SIZE_GLOBAL; i++) {
+	for (int i = 0; i < size; i++) {
 		
 		if (images[i] != "")
 		{
@@ -52,7 +51,6 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			listViewImages->Refresh();
 		}
 	}
-	I_GLOBAL = SIZE_GLOBAL;
 }
 
 void Gallery::ChangePictureName(int ind)
@@ -73,7 +71,46 @@ void Gallery::ChangePictureDescription(int ind)
 
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
-	
+	Gallery Gal;
+
+	ImageList^ IList = gcnew ImageList();
+	IList->ColorDepth = ColorDepth::Depth32Bit;
+
+	OpenFileDialog^ ofd = gcnew OpenFileDialog();
+	ofd->Filter = "Image Files(*.JPG; *.PNG) |*.JPG; *.PNG|All files (*.*)|*.*";
+	ofd->FilterIndex = 2;
+	ofd->RestoreDirectory = true;
+
+	if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		for (int i = 0; i < imageList->Images->Count; i++) {
+			if (i != ind) {
+				string path = Gal.vec_Gal.at(i).PicturePath;
+				Image^ img = Image::FromFile(marshal_as<String^>(path));
+				IList->Images->Add(img);
+			}
+			else {
+				Image^ img = Image::FromFile(ofd->FileName);
+				IList->Images->Add(img);
+				Gal.vec_Gal.at(i).PicturePath = marshal_as<string>(ofd->FileName);
+			}
+		}
+
+		imageList->Images->Clear();
+		for (int i = 0; i < IList->Images->Count; i++) {
+			string path = Gal.vec_Gal.at(i).PicturePath;
+			Image^ img = Image::FromFile(marshal_as<String^>(path));
+			imageList->Images->Add(img);
+		}
+
+		listViewImages->BeginUpdate();
+		listViewImages->Items->Clear();
+		for (int i = 0; i < imageList->Images->Count; i++) {
+			ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal.at(i).PictureName), i));
+			item->ImageIndex = i;
+		}
+		listViewImages->EndUpdate();
+		listViewImages->Refresh();
+	}
 }
 
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -82,21 +119,19 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 
 	ImageList^ IList = gcnew ImageList();
 	IList->ColorDepth = ColorDepth::Depth32Bit;
-	ListView^ LView = gcnew ListView();
+
 	for (int i = 0; i < imageList->Images->Count; i++) {
 		if (i != ind) {
-			string path = Gal.vec_Gal[i].PicturePath;
+			string path = Gal.vec_Gal.at(i).PicturePath;
 			Image^ img = Image::FromFile(marshal_as<String^>(path));
 			IList->Images->Add(img);
 		}
 	}
 	Gal.vec_Gal.erase(vec_Gal.begin() + ind);
-	SIZE_GLOBAL--;
-	I_GLOBAL--;
 
 	imageList->Images->Clear();
 	for (int i = 0; i < IList->Images->Count; i++) {
-		string path = Gal.vec_Gal[i].PicturePath;
+		string path = Gal.vec_Gal.at(i).PicturePath;
 		Image^ img = Image::FromFile(marshal_as<String^>(path));
 		imageList->Images->Add(img);
 	}
@@ -104,7 +139,7 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	listViewImages->BeginUpdate();
 	listViewImages->Items->Clear();
 	for (int i = 0; i < imageList->Images->Count; i++) {
-		ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal[i].PictureName), i));
+		ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal.at(i).PictureName), i));
 		item->ImageIndex = i;
 	}
 	listViewImages->EndUpdate();
