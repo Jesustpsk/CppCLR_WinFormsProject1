@@ -193,7 +193,7 @@ namespace CppCLRWinFormsProject {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->optionsToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1213, 30);
+			this->menuStrip1->Size = System::Drawing::Size(1213, 28);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -204,7 +204,7 @@ namespace CppCLRWinFormsProject {
 					this->searchByToolStripMenuItem
 			});
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
-			this->optionsToolStripMenuItem->Size = System::Drawing::Size(75, 26);
+			this->optionsToolStripMenuItem->Size = System::Drawing::Size(75, 24);
 			this->optionsToolStripMenuItem->Text = L"Options";
 			// 
 			// getInfoAboutAlbumToolStripMenuItem
@@ -353,7 +353,8 @@ namespace CppCLRWinFormsProject {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"Gallery";
 			this->contextMenuStrip1->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
