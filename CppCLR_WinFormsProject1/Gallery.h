@@ -51,7 +51,7 @@ public:
 	void Search_Unfinished(ListView^);
 
 	void ViewMode(ListView^, PictureBox^);
-	void ChangeMode(ListView^, PictureBox^, Form1^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^);
+	void ChangeMode(ListView^, PictureBox^, Form1^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, PictureBox^, PictureBox^);
 
 	void GoToFirst(ListView^, PictureBox^);
 	void GoToLast(ListView^, PictureBox^);

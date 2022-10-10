@@ -33,6 +33,8 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Button^ button9;
 	private: System::Windows::Forms::Button^ button10;
 	private: System::Windows::Forms::Button^ button11;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	public:
 		static bool BtnMode = false;
 	protected:
@@ -86,6 +88,7 @@ namespace CppCLRWinFormsProject {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->listViewImages = (gcnew System::Windows::Forms::ListView());
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->showPictureStatsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -116,9 +119,13 @@ namespace CppCLRWinFormsProject {
 			this->button9 = (gcnew System::Windows::Forms::Button());
 			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->button11 = (gcnew System::Windows::Forms::Button());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// listViewImages
@@ -399,16 +406,36 @@ namespace CppCLRWinFormsProject {
 			this->button11->Visible = false;
 			this->button11->Click += gcnew System::EventHandler(this, &Form1::button11_Click);
 			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->Location = System::Drawing::Point(636, 472);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(40, 36);
+			this->pictureBox2->TabIndex = 15;
+			this->pictureBox2->TabStop = false;
+			this->pictureBox2->Visible = false;
+			// 
+			// pictureBox3
+			// 
+			this->pictureBox3->Location = System::Drawing::Point(701, 473);
+			this->pictureBox3->Name = L"pictureBox3";
+			this->pictureBox3->Size = System::Drawing::Size(53, 35);
+			this->pictureBox3->TabIndex = 16;
+			this->pictureBox3->TabStop = false;
+			this->pictureBox3->Visible = false;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(910, 521);
+			this->Controls->Add(this->pictureBox3);
+			this->Controls->Add(this->pictureBox2);
+			this->Controls->Add(this->listViewImages);
 			this->Controls->Add(this->button11);
 			this->Controls->Add(this->button10);
 			this->Controls->Add(this->button9);
 			this->Controls->Add(this->button8);
-			this->Controls->Add(this->listViewImages);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
@@ -427,6 +454,8 @@ namespace CppCLRWinFormsProject {
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

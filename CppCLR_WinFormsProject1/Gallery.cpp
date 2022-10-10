@@ -246,7 +246,7 @@ void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 	}
 }
 
-void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, Button^ b1, Button^ b2, Button^ b3, Button^ b4, Button^ b5, Button^ b6, Button^ b7, Button^ b0, Button^ b8, Button^ b9, Button^ b10, Button^ b11)
+void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, Button^ b1, Button^ b2, Button^ b3, Button^ b4, Button^ b5, Button^ b6, Button^ b7, Button^ b0, Button^ b8, Button^ b9, Button^ b10, Button^ b11, PictureBox^ back1, PictureBox^ back2)
 {
 	if (Gal.PicView_mode == 0) {
 		Gal.PicView_mode = 1;
@@ -256,52 +256,65 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		form->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 		double form_x = form->Width;
 		double form_y = form->Height;
-		Point pt(form_x - 102, form_y - 47);
+		double size_x = form_x - (form_x / 2);
 
+		Point p_back1((form_x / 2) + (size_x / 2), 25);
+		back1->Size = System::Drawing::Size((form_x / 2), form_y);
+		back1->Location = p_back1;
+		back1->Visible = true;
+		back1->Image = Image::FromFile("D:\\Учеба\\Программирование Ураева\\kursach_1\\CppCLR_WinFormsProject1\\data\\background.png"); //изменить путь для корректной работы!!!
+
+		Point p_back2(0, (form_y / 2) + (size_x / 2) - 20);
+		back2->Size = System::Drawing::Size(form_x, form_y);
+		back2->Location = p_back2;
+		back2->Visible = true;
+		back2->Image = Image::FromFile("D:\\Учеба\\Программирование Ураева\\kursach_1\\CppCLR_WinFormsProject1\\data\\background.png"); //изменить путь для корректной работы!!!
+
+		Point pt(form_x - 102, form_y - 47);
 		listViewImages->Visible = false;
 		b0->Visible = false;
 		b1->Visible = false;
 		b7->Location = pt;
-
+		b7->BringToFront();
 		Point pt2((form_x / 2) - 50, form_y - 60);
 		b6->Size = System::Drawing::Size(50, 50);
 		b6->Location = pt2;
-
+		b6->BringToFront();
 		Point pt3((form_x / 2) - 110, form_y - 60);
 		b4->Size = System::Drawing::Size(50, 50);
 		b4->Location = pt3;
-
+		b4->BringToFront();
 		Point pt4((form_x / 2) + 10, form_y - 60);
 		b5->Size = System::Drawing::Size(50, 50);
 		b5->Location = pt4;
-
+		b5->BringToFront();
 		Point pt5((form_x / 2) - 170, form_y - 60);
 		b2->Size = System::Drawing::Size(50, 50);
 		b2->Location = pt5;
-
+		b2->BringToFront();
 		Point pt6((form_x / 2) + 70, form_y - 60);
 		b3->Size = System::Drawing::Size(50, 50);
 		b3->Location = pt6;
-
-		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
-		double size_x = form_x - (form_x / 2);
-		Point pb((form_x / 2) - (size_x / 2), 30);
-		PB->Location = pb;
-
+		b3->BringToFront();
 		Point pt7((form_x / 2) - 230, form_y - 60);
 		b8->Location = pt7;
 		b8->Visible = true;
-
+		b8->BringToFront();
 		Point pt8((form_x / 2) + 130, form_y - 60);
 		b9->Location = pt8;
 		b9->Visible = true;
-
+		b9->BringToFront();
 		Point pt9((form_x / 2) + (size_x / 2) + 20, (form_y / 2) - 60);
 		b10->Location = pt9;
 		b10->Visible = true;
+		b10->BringToFront();
 		Point pt10((form_x / 2) + (size_x / 2) + 20, (form_y / 2) + 10);
 		b11->Location = pt10;
 		b11->Visible = true;
+		b11->BringToFront();
+		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
+		Point pb((form_x / 2) - (size_x / 2), 30);
+		PB->Location = pb;
 	}
 	else {
 		Gal.PicView_mode = 0;
@@ -344,6 +357,8 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		b9->Visible = false;
 		b10->Visible = false;
 		b11->Visible = false;
+		back1->Visible = false;
+		back2->Visible = false;
 	}
 }
 
@@ -410,10 +425,9 @@ void Gallery::Img_minus(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::Img_plus(ListView^ listViewImages, PictureBox^ PB)
 {
-	/*if (PB->Width != 1200) {
+	if (PB->Width != 1200) {
 		PB->Width += 50;
 		PB->Height += 50;
-	}*/
-	/*Image^ img = PB->Image;
-	img->Size =*/
+	}
+	
 }
