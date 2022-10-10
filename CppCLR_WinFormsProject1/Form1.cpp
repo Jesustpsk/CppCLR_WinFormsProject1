@@ -166,6 +166,20 @@ System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender, System::EventArgs^ e) //change mode
 {
 	Gallery Gal;
-	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this);
+	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this, this->button1, this->button2, this->button3, this->button4, this->button5, this->button6, this->button7, this->btnAddImgage, this->button8, this->button9);
+}
+
+
+
+System::Void CppCLRWinFormsProject::Form1::button8_Click(System::Object^ sender, System::EventArgs^ e) //flip left
+{
+	Gallery Gal;
+	Gal.Rotate_Img(this->listViewImages, this->pictureBox1);
+}
+
+System::Void CppCLRWinFormsProject::Form1::button9_Click(System::Object^ sender, System::EventArgs^ e) //flip right
+{
+	Gallery Gal;
+	Gal.Flip_Img(this->listViewImages, this->pictureBox1);
 }
 

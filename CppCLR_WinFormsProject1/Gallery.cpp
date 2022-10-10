@@ -261,19 +261,96 @@ void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 	}
 }
 
-void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, Button^ b1, Button^ b2, Button^ b3, Button^ b4, Button^ b5, Button^ b6, Button^ b7, Button^ b0, Button^ b8, Button^ b9)
 {
 	Gallery Gal;
 	if (Gal.PicView_mode == 0) {
 		Gal.PicView_mode = 1;
+
 		form->TopMost = true;
 		form->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 		form->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+		double form_x = form->Width;
+		double form_y = form->Height;
+		Point pt(form_x - 102, form_y - 47);
+
+		listViewImages->Visible = false;
+		b0->Visible = false;
+		b1->Visible = false;
+		b7->Location = pt;
+
+		Point pt2((form_x / 2) - 50, form_y - 60);
+		b6->Size = System::Drawing::Size(50, 50);
+		b6->Location = pt2;
+
+		Point pt3((form_x / 2) - 110, form_y - 60);
+		b4->Size = System::Drawing::Size(50, 50);
+		b4->Location = pt3;
+
+		Point pt4((form_x / 2) + 10, form_y - 60);
+		b5->Size = System::Drawing::Size(50, 50);
+		b5->Location = pt4;
+
+		Point pt5((form_x / 2) - 170, form_y - 60);
+		b2->Size = System::Drawing::Size(50, 50);
+		b2->Location = pt5;
+
+		Point pt6((form_x / 2) + 70, form_y - 60);
+		b3->Size = System::Drawing::Size(50, 50);
+		b3->Location = pt6;
+
+		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
+		double size_x = form_x - (form_x / 2);
+		Point pb((form_x / 2) - (size_x / 2), 30);
+		PB->Location = pb;
+
+		Point pt7((form_x / 2) - 230, form_y - 60);
+		b8->Location = pt7;
+		b8->Visible = true;
+
+		Point pt8((form_x / 2) + 130, form_y - 60);
+		b9->Location = pt8;
+		b9->Visible = true;
 	}
 	else {
 		Gal.PicView_mode = 0;
+
 		form->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
 		form->WindowState = FormWindowState::Normal;
+
+		listViewImages->Visible = true;
+		b0->Visible = true;
+		b1->Visible = true;
+
+		Point pt(792, 472);
+		b7->Location = pt;
+
+		Point pt2(673, 434);
+		b6->Size = System::Drawing::Size(21, 22);
+		b6->Location = pt2;
+
+		Point pt3(590, 434);
+		b4->Size = System::Drawing::Size(75, 23);
+		b4->Location = pt3;
+
+		Point pt4(701, 434);
+		b5->Size = System::Drawing::Size(75, 23);
+		b5->Location = pt4;
+
+		Point pt5(484, 434);
+		b2->Size = System::Drawing::Size(28, 23);
+		b2->Location = pt5;
+
+		Point pt6(856, 434);
+		b3->Size = System::Drawing::Size(28, 23);
+		b3->Location = pt6;
+
+		Point pb(484, 27);
+		PB->Size = System::Drawing::Size(400, 400);
+		PB->Location = pb;
+
+		b8->Visible = false;
+		b9->Visible = false;
 	}
 }
 
@@ -320,6 +397,20 @@ void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB)
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 	}
+}
+
+void Gallery::Rotate_Img(ListView^ listViewImages, PictureBox^ PB)
+{
+	Gallery Gal;
+	PB->Image->RotateFlip(RotateFlipType::Rotate90FlipNone);
+	PB->Refresh();
+}
+
+void Gallery::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
+{
+	Gallery Gal;
+	PB->Image->RotateFlip(RotateFlipType::RotateNoneFlipX);
+	PB->Refresh();
 }
 
 

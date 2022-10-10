@@ -29,6 +29,8 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
 	private: System::Windows::Forms::Button^ button7;
+	private: System::Windows::Forms::Button^ button8;
+	private: System::Windows::Forms::Button^ button9;
 	public:
 		static bool BtnMode = false;
 	protected:
@@ -108,6 +110,8 @@ namespace CppCLRWinFormsProject {
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->button8 = (gcnew System::Windows::Forms::Button());
+			this->button9 = (gcnew System::Windows::Forms::Button());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -117,10 +121,9 @@ namespace CppCLRWinFormsProject {
 			// 
 			this->listViewImages->ContextMenuStrip = this->contextMenuStrip1;
 			this->listViewImages->HideSelection = false;
-			this->listViewImages->Location = System::Drawing::Point(16, 33);
-			this->listViewImages->Margin = System::Windows::Forms::Padding(4);
+			this->listViewImages->Location = System::Drawing::Point(12, 27);
 			this->listViewImages->Name = L"listViewImages";
-			this->listViewImages->Size = System::Drawing::Size(1180, 538);
+			this->listViewImages->Size = System::Drawing::Size(886, 438);
 			this->listViewImages->TabIndex = 0;
 			this->listViewImages->UseCompatibleStateImageBehavior = false;
 			this->listViewImages->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::listViewImages_SelectedIndexChanged);
@@ -134,50 +137,49 @@ namespace CppCLRWinFormsProject {
 					this->deletePictureToolStripMenuItem
 			});
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
-			this->contextMenuStrip1->Size = System::Drawing::Size(257, 124);
+			this->contextMenuStrip1->Size = System::Drawing::Size(218, 114);
 			this->contextMenuStrip1->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &Form1::contextMenuStrip1_Opening);
 			// 
 			// showPictureStatsToolStripMenuItem
 			// 
 			this->showPictureStatsToolStripMenuItem->Name = L"showPictureStatsToolStripMenuItem";
-			this->showPictureStatsToolStripMenuItem->Size = System::Drawing::Size(256, 24);
+			this->showPictureStatsToolStripMenuItem->Size = System::Drawing::Size(217, 22);
 			this->showPictureStatsToolStripMenuItem->Text = L"Show picture stats";
 			this->showPictureStatsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::showPictureStatsToolStripMenuItem_Click);
 			// 
 			// changePictureNameToolStripMenuItem
 			// 
 			this->changePictureNameToolStripMenuItem->Name = L"changePictureNameToolStripMenuItem";
-			this->changePictureNameToolStripMenuItem->Size = System::Drawing::Size(256, 24);
+			this->changePictureNameToolStripMenuItem->Size = System::Drawing::Size(217, 22);
 			this->changePictureNameToolStripMenuItem->Text = L"Change picture name";
 			this->changePictureNameToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changePictureNameToolStripMenuItem_Click);
 			// 
 			// changePictureDescriptionToolStripMenuItem
 			// 
 			this->changePictureDescriptionToolStripMenuItem->Name = L"changePictureDescriptionToolStripMenuItem";
-			this->changePictureDescriptionToolStripMenuItem->Size = System::Drawing::Size(256, 24);
+			this->changePictureDescriptionToolStripMenuItem->Size = System::Drawing::Size(217, 22);
 			this->changePictureDescriptionToolStripMenuItem->Text = L"Change picture description";
 			this->changePictureDescriptionToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changePictureDescriptionToolStripMenuItem_Click);
 			// 
 			// changePictureToolStripMenuItem
 			// 
 			this->changePictureToolStripMenuItem->Name = L"changePictureToolStripMenuItem";
-			this->changePictureToolStripMenuItem->Size = System::Drawing::Size(256, 24);
+			this->changePictureToolStripMenuItem->Size = System::Drawing::Size(217, 22);
 			this->changePictureToolStripMenuItem->Text = L"Change picture";
 			this->changePictureToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::changePictureToolStripMenuItem_Click);
 			// 
 			// deletePictureToolStripMenuItem
 			// 
 			this->deletePictureToolStripMenuItem->Name = L"deletePictureToolStripMenuItem";
-			this->deletePictureToolStripMenuItem->Size = System::Drawing::Size(256, 24);
+			this->deletePictureToolStripMenuItem->Size = System::Drawing::Size(217, 22);
 			this->deletePictureToolStripMenuItem->Text = L"Delete picture";
 			this->deletePictureToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::deletePictureToolStripMenuItem_Click);
 			// 
 			// btnAddImgage
 			// 
-			this->btnAddImgage->Location = System::Drawing::Point(16, 580);
-			this->btnAddImgage->Margin = System::Windows::Forms::Padding(4);
+			this->btnAddImgage->Location = System::Drawing::Point(12, 471);
 			this->btnAddImgage->Name = L"btnAddImgage";
-			this->btnAddImgage->Size = System::Drawing::Size(123, 47);
+			this->btnAddImgage->Size = System::Drawing::Size(92, 38);
 			this->btnAddImgage->TabIndex = 1;
 			this->btnAddImgage->Text = L"Add Images";
 			this->btnAddImgage->UseVisualStyleBackColor = true;
@@ -195,7 +197,8 @@ namespace CppCLRWinFormsProject {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->optionsToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1213, 30);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
+			this->menuStrip1->Size = System::Drawing::Size(910, 24);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -206,13 +209,13 @@ namespace CppCLRWinFormsProject {
 					this->searchByToolStripMenuItem
 			});
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
-			this->optionsToolStripMenuItem->Size = System::Drawing::Size(75, 24);
+			this->optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->optionsToolStripMenuItem->Text = L"Options";
 			// 
 			// getInfoAboutAlbumToolStripMenuItem
 			// 
 			this->getInfoAboutAlbumToolStripMenuItem->Name = L"getInfoAboutAlbumToolStripMenuItem";
-			this->getInfoAboutAlbumToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->getInfoAboutAlbumToolStripMenuItem->Size = System::Drawing::Size(187, 22);
 			this->getInfoAboutAlbumToolStripMenuItem->Text = L"Get info about album";
 			this->getInfoAboutAlbumToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::getInfoAboutAlbumToolStripMenuItem_Click);
 			// 
@@ -224,50 +227,49 @@ namespace CppCLRWinFormsProject {
 					this->unfinishedImagesToolStripMenuItem
 			});
 			this->searchByToolStripMenuItem->Name = L"searchByToolStripMenuItem";
-			this->searchByToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->searchByToolStripMenuItem->Size = System::Drawing::Size(187, 22);
 			this->searchByToolStripMenuItem->Text = L"Search by...";
 			// 
 			// searchByNumberToolStripMenuItem
 			// 
 			this->searchByNumberToolStripMenuItem->Name = L"searchByNumberToolStripMenuItem";
-			this->searchByNumberToolStripMenuItem->Size = System::Drawing::Size(214, 26);
+			this->searchByNumberToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->searchByNumberToolStripMenuItem->Text = L"Number";
 			this->searchByNumberToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByNumberToolStripMenuItem_Click);
 			// 
 			// searchByDescriptionToolStripMenuItem
 			// 
 			this->searchByDescriptionToolStripMenuItem->Name = L"searchByDescriptionToolStripMenuItem";
-			this->searchByDescriptionToolStripMenuItem->Size = System::Drawing::Size(214, 26);
+			this->searchByDescriptionToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->searchByDescriptionToolStripMenuItem->Text = L"Description";
 			this->searchByDescriptionToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByDescriptionToolStripMenuItem_Click);
 			// 
 			// searchByCreationDateToolStripMenuItem
 			// 
 			this->searchByCreationDateToolStripMenuItem->Name = L"searchByCreationDateToolStripMenuItem";
-			this->searchByCreationDateToolStripMenuItem->Size = System::Drawing::Size(214, 26);
+			this->searchByCreationDateToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->searchByCreationDateToolStripMenuItem->Text = L"Creation date";
 			this->searchByCreationDateToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::searchByCreationDateToolStripMenuItem_Click);
 			// 
 			// modifiedDateToolStripMenuItem
 			// 
 			this->modifiedDateToolStripMenuItem->Name = L"modifiedDateToolStripMenuItem";
-			this->modifiedDateToolStripMenuItem->Size = System::Drawing::Size(214, 26);
+			this->modifiedDateToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->modifiedDateToolStripMenuItem->Text = L"Modified date";
 			this->modifiedDateToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::modifiedDateToolStripMenuItem_Click);
 			// 
 			// unfinishedImagesToolStripMenuItem
 			// 
 			this->unfinishedImagesToolStripMenuItem->Name = L"unfinishedImagesToolStripMenuItem";
-			this->unfinishedImagesToolStripMenuItem->Size = System::Drawing::Size(214, 26);
+			this->unfinishedImagesToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->unfinishedImagesToolStripMenuItem->Text = L"Unfinished images";
 			this->unfinishedImagesToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::unfinishedImagesToolStripMenuItem_Click);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(147, 580);
-			this->button1->Margin = System::Windows::Forms::Padding(4);
+			this->button1->Location = System::Drawing::Point(110, 471);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(123, 46);
+			this->button1->Size = System::Drawing::Size(92, 37);
 			this->button1->TabIndex = 3;
 			this->button1->Text = L"Photo View Mode";
 			this->button1->UseVisualStyleBackColor = true;
@@ -275,20 +277,18 @@ namespace CppCLRWinFormsProject {
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Location = System::Drawing::Point(645, 33);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
+			this->pictureBox1->Location = System::Drawing::Point(484, 27);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(533, 492);
+			this->pictureBox1->Size = System::Drawing::Size(400, 400);
 			this->pictureBox1->TabIndex = 4;
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Click += gcnew System::EventHandler(this, &Form1::pictureBox1_Click);
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(645, 534);
-			this->button2->Margin = System::Windows::Forms::Padding(4);
+			this->button2->Location = System::Drawing::Point(484, 434);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(37, 28);
+			this->button2->Size = System::Drawing::Size(28, 23);
 			this->button2->TabIndex = 5;
 			this->button2->Text = L"<<";
 			this->button2->UseVisualStyleBackColor = true;
@@ -296,10 +296,9 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(1141, 534);
-			this->button3->Margin = System::Windows::Forms::Padding(4);
+			this->button3->Location = System::Drawing::Point(856, 434);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(37, 28);
+			this->button3->Size = System::Drawing::Size(28, 23);
 			this->button3->TabIndex = 6;
 			this->button3->Text = L">>";
 			this->button3->UseVisualStyleBackColor = true;
@@ -307,10 +306,9 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(787, 534);
-			this->button4->Margin = System::Windows::Forms::Padding(4);
+			this->button4->Location = System::Drawing::Point(590, 434);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(100, 28);
+			this->button4->Size = System::Drawing::Size(75, 23);
 			this->button4->TabIndex = 7;
 			this->button4->Text = L"Prev";
 			this->button4->UseVisualStyleBackColor = true;
@@ -318,10 +316,9 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(934, 534);
-			this->button5->Margin = System::Windows::Forms::Padding(4);
+			this->button5->Location = System::Drawing::Point(701, 434);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(100, 28);
+			this->button5->Size = System::Drawing::Size(75, 23);
 			this->button5->TabIndex = 8;
 			this->button5->Text = L"Next";
 			this->button5->UseVisualStyleBackColor = true;
@@ -329,9 +326,10 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(897, 534);
+			this->button6->Location = System::Drawing::Point(673, 434);
+			this->button6->Margin = System::Windows::Forms::Padding(2);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(28, 27);
+			this->button6->Size = System::Drawing::Size(21, 22);
 			this->button6->TabIndex = 9;
 			this->button6->Text = L"\?";
 			this->button6->UseVisualStyleBackColor = true;
@@ -339,25 +337,50 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(1056, 581);
+			this->button7->Location = System::Drawing::Point(792, 472);
+			this->button7->Margin = System::Windows::Forms::Padding(2);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(123, 46);
+			this->button7->Size = System::Drawing::Size(92, 37);
 			this->button7->TabIndex = 10;
 			this->button7->Text = L"Change Mode";
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Visible = false;
 			this->button7->Click += gcnew System::EventHandler(this, &Form1::button7_Click);
 			// 
+			// button8
+			// 
+			this->button8->Location = System::Drawing::Point(388, 470);
+			this->button8->Name = L"button8";
+			this->button8->Size = System::Drawing::Size(50, 50);
+			this->button8->TabIndex = 11;
+			this->button8->Text = L"Rotate";
+			this->button8->UseVisualStyleBackColor = true;
+			this->button8->Visible = false;
+			this->button8->Click += gcnew System::EventHandler(this, &Form1::button8_Click);
+			// 
+			// button9
+			// 
+			this->button9->Location = System::Drawing::Point(444, 470);
+			this->button9->Name = L"button9";
+			this->button9->Size = System::Drawing::Size(50, 50);
+			this->button9->TabIndex = 12;
+			this->button9->Text = L"Flip";
+			this->button9->UseVisualStyleBackColor = true;
+			this->button9->Visible = false;
+			this->button9->Click += gcnew System::EventHandler(this, &Form1::button9_Click);
+			// 
 			// Form1
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1213, 641);
+			this->ClientSize = System::Drawing::Size(910, 521);
+			this->Controls->Add(this->button9);
+			this->Controls->Add(this->button8);
+			this->Controls->Add(this->listViewImages);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->btnAddImgage);
-			this->Controls->Add(this->listViewImages);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button4);
@@ -365,7 +388,6 @@ namespace CppCLRWinFormsProject {
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button6);
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Form1";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Gallery";
@@ -380,6 +402,7 @@ namespace CppCLRWinFormsProject {
 #pragma endregion
 	private: 
 		System::Void btnAddImgage_Click(System::Object^ sender, System::EventArgs^ e);
+
 		System::Void contextMenuStrip1_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
 		System::Void changePictureNameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void changePictureDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
@@ -401,6 +424,8 @@ namespace CppCLRWinFormsProject {
 		System::Void button5_Click(System::Object^ sender, System::EventArgs^ e); //next img
 		System::Void button6_Click(System::Object^ sender, System::EventArgs^ e); //get info
 		System::Void button7_Click(System::Object^ sender, System::EventArgs^ e); //change view mode
+		System::Void button8_Click(System::Object^ sender, System::EventArgs^ e); //flip left
+		System::Void button9_Click(System::Object^ sender, System::EventArgs^ e); //flip right
 
 		System::Void listViewImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {};
 };
