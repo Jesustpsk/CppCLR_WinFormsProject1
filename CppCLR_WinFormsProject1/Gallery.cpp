@@ -253,7 +253,7 @@ void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 	Gallery Gal;
 	
 	if (listViewImages->Items->Count > 0) {
-		Gal.PicView_ind = 0;
+		(listViewImages->SelectedIndices->Count > 0) ? Gal.PicView_ind = listViewImages->SelectedIndices[0] : Gal.PicView_ind = 0;
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(PicView_ind).PicturePath));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
