@@ -158,6 +158,7 @@ System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender, System::EventArgs^ e) //get info
 {
 	Gallery Gal;
+	Gal.GetStats(Gal.PicView_ind);
 	// to be contuined 
 }
 

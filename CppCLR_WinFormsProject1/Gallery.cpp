@@ -181,8 +181,8 @@ void Gallery::GetInfo()
 	String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
 	String^ answ = "";
 	answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
+	MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
-
 
 
 void Gallery::Search_Num(ListView^ listViewImages)

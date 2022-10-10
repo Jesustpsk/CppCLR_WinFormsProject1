@@ -118,7 +118,7 @@ namespace CppCLRWinFormsProject {
 			this->listViewImages->Location = System::Drawing::Point(16, 33);
 			this->listViewImages->Margin = System::Windows::Forms::Padding(4);
 			this->listViewImages->Name = L"listViewImages";
-			this->listViewImages->Size = System::Drawing::Size(590, 538);
+			this->listViewImages->Size = System::Drawing::Size(1180, 538);
 			this->listViewImages->TabIndex = 0;
 			this->listViewImages->UseCompatibleStateImageBehavior = false;
 			this->listViewImages->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::listViewImages_SelectedIndexChanged);
@@ -193,7 +193,7 @@ namespace CppCLRWinFormsProject {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->optionsToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1213, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1213, 30);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -204,7 +204,7 @@ namespace CppCLRWinFormsProject {
 					this->searchByToolStripMenuItem
 			});
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
-			this->optionsToolStripMenuItem->Size = System::Drawing::Size(75, 24);
+			this->optionsToolStripMenuItem->Size = System::Drawing::Size(75, 26);
 			this->optionsToolStripMenuItem->Text = L"Options";
 			// 
 			// getInfoAboutAlbumToolStripMenuItem
@@ -340,7 +340,6 @@ namespace CppCLRWinFormsProject {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1213, 641);
-			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->btnAddImgage);
@@ -350,6 +349,7 @@ namespace CppCLRWinFormsProject {
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button6);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Form1";
@@ -386,7 +386,7 @@ namespace CppCLRWinFormsProject {
 		System::Void button5_Click(System::Object^ sender, System::EventArgs^ e); //next img
 		System::Void button6_Click(System::Object^ sender, System::EventArgs^ e); //get info
 
-		System::Void listViewImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {}
+		System::Void listViewImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {};
 		
 };
 }
