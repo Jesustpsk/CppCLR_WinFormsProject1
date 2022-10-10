@@ -417,10 +417,10 @@ void Gallery::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::Img_minus(ListView^ listViewImages, PictureBox^ PB)
 {
-	/*if (PB->Width != 400) {
+	if (PB->Width != 400) {
 		PB->Width -= 50;
 		PB->Height -= 50;
-	}*/
+	}
 }
 
 void Gallery::Img_plus(ListView^ listViewImages, PictureBox^ PB)
@@ -429,5 +429,4 @@ void Gallery::Img_plus(ListView^ listViewImages, PictureBox^ PB)
 		PB->Width += 50;
 		PB->Height += 50;
 	}
-	
 }
