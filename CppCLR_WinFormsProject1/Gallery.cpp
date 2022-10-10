@@ -9,12 +9,16 @@
 
 using std::vector;
 using std::string;
+
 using namespace msclr::interop;
 using namespace CppCLRWinFormsProject;
+
 vector <Gallery> Gallery::vec_Gal;
 vector <string> Gallery::Changes;
+
 int Gallery::PicView_ind = 0;
 int Gallery::PicView_mode = 0;
+Gallery Gal;
 
 string Gallery::time_now(){
 	time_t     now = time(0);
@@ -28,11 +32,7 @@ string Gallery::time_now(){
 
 void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^listViewImages)
 {
-	Gallery Gal;
-	
-
 	int size = images->Length;
-
 	for (int i = 0; i < size; i++) {
 		string std_time = time_now();
 		if (images[i] != "")
@@ -40,17 +40,17 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			imageList->Images->Add(Image::FromFile(images[i]));
 			listViewImages->BeginUpdate();
 			ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem("Picture " + Convert::ToString(imageList->Images->Count), imageList->Images->Count - 1));
-			
+
 			String^ description = Microsoft::VisualBasic::Interaction::InputBox("Введите комментарий к фото:", "Input description", "", 100, 100);
 			string std_name = marshal_as<string>("Picture " + Convert::ToString(imageList->Images->Count));
 			string std_description = marshal_as<string>(description);
 			String^ path = images[i];
 			string std_path = marshal_as<string>(path);
 			Gal.vec_Gal.push_back(Gallery(std_name, std_description, std_time, std_path));
-				
+		
 			item->ImageIndex = imageList->Images->Count - 1;
 			listViewImages->EndUpdate();
-			listViewImages->LargeImageList = imageList;
+			listViewImages->LargeImageList = imageList;	
 			listViewImages->Refresh();
 		}
 	}
@@ -58,7 +58,6 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 
 void Gallery::ChangePictureName(int ind, ListView^ listViewImages)
 {
-	Gallery Gal;
 	String^ NewName = Microsoft::VisualBasic::Interaction::InputBox("Введите новое имя фото:", "New Name", "", 100, 100);
 	string NName = marshal_as<string>(NewName);
 	Gal.vec_Gal.at(ind).PictureName = NName;
@@ -70,7 +69,6 @@ void Gallery::ChangePictureName(int ind, ListView^ listViewImages)
 
 void Gallery::ChangePictureDescription(int ind)
 {
-	Gallery Gal;
 	String^ NewDescription = Microsoft::VisualBasic::Interaction::InputBox("Введите новое описание фото:", "New Description", "", 100, 100);
 	string NDesc = marshal_as<string>(NewDescription);
 	Gal.vec_Gal.at(ind).PictureDescription = NDesc;
@@ -81,8 +79,6 @@ void Gallery::ChangePictureDescription(int ind)
 
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
-	Gallery Gal;
-
 	ImageList^ IList = gcnew ImageList();
 	IList->ColorDepth = ColorDepth::Depth32Bit;
 
@@ -128,8 +124,6 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
-	Gallery Gal;
-
 	ImageList^ IList = gcnew ImageList();
 	IList->ColorDepth = ColorDepth::Depth32Bit;
 
@@ -163,7 +157,6 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 
 void Gallery::GetStats(int ind)
 {
-	Gallery Gal;
 	String^ answ = "";
 	String^ name = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureName);
 	String^ date = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureDate);
@@ -176,7 +169,6 @@ void Gallery::GetStats(int ind)
 
 void Gallery::GetInfo()
 {
-	Gallery Gal;
 	String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
 	String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
 	String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
@@ -190,7 +182,6 @@ void Gallery::Search_Num(ListView^ listViewImages)
 {
 	for(int i = 0; i < listViewImages->Items->Count; i++)
 		listViewImages->Items[i]->Selected = false;
-	Gallery Gal;
 	String^ Num = Microsoft::VisualBasic::Interaction::InputBox("Введите номер изображения для поиска: ", "Input number", "", 100, 100);
 	int num = Convert::ToInt32(Num);
 	num--;
@@ -202,7 +193,6 @@ void Gallery::Search_Desc(ListView^ listViewImages)
 {
 	for (int i = 0; i < listViewImages->Items->Count; i++)
 		listViewImages->Items[i]->Selected = false;
-	Gallery Gal;
 	String^ Description = Microsoft::VisualBasic::Interaction::InputBox("Введите описание изображения для поиска: ", "Input description", "", 100, 100);
 	string std_desc = marshal_as<string>(Description);
 	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
@@ -215,7 +205,6 @@ void Gallery::Search_Creation(ListView^ listViewImages)
 {
 	for (int i = 0; i < listViewImages->Items->Count; i++)
 		listViewImages->Items[i]->Selected = false;
-	Gallery Gal;
 	String^ Creation = Microsoft::VisualBasic::Interaction::InputBox("Введите дату создания изображения для поиска: \nFormat: YYYY-MM-DD HH:MM:SS", "Input creation date", "", 100, 100);
 	string std_creat = marshal_as<string>(Creation);
 	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
@@ -228,7 +217,6 @@ void Gallery::Search_Modified(ListView^ listViewImages)
 {
 	for (int i = 0; i < listViewImages->Items->Count; i++)
 		listViewImages->Items[i]->Selected = false;
-	Gallery Gal;
 	String^ Modified = Microsoft::VisualBasic::Interaction::InputBox("Введите дату изменения изображения для поиска: \nFormat: YYYY-MM-DD HH:MM:SS", "Input modified date", "", 100, 100);
 	string std_mod = marshal_as<string>(Modified);
 	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
@@ -241,18 +229,15 @@ void Gallery::Search_Unfinished(ListView^ listViewImages)
 {
 	for (int i = 0; i < listViewImages->Items->Count; i++)
 		listViewImages->Items[i]->Selected = false;
-	Gallery Gal;
-	
 	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
 		if ((Gal.vec_Gal[i].PictureDescription == "") || (Gal.vec_Gal[i].PictureDescription == " "))
 			listViewImages->Items[i]->Selected = true;
 	}
 }
 
+
 void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 {
-	Gallery Gal;
-	
 	if (listViewImages->Items->Count > 0) {
 		(listViewImages->SelectedIndices->Count > 0) ? Gal.PicView_ind = listViewImages->SelectedIndices[0] : Gal.PicView_ind = 0;
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(PicView_ind).PicturePath));
@@ -261,9 +246,8 @@ void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 	}
 }
 
-void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, Button^ b1, Button^ b2, Button^ b3, Button^ b4, Button^ b5, Button^ b6, Button^ b7, Button^ b0, Button^ b8, Button^ b9)
+void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, Button^ b1, Button^ b2, Button^ b3, Button^ b4, Button^ b5, Button^ b6, Button^ b7, Button^ b0, Button^ b8, Button^ b9, Button^ b10, Button^ b11)
 {
-	Gallery Gal;
 	if (Gal.PicView_mode == 0) {
 		Gal.PicView_mode = 1;
 
@@ -311,6 +295,13 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		Point pt8((form_x / 2) + 130, form_y - 60);
 		b9->Location = pt8;
 		b9->Visible = true;
+
+		Point pt9((form_x / 2) + (size_x / 2) + 20, (form_y / 2) - 60);
+		b10->Location = pt9;
+		b10->Visible = true;
+		Point pt10((form_x / 2) + (size_x / 2) + 20, (form_y / 2) + 10);
+		b11->Location = pt10;
+		b11->Visible = true;
 	}
 	else {
 		Gal.PicView_mode = 0;
@@ -351,13 +342,14 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 
 		b8->Visible = false;
 		b9->Visible = false;
+		b10->Visible = false;
+		b11->Visible = false;
 	}
 }
 
 
 void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB)
 {
-	Gallery Gal;
 	if (Gal.PicView_ind != 0) {
 		Gal.PicView_ind = 0;
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(0).PicturePath));
@@ -368,7 +360,6 @@ void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB)
 {
-	Gallery Gal;
 	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
 		Gal.PicView_ind = Gal.vec_Gal.size() - 1;
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PicturePath));
@@ -379,7 +370,6 @@ void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB)
 {
-	Gallery Gal;
 	if (Gal.PicView_ind != 0) {
 		Gal.PicView_ind--;
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
@@ -390,7 +380,6 @@ void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB)
 {
-	Gallery Gal;
 	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
 		Gal.PicView_ind++;
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
@@ -401,16 +390,30 @@ void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::Rotate_Img(ListView^ listViewImages, PictureBox^ PB)
 {
-	Gallery Gal;
 	PB->Image->RotateFlip(RotateFlipType::Rotate90FlipNone);
 	PB->Refresh();
 }
 
 void Gallery::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
 {
-	Gallery Gal;
 	PB->Image->RotateFlip(RotateFlipType::RotateNoneFlipX);
 	PB->Refresh();
 }
 
+void Gallery::Img_minus(ListView^ listViewImages, PictureBox^ PB)
+{
+	/*if (PB->Width != 400) {
+		PB->Width -= 50;
+		PB->Height -= 50;
+	}*/
+}
 
+void Gallery::Img_plus(ListView^ listViewImages, PictureBox^ PB)
+{
+	/*if (PB->Width != 1200) {
+		PB->Width += 50;
+		PB->Height += 50;
+	}*/
+	/*Image^ img = PB->Image;
+	img->Size =*/
+}

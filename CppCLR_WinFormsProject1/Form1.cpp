@@ -2,12 +2,11 @@
 #include "Form1.h"
 #include <Windows.h>
 #include "Gallery.h"
-
+#include <fstream>
 
 System::Void CppCLRWinFormsProject::Form1::btnAddImgage_Click(System::Object^ sender, System::EventArgs^ e) //Button Add Image
 {
 	Gallery Gal;
-	
 	OpenFileDialog^ ofd = gcnew OpenFileDialog();
 	ofd->Multiselect = true;
 	ofd->Filter = "Image Files(*.JPG; *.PNG) |*.JPG; *.PNG|All files (*.*)|*.*";
@@ -166,7 +165,7 @@ System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender, System::EventArgs^ e) //change mode
 {
 	Gallery Gal;
-	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this, this->button1, this->button2, this->button3, this->button4, this->button5, this->button6, this->button7, this->btnAddImgage, this->button8, this->button9);
+	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this, this->button1, this->button2, this->button3, this->button4, this->button5, this->button6, this->button7, this->btnAddImgage, this->button8, this->button9, this->button10, this->button11);
 }
 
 
@@ -181,5 +180,17 @@ System::Void CppCLRWinFormsProject::Form1::button9_Click(System::Object^ sender,
 {
 	Gallery Gal;
 	Gal.Flip_Img(this->listViewImages, this->pictureBox1);
+}
+
+System::Void CppCLRWinFormsProject::Form1::button10_Click(System::Object^ sender, System::EventArgs^ e) //-
+{
+	Gallery Gal;
+	Gal.Img_minus(this->listViewImages, this->pictureBox1);
+}
+
+System::Void CppCLRWinFormsProject::Form1::button11_Click(System::Object^ sender, System::EventArgs^ e) //+
+{
+	Gallery Gal;
+	Gal.Img_plus(this->listViewImages, this->pictureBox1);
 }
 

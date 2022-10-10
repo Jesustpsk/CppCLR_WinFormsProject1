@@ -31,6 +31,8 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Button^ button7;
 	private: System::Windows::Forms::Button^ button8;
 	private: System::Windows::Forms::Button^ button9;
+	private: System::Windows::Forms::Button^ button10;
+	private: System::Windows::Forms::Button^ button11;
 	public:
 		static bool BtnMode = false;
 	protected:
@@ -112,6 +114,8 @@ namespace CppCLRWinFormsProject {
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->button9 = (gcnew System::Windows::Forms::Button());
+			this->button10 = (gcnew System::Windows::Forms::Button());
+			this->button11 = (gcnew System::Windows::Forms::Button());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -369,11 +373,39 @@ namespace CppCLRWinFormsProject {
 			this->button9->Visible = false;
 			this->button9->Click += gcnew System::EventHandler(this, &Form1::button9_Click);
 			// 
+			// button10
+			// 
+			this->button10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button10->Location = System::Drawing::Point(500, 470);
+			this->button10->Name = L"button10";
+			this->button10->Size = System::Drawing::Size(50, 50);
+			this->button10->TabIndex = 13;
+			this->button10->Text = L"-";
+			this->button10->UseVisualStyleBackColor = true;
+			this->button10->Visible = false;
+			this->button10->Click += gcnew System::EventHandler(this, &Form1::button10_Click);
+			// 
+			// button11
+			// 
+			this->button11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->button11->Location = System::Drawing::Point(556, 470);
+			this->button11->Name = L"button11";
+			this->button11->Size = System::Drawing::Size(50, 50);
+			this->button11->TabIndex = 14;
+			this->button11->Text = L"+";
+			this->button11->UseVisualStyleBackColor = true;
+			this->button11->Visible = false;
+			this->button11->Click += gcnew System::EventHandler(this, &Form1::button11_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(910, 521);
+			this->Controls->Add(this->button11);
+			this->Controls->Add(this->button10);
 			this->Controls->Add(this->button9);
 			this->Controls->Add(this->button8);
 			this->Controls->Add(this->listViewImages);
@@ -426,6 +458,8 @@ namespace CppCLRWinFormsProject {
 		System::Void button7_Click(System::Object^ sender, System::EventArgs^ e); //change view mode
 		System::Void button8_Click(System::Object^ sender, System::EventArgs^ e); //flip left
 		System::Void button9_Click(System::Object^ sender, System::EventArgs^ e); //flip right
+		System::Void button10_Click(System::Object^ sender, System::EventArgs^ e); //-
+		System::Void button11_Click(System::Object^ sender, System::EventArgs^ e); //+
 
 		System::Void listViewImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {};
 };

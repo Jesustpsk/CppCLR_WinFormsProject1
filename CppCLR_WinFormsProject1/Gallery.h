@@ -51,12 +51,14 @@ public:
 	void Search_Unfinished(ListView^);
 
 	void ViewMode(ListView^, PictureBox^);
-	void ChangeMode(ListView^, PictureBox^, Form1^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^);
+	void ChangeMode(ListView^, PictureBox^, Form1^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^);
 
 	void GoToFirst(ListView^, PictureBox^);
 	void GoToLast(ListView^, PictureBox^);
 	void Prev_Img(ListView^, PictureBox^);
 	void Next_Img(ListView^, PictureBox^);
+	void Img_minus(ListView^, PictureBox^);
+	void Img_plus(ListView^, PictureBox^);
 
 	void Rotate_Img(ListView^, PictureBox^);
 	void Flip_Img(ListView^, PictureBox^);
