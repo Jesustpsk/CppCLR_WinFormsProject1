@@ -154,3 +154,10 @@ System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender,
 	Gallery Gal;
 	Gal.Next_Img(this->listViewImages, this->pictureBox1);
 }
+
+System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender, System::EventArgs^ e) //get info
+{
+	Gallery Gal;
+	// to be contuined 
+}
+
