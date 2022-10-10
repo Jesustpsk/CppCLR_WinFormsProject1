@@ -120,11 +120,13 @@ System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender,
 	Gallery Gal;
 	if (BtnMode == false) {
 		this->listViewImages->Width /= 2.;
+		this->button7->Visible = true;
 		BtnMode = true;
 		Gal.ViewMode(this->listViewImages, this->pictureBox1);
 	}
 	else if (BtnMode == true) {
 		this->listViewImages->Width *= 2.;
+		this->button7->Visible = false;
 		BtnMode = false;
 	}
 }
@@ -159,6 +161,11 @@ System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender,
 {
 	Gallery Gal;
 	Gal.GetStats(Gal.PicView_ind);
-	// to be contuined 
+}
+
+System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender, System::EventArgs^ e) //change mode
+{
+	Gallery Gal;
+	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this);
 }
 

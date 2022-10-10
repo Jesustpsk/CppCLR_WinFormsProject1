@@ -14,6 +14,7 @@ using namespace CppCLRWinFormsProject;
 vector <Gallery> Gallery::vec_Gal;
 vector <string> Gallery::Changes;
 int Gallery::PicView_ind = 0;
+int Gallery::PicView_mode = 0;
 
 string Gallery::time_now(){
 	time_t     now = time(0);
@@ -259,6 +260,23 @@ void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 		PB->Refresh();
 	}
 }
+
+void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+{
+	Gallery Gal;
+	if (Gal.PicView_mode == 0) {
+		Gal.PicView_mode = 1;
+		form->TopMost = true;
+		form->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+		form->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+	}
+	else {
+		Gal.PicView_mode = 0;
+		form->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
+		form->WindowState = FormWindowState::Normal;
+	}
+}
+
 
 void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB)
 {

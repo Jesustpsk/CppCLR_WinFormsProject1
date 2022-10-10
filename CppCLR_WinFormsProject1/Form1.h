@@ -28,6 +28,7 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
+	private: System::Windows::Forms::Button^ button7;
 	public:
 		static bool BtnMode = false;
 	protected:
@@ -106,6 +107,7 @@ namespace CppCLRWinFormsProject {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -193,7 +195,7 @@ namespace CppCLRWinFormsProject {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->optionsToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1213, 28);
+			this->menuStrip1->Size = System::Drawing::Size(1213, 30);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -335,11 +337,23 @@ namespace CppCLRWinFormsProject {
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &Form1::button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->Location = System::Drawing::Point(1056, 581);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(123, 46);
+			this->button7->TabIndex = 10;
+			this->button7->Text = L"Change Mode";
+			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Visible = false;
+			this->button7->Click += gcnew System::EventHandler(this, &Form1::button7_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1213, 641);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->btnAddImgage);
@@ -378,16 +392,16 @@ namespace CppCLRWinFormsProject {
 		System::Void searchByCreationDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void modifiedDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void unfinishedImagesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
-		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {};
 
+		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void button2_Click(System::Object^ sender, System::EventArgs^ e); //first img
 		System::Void button3_Click(System::Object^ sender, System::EventArgs^ e); //last img
 		System::Void button4_Click(System::Object^ sender, System::EventArgs^ e); //prev img
 		System::Void button5_Click(System::Object^ sender, System::EventArgs^ e); //next img
 		System::Void button6_Click(System::Object^ sender, System::EventArgs^ e); //get info
+		System::Void button7_Click(System::Object^ sender, System::EventArgs^ e); //change view mode
 
 		System::Void listViewImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {};
-		
 };
 }

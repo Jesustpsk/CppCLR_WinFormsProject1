@@ -31,7 +31,7 @@ public:
 	static vector <Gallery> vec_Gal;
 	static vector <string> Changes;
 	static int PicView_ind;
-
+	static int PicView_mode;
 	string time_now();
 
 	void addImage(array <String^>^ images, ImageList ^, ListView ^);
@@ -50,6 +50,7 @@ public:
 	void Search_Unfinished(ListView^);
 
 	void ViewMode(ListView^, PictureBox^);
+	void ChangeMode(ListView^, PictureBox^, Form1^);
 
 	void GoToFirst(ListView^, PictureBox^);
 	void GoToLast(ListView^, PictureBox^);
