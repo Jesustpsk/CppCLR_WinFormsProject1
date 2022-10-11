@@ -25,8 +25,8 @@ double Gallery::min_x = 0;
 double Gallery::min_y = 0;
 double Gallery::max_x = 0;
 double Gallery::max_y = 0;
-string Gallery::Gal_path = "..\\data\\data_Gal.txt";
-string Gallery::Changes_path = "..\\data\\data_Changes.txt";
+string Gallery::Gal_path = "data_Gal.txt";
+string Gallery::Changes_path = "data_Changes.txt";
 
 Gallery Gal;
 
