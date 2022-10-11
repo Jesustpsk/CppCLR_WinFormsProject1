@@ -381,6 +381,8 @@ void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB)
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(0).PicturePath));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
+		if(Gal.PicView_mode == 1)
+			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
 	}
 }
 
@@ -391,6 +393,8 @@ void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB)
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PicturePath));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
+		if (Gal.PicView_mode == 1)
+			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
 	}
 }
 
@@ -401,6 +405,8 @@ void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB)
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
+		if (Gal.PicView_mode == 1)
+			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
 	}
 }
 
@@ -411,6 +417,8 @@ void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB)
 		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
+		if (Gal.PicView_mode == 1)
+			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
 	}
 }
 

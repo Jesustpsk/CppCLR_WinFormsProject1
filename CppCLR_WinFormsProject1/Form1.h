@@ -458,6 +458,7 @@ namespace CppCLRWinFormsProject {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+			this->DoubleBuffered = true;
 
 		}
 #pragma endregion
