@@ -267,13 +267,14 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		back1->Size = System::Drawing::Size((form_x / 2), form_y);
 		back1->Location = p_back1;
 		back1->Visible = true;
-		back1->Image = Image::FromFile("..\\data\\background.png"); //изменить путь для корректной работы!!!
+		Bitmap^ img = gcnew Bitmap("background.png");
+		back2->Image = img;
 
 		Point p_back2(0, (form_y / 2) + (size_x / 2) - 20);
 		back2->Size = System::Drawing::Size(form_x, form_y);
 		back2->Location = p_back2;
 		back2->Visible = true;
-		back2->Image = Image::FromFile("..\\data\\background.png"); //изменить путь для корректной работы!!!
+		back2->Image = img;
 
 		Point pt(form_x - 102, form_y - 47);
 		listViewImages->Visible = false;

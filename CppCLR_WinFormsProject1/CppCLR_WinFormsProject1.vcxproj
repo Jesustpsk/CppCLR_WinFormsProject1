@@ -153,6 +153,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\data\background.png" />
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
