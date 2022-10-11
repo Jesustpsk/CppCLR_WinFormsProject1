@@ -32,6 +32,10 @@ public:
 	static vector <string> Changes;
 	static int PicView_ind;
 	static int PicView_mode;
+	static double min_x;
+	static double min_y;
+	static double max_x;
+	static double max_y;
 
 	string time_now();
 

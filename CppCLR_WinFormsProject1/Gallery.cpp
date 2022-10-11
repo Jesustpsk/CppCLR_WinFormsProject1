@@ -18,6 +18,11 @@ vector <string> Gallery::Changes;
 
 int Gallery::PicView_ind = 0;
 int Gallery::PicView_mode = 0;
+double Gallery::min_x = 0;
+double Gallery::min_y = 0;
+double Gallery::max_x = 0;
+double Gallery::max_y = 0;
+
 Gallery Gal;
 
 string Gallery::time_now(){
@@ -262,13 +267,13 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		back1->Size = System::Drawing::Size((form_x / 2), form_y);
 		back1->Location = p_back1;
 		back1->Visible = true;
-		back1->Image = Image::FromFile("D:\\Учеба\\Программирование Ураева\\kursach_1\\CppCLR_WinFormsProject1\\data\\background.png"); //изменить путь для корректной работы!!!
+		back1->Image = Image::FromFile("..\\data\\background.png"); //изменить путь для корректной работы!!!
 
 		Point p_back2(0, (form_y / 2) + (size_x / 2) - 20);
 		back2->Size = System::Drawing::Size(form_x, form_y);
 		back2->Location = p_back2;
 		back2->Visible = true;
-		back2->Image = Image::FromFile("D:\\Учеба\\Программирование Ураева\\kursach_1\\CppCLR_WinFormsProject1\\data\\background.png"); //изменить путь для корректной работы!!!
+		back2->Image = Image::FromFile("..\\data\\background.png"); //изменить путь для корректной работы!!!
 
 		Point pt(form_x - 102, form_y - 47);
 		listViewImages->Visible = false;
@@ -315,6 +320,10 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
 		Point pb((form_x / 2) - (size_x / 2), 30);
 		PB->Location = pb;
+		Gal.min_x = form_x - (form_x / 2);
+		Gal.min_y = form_y - (form_y / 10);
+		Gal.max_x = min_x * 3.;
+		Gal.max_y = min_y * 3.;
 	}
 	else {
 		Gal.PicView_mode = 0;
@@ -359,6 +368,7 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		b11->Visible = false;
 		back1->Visible = false;
 		back2->Visible = false;
+		listViewImages->BringToFront();
 	}
 }
 
@@ -417,7 +427,7 @@ void Gallery::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::Img_minus(ListView^ listViewImages, PictureBox^ PB)
 {
-	if (PB->Width != 400) {
+	if ((PB->Width >= Gal.min_x) && (PB->Height >= Gal.min_y))  {
 		PB->Width -= 50;
 		PB->Height -= 50;
 	}
@@ -425,7 +435,7 @@ void Gallery::Img_minus(ListView^ listViewImages, PictureBox^ PB)
 
 void Gallery::Img_plus(ListView^ listViewImages, PictureBox^ PB)
 {
-	if (PB->Width != 1200) {
+	if ((PB->Width <= Gal.max_x) && (PB->Height <= Gal.max_y)) {
 		PB->Width += 50;
 		PB->Height += 50;
 	}
