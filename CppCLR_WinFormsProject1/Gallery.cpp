@@ -55,7 +55,7 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			string std_name = marshal_as<string>("Picture " + Convert::ToString(imageList->Images->Count));
 			string std_description = marshal_as<string>(description);
 			if (std_description == "")
-				std_description == "None.";
+				std_description = "None.";
 			String^ path = images[i];
 			string std_path = marshal_as<string>(path);
 			Gal.vec_Gal.push_back(Gallery(std_name, std_description, std_time, std_path));
