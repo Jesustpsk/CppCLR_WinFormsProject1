@@ -6,7 +6,10 @@
 #include <vector>
 #include <string>
 #include <msclr/marshal_cppstd.h>
+#include <fstream>
 
+using std::ifstream;
+using std::ofstream;
 using std::vector;
 using std::string;
 
@@ -22,6 +25,8 @@ double Gallery::min_x = 0;
 double Gallery::min_y = 0;
 double Gallery::max_x = 0;
 double Gallery::max_y = 0;
+string Gallery::Gal_path = "..\\data\\data_Gal.txt";
+string Gallery::Changes_path = "..\\data\\data_Changes.txt";
 
 Gallery Gal;
 
@@ -49,6 +54,8 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			String^ description = Microsoft::VisualBasic::Interaction::InputBox("Введите комментарий к фото:", "Input description", "", 100, 100);
 			string std_name = marshal_as<string>("Picture " + Convert::ToString(imageList->Images->Count));
 			string std_description = marshal_as<string>(description);
+			if (std_description == "")
+				std_description == "None.";
 			String^ path = images[i];
 			string std_path = marshal_as<string>(path);
 			Gal.vec_Gal.push_back(Gallery(std_name, std_description, std_time, std_path));
@@ -59,6 +66,7 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			listViewImages->Refresh();
 		}
 	}
+	AutoSave();
 }
 
 void Gallery::ChangePictureName(int ind, ListView^ listViewImages)
@@ -70,6 +78,7 @@ void Gallery::ChangePictureName(int ind, ListView^ listViewImages)
 	string time = time_now();
 	Gal.Changes.push_back(time);
 	Gal.vec_Gal.at(ind).PictureModified = time;
+	AutoSave();
 }
 
 void Gallery::ChangePictureDescription(int ind)
@@ -80,6 +89,7 @@ void Gallery::ChangePictureDescription(int ind)
 	string time = time_now();
 	Gal.Changes.push_back(time);
 	Gal.vec_Gal.at(ind).PictureModified = time;
+	AutoSave();
 }
 
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -125,6 +135,7 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	string time = time_now();
 	Gal.Changes.push_back(time);
 	Gal.vec_Gal.at(ind).PictureModified = time;
+	AutoSave();
 }
 
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -158,6 +169,7 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	listViewImages->Refresh();
 	string time = time_now();
 	Gal.Changes.push_back(time);
+	AutoSave();
 }
 
 void Gallery::GetStats(int ind)
@@ -174,16 +186,17 @@ void Gallery::GetStats(int ind)
 
 void Gallery::GetInfo()
 {
-	String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
-	String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
-	String^ LastChange;
-	if (Gal.Changes.size() > 0)
-		LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
-	else
-		LastChange = "None.";
-	String^ answ = "";
-	answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
-	MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	try {
+		String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
+		String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
+		String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
+		String^ answ = "";
+		answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
+		MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 
@@ -452,4 +465,105 @@ void Gallery::Img_plus(ListView^ listViewImages, PictureBox^ PB)
 		PB->Width += 50;
 		PB->Height += 50;
 	}
+}
+
+
+void Gallery::AutoSave()
+{
+	ofstream ofile;
+	ofstream ofile2;
+	ofile.open(Gal.Gal_path, std::ios::out);
+	for (int i = 0; i < Gal.vec_Gal.size(); i++)
+		ofile << Gal.vec_Gal.at(i).PictureName << '\n' << Gal.vec_Gal.at(i).PictureDescription << '\n' << Gal.vec_Gal.at(i).PictureDate << '\n' << Gal.vec_Gal.at(i).PicturePath << '\n' << Gal.vec_Gal.at(i).PictureModified << '\n';
+	ofile.close();
+	if (Gal.Changes.size() > 0) {
+		ofile2.open(Gal.Changes_path, std::ios::out);
+		for (int i = 0; i < Gal.Changes.size(); i++)
+			ofile2 << Gal.Changes.at(i) << '\n';
+		ofile2.close();
+	}
+}
+
+void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
+{
+	ifstream ifile;
+	ifstream ifile2;
+	string line;
+	int count = 0;
+	int x = 0;
+	int size = 0;
+	ifile.open(Gal.Gal_path);
+	if (ifile.peek() != EOF) {
+		while (!ifile.eof()) {
+			std::getline(ifile, line);
+			size++;
+		}
+		size--; //потому что последняя строка пустая и не относится ни к одному из файлов
+		size /= 5;
+		for (int i = 0; i < size; i++)
+			Gal.vec_Gal.push_back(Gallery());
+		ifile.close();
+		ifile.open(Gal.Gal_path);
+		while (x < size) {
+			std::getline(ifile, line);
+			if (count == 0) {
+				Gal.vec_Gal.at(x).PictureName = line;
+			}
+			else if (count == 1) {
+				Gal.vec_Gal.at(x).PictureDescription = line;
+			}
+			else if (count == 2) {
+				Gal.vec_Gal.at(x).PictureDate = line;
+			}
+			else if (count == 3) {
+				Gal.vec_Gal.at(x).PicturePath = line;
+			}
+			else if (count == 4) {
+				Gal.vec_Gal.at(x).PictureModified = line;
+			}
+			if (count < 4)
+				count++;
+			else {
+				count = 0;
+				x++;
+			}
+		}
+
+		for (int i = 0; i < size; i++) {
+			string std_time = Gal.vec_Gal.at(i).PictureDate;
+			if (Gal.vec_Gal.at(i).PicturePath != "")
+			{
+				imageList->Images->Add(Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(i).PicturePath)));
+				listViewImages->BeginUpdate();
+				ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal.at(i).PictureName), imageList->Images->Count - 1));
+				item->ImageIndex = imageList->Images->Count - 1;
+				listViewImages->EndUpdate();
+				listViewImages->LargeImageList = imageList;
+				listViewImages->Refresh();
+			}
+		}
+	}
+	ifile.close();
+	ifile2.open(Gal.Changes_path);
+	if (ifile2.peek() != EOF) {
+		while (std::getline(ifile2, line)) {
+			Gal.Changes.push_back(line);
+		}
+	}
+	ifile2.close();
+}
+
+void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages)
+{
+	ofstream ofile;
+	ofstream ofile2;
+	ofile.open(Gal.Gal_path, std::ios::out);
+	ofile.close();
+	ofile2.open(Gal.Changes_path, std::ios::out);
+	ofile2.close();
+	MessageBox::Show("Сохраненные данные были очищены!", "Delete data", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	Gal.vec_Gal.clear();
+	Gal.Changes.clear();
+	imageList->Images->Clear();
+	listViewImages->Clear();
 }

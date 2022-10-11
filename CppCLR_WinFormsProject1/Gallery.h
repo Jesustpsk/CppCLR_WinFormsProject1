@@ -23,7 +23,7 @@ public:
 		PictureDescription = PicDes_value;
 		PictureDate = PicDate_value;
 		PicturePath = PicPath_value;
-		PictureModified = "";
+		PictureModified = "None.";
 	}
 	~Gallery() {
 
@@ -36,6 +36,8 @@ public:
 	static double min_y;
 	static double max_x;
 	static double max_y;
+	static string Gal_path;
+	static string Changes_path;
 
 	string time_now();
 
@@ -66,6 +68,10 @@ public:
 
 	void Rotate_Img(ListView^, PictureBox^);
 	void Flip_Img(ListView^, PictureBox^);
+
+	void AutoSave();
+	void AutoLoad(ImageList^, ListView^);
+	void DeleteData(ImageList^, ListView^);
 
 private:
 	string PictureName;

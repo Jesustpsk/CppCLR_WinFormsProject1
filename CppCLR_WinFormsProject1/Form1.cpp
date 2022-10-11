@@ -19,59 +19,79 @@ System::Void CppCLRWinFormsProject::Form1::btnAddImgage_Click(System::Object^ se
 	}
 }
 
-System::Void CppCLRWinFormsProject::Form1::contextMenuStrip1_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e)
-{
-	return System::Void();
-}
-
 System::Void CppCLRWinFormsProject::Form1::changePictureNameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic name
 {
-	Gallery Gal;
-	int ind = listViewImages->SelectedIndices[0];
-	if (listViewImages->SelectedIndices->Count > 1)
-		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	else
-		Gal.ChangePictureName(ind, this->listViewImages);
+	try {
+		Gallery Gal;
+		int ind = listViewImages->SelectedIndices[0];
+		if (listViewImages->SelectedIndices->Count > 1)
+			MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		else
+			Gal.ChangePictureName(ind, this->listViewImages);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Не выбрано изображение!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::changePictureDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic description
 {
-	Gallery Gal;
-	int ind = listViewImages->SelectedIndices[0];
-	if (listViewImages->SelectedIndices->Count > 1)
-		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	else
-		Gal.ChangePictureDescription(ind);
+	try {
+		Gallery Gal;
+		int ind = listViewImages->SelectedIndices[0];
+		if (listViewImages->SelectedIndices->Count > 1)
+			MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		else
+			Gal.ChangePictureDescription(ind);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Не выбрано изображение!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::changePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic
 {
-	Gallery Gal;
-	int ind = listViewImages->SelectedIndices[0];
-	if (listViewImages->SelectedIndices->Count > 1)
-		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	else
-		Gal.ChangePicture(ind, this->imageList, this->listViewImages);
+	try {
+		Gallery Gal;
+		int ind = listViewImages->SelectedIndices[0];
+		if (listViewImages->SelectedIndices->Count > 1)
+			MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		else
+			Gal.ChangePicture(ind, this->imageList, this->listViewImages);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Не выбрано изображение!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::deletePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context delete pic
 {
-	Gallery Gal;
-	int ind = listViewImages->SelectedIndices[0];
-	if (listViewImages->SelectedIndices->Count > 1)
-		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	else
-		Gal.DeletePicture(ind, this->imageList, this->listViewImages);
+	try {
+		Gallery Gal;
+		int ind = listViewImages->SelectedIndices[0];
+		if (listViewImages->SelectedIndices->Count > 1)
+			MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		else
+			Gal.DeletePicture(ind, this->imageList, this->listViewImages);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Не выбрано изображение!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::showPictureStatsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Show picture stats
 {
-	Gallery Gal;
-	int ind = listViewImages->SelectedIndices[0];
-	if (listViewImages->SelectedIndices->Count > 1)
-		MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	else
-		Gal.GetStats(ind);
+	try {
+		Gallery Gal;
+		int ind = listViewImages->SelectedIndices[0];
+		if (listViewImages->SelectedIndices->Count > 1)
+			MessageBox::Show("Выбрано несколько фото!", "Ошибка", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		else
+			Gal.GetStats(ind);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Не выбрано изображение!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::getInfoAboutAlbumToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Get info about album
@@ -106,7 +126,7 @@ System::Void CppCLRWinFormsProject::Form1::modifiedDateToolStripMenuItem_Click(S
 	Gal.Search_Modified(this->listViewImages);
 }
 
-System::Void CppCLRWinFormsProject::Form1::unfinishedImagesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void CppCLRWinFormsProject::Form1::unfinishedImagesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // UNFINISHED
 {
 	Gallery Gal;
 	Gal.Search_Unfinished(this->listViewImages);
@@ -134,32 +154,57 @@ System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender,
 
 System::Void CppCLRWinFormsProject::Form1::button2_Click(System::Object^ sender, System::EventArgs^ e) //on first img
 {
-	Gallery Gal;
-	Gal.GoToFirst(this->listViewImages, this->pictureBox1);
+	try {
+		Gallery Gal;
+		Gal.GoToFirst(this->listViewImages, this->pictureBox1);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::button3_Click(System::Object^ sender, System::EventArgs^ e) //on last img
 {
-	Gallery Gal;
-	Gal.GoToLast(this->listViewImages, this->pictureBox1);
+	try {
+		Gallery Gal;
+		Gal.GoToLast(this->listViewImages, this->pictureBox1);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::button4_Click(System::Object^ sender, System::EventArgs^ e) //prev img
 {
-	Gallery Gal;
-	Gal.Prev_Img(this->listViewImages, this->pictureBox1);
+	try {
+		Gallery Gal;
+		Gal.Prev_Img(this->listViewImages, this->pictureBox1);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender, System::EventArgs^ e) //next img
 {
-	Gallery Gal;
-	Gal.Next_Img(this->listViewImages, this->pictureBox1);
+	try {
+		Gallery Gal;
+		Gal.Next_Img(this->listViewImages, this->pictureBox1);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender, System::EventArgs^ e) //get info
 {
-	Gallery Gal;
-	Gal.GetStats(Gal.PicView_ind);
+	try {
+		Gallery Gal;
+		Gal.GetStats(Gal.PicView_ind);
+	}
+	catch (Exception^ e) {
+		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender, System::EventArgs^ e) //change mode
@@ -192,5 +237,17 @@ System::Void CppCLRWinFormsProject::Form1::button11_Click(System::Object^ sender
 {
 	Gallery Gal;
 	Gal.Img_plus(this->listViewImages, this->pictureBox1);
+}
+
+System::Void CppCLRWinFormsProject::Form1::AutoLoad_Click(System::Object^ sender, System::EventArgs^ e) //autoload
+{
+	Gallery Gal;
+	Gal.AutoLoad(this->imageList, this->listViewImages);
+}
+
+System::Void CppCLRWinFormsProject::Form1::deleteDataToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Gallery Gal;
+	Gal.DeleteData(this->imageList, this->listViewImages);
 }
 

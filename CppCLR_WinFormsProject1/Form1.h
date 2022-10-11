@@ -35,6 +35,10 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Button^ button11;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
+
+
+	private: System::Windows::Forms::Button^ AutoLoad;
+	private: System::Windows::Forms::ToolStripMenuItem^ deleteDataToolStripMenuItem;
 	public:
 		static bool BtnMode = false;
 	protected:
@@ -88,7 +92,6 @@ namespace CppCLRWinFormsProject {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->listViewImages = (gcnew System::Windows::Forms::ListView());
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->showPictureStatsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -121,6 +124,8 @@ namespace CppCLRWinFormsProject {
 			this->button11 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
+			this->AutoLoad = (gcnew System::Windows::Forms::Button());
+			this->deleteDataToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -215,9 +220,9 @@ namespace CppCLRWinFormsProject {
 			// 
 			// optionsToolStripMenuItem
 			// 
-			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->getInfoAboutAlbumToolStripMenuItem,
-					this->searchByToolStripMenuItem
+					this->searchByToolStripMenuItem, this->deleteDataToolStripMenuItem
 			});
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
 			this->optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
@@ -424,11 +429,30 @@ namespace CppCLRWinFormsProject {
 			this->pictureBox3->TabStop = false;
 			this->pictureBox3->Visible = false;
 			// 
+			// AutoLoad
+			// 
+			this->AutoLoad->Location = System::Drawing::Point(270, 473);
+			this->AutoLoad->Name = L"AutoLoad";
+			this->AutoLoad->Size = System::Drawing::Size(75, 23);
+			this->AutoLoad->TabIndex = 17;
+			this->AutoLoad->Text = L"autoload";
+			this->AutoLoad->UseVisualStyleBackColor = true;
+			this->AutoLoad->Visible = false;
+			this->AutoLoad->Click += gcnew System::EventHandler(this, &Form1::AutoLoad_Click);
+			// 
+			// deleteDataToolStripMenuItem
+			// 
+			this->deleteDataToolStripMenuItem->Name = L"deleteDataToolStripMenuItem";
+			this->deleteDataToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->deleteDataToolStripMenuItem->Text = L"Delete data";
+			this->deleteDataToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::deleteDataToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(910, 521);
+			this->Controls->Add(this->AutoLoad);
 			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->listViewImages);
@@ -446,10 +470,12 @@ namespace CppCLRWinFormsProject {
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button6);
+			this->DoubleBuffered = true;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Gallery";
+			this->Load += gcnew System::EventHandler(this, &Form1::AutoLoad_Click);
 			this->contextMenuStrip1->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -458,14 +484,13 @@ namespace CppCLRWinFormsProject {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-			this->DoubleBuffered = true;
 
 		}
 #pragma endregion
 	private: 
 		System::Void btnAddImgage_Click(System::Object^ sender, System::EventArgs^ e);
 
-		System::Void contextMenuStrip1_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
+		System::Void contextMenuStrip1_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {};
 		System::Void changePictureNameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void changePictureDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void changePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
@@ -492,5 +517,8 @@ namespace CppCLRWinFormsProject {
 		System::Void button11_Click(System::Object^ sender, System::EventArgs^ e); //+
 
 		System::Void listViewImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {};
+
+		System::Void AutoLoad_Click(System::Object^ sender, System::EventArgs^ e); //autoload
+		System::Void deleteDataToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e); //delete data
 };
 }
