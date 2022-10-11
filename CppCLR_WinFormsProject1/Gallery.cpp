@@ -176,7 +176,11 @@ void Gallery::GetInfo()
 {
 	String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
 	String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
-	String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
+	String^ LastChange;
+	if (Gal.Changes.size() > 0)
+		LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
+	else
+		LastChange = "None.";
 	String^ answ = "";
 	answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
 	MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
