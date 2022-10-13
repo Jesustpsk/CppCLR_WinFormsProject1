@@ -71,7 +71,7 @@ public:
 
 	void AutoSave();
 	void AutoLoad(ImageList^, ListView^);
-	void DeleteData(ImageList^, ListView^);
+	void DeleteData(ImageList^, ListView^, PictureBox^);
 
 private:
 	string PictureName;

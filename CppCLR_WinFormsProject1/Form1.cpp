@@ -248,6 +248,6 @@ System::Void CppCLRWinFormsProject::Form1::AutoLoad_Click(System::Object^ sender
 System::Void CppCLRWinFormsProject::Form1::deleteDataToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	Gallery Gal;
-	Gal.DeleteData(this->imageList, this->listViewImages);
+	Gal.DeleteData(this->imageList, this->listViewImages, this->pictureBox1);
 }
 

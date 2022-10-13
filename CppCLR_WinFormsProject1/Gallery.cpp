@@ -553,7 +553,7 @@ void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
 	ifile2.close();
 }
 
-void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages)
+void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages, PictureBox^ PB)
 {
 	ofstream ofile;
 	ofstream ofile2;
@@ -566,4 +566,5 @@ void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages)
 	Gal.Changes.clear();
 	imageList->Images->Clear();
 	listViewImages->Clear();
+	PB->Image = nullptr;
 }
