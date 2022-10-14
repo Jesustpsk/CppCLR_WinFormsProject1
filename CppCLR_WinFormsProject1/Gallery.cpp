@@ -184,12 +184,12 @@ void Gallery::GetStats(int ind)
 	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 
-void Gallery::GetInfo()
+void Gallery::GetInfo() // починить!!!!!!!
 {
 	try {
 		String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
 		String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
-		String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
+		String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1)); // tut
 		String^ answ = "";
 		answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
 		MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -252,7 +252,7 @@ void Gallery::Search_Unfinished(ListView^ listViewImages)
 	for (int i = 0; i < listViewImages->Items->Count; i++)
 		listViewImages->Items[i]->Selected = false;
 	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-		if ((Gal.vec_Gal[i].PictureDescription == "") || (Gal.vec_Gal[i].PictureDescription == " "))
+		if (Gal.vec_Gal[i].PictureDescription == "None.")
 			listViewImages->Items[i]->Selected = true;
 	}
 }
