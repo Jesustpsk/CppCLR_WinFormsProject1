@@ -110,6 +110,7 @@ namespace CppCLRWinFormsProject {
 			this->searchByCreationDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modifiedDateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->unfinishedImagesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->deleteDataToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -125,7 +126,6 @@ namespace CppCLRWinFormsProject {
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->AutoLoad = (gcnew System::Windows::Forms::Button());
-			this->deleteDataToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -280,6 +280,13 @@ namespace CppCLRWinFormsProject {
 			this->unfinishedImagesToolStripMenuItem->Size = System::Drawing::Size(172, 22);
 			this->unfinishedImagesToolStripMenuItem->Text = L"Unfinished images";
 			this->unfinishedImagesToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::unfinishedImagesToolStripMenuItem_Click);
+			// 
+			// deleteDataToolStripMenuItem
+			// 
+			this->deleteDataToolStripMenuItem->Name = L"deleteDataToolStripMenuItem";
+			this->deleteDataToolStripMenuItem->Size = System::Drawing::Size(187, 22);
+			this->deleteDataToolStripMenuItem->Text = L"Delete data";
+			this->deleteDataToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::deleteDataToolStripMenuItem_Click);
 			// 
 			// button1
 			// 
@@ -440,22 +447,15 @@ namespace CppCLRWinFormsProject {
 			this->AutoLoad->Visible = false;
 			this->AutoLoad->Click += gcnew System::EventHandler(this, &Form1::AutoLoad_Click);
 			// 
-			// deleteDataToolStripMenuItem
-			// 
-			this->deleteDataToolStripMenuItem->Name = L"deleteDataToolStripMenuItem";
-			this->deleteDataToolStripMenuItem->Size = System::Drawing::Size(187, 22);
-			this->deleteDataToolStripMenuItem->Text = L"Delete data";
-			this->deleteDataToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::deleteDataToolStripMenuItem_Click);
-			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(910, 521);
+			this->Controls->Add(this->listViewImages);
 			this->Controls->Add(this->AutoLoad);
 			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->pictureBox2);
-			this->Controls->Add(this->listViewImages);
 			this->Controls->Add(this->button11);
 			this->Controls->Add(this->button10);
 			this->Controls->Add(this->button9);

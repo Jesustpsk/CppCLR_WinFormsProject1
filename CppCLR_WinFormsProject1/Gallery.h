@@ -56,13 +56,14 @@ public:
 	void Search_Modified(ListView^);
 	void Search_Unfinished(ListView^);
 
-	void ViewMode(ListView^, PictureBox^);
+	void ImgResize(Image^, PictureBox^, Form1^);
+	void ViewMode(ListView^, PictureBox^, Form1^);
 	void ChangeMode(ListView^, PictureBox^, Form1^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, PictureBox^, PictureBox^);
 
-	void GoToFirst(ListView^, PictureBox^);
-	void GoToLast(ListView^, PictureBox^);
-	void Prev_Img(ListView^, PictureBox^);
-	void Next_Img(ListView^, PictureBox^);
+	void GoToFirst(ListView^, PictureBox^, Form1^);
+	void GoToLast(ListView^, PictureBox^, Form1^);
+	void Prev_Img(ListView^, PictureBox^, Form1^);
+	void Next_Img(ListView^, PictureBox^, Form1^);
 	void Img_minus(ListView^, PictureBox^);
 	void Img_plus(ListView^, PictureBox^);
 
