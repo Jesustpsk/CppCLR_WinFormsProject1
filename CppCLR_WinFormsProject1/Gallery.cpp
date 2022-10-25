@@ -259,6 +259,8 @@ void Gallery::Search_Unfinished(ListView^ listViewImages)
 
 void Gallery::ImgResize(Image^ img, PictureBox^ PB, Form1^ form) {
 	Point Loc;
+	double x, y;
+	double per, out;
 	if (Gal.PicView_mode == 0) {
 		Loc = Point(485, 27);
 		PB->Size = System::Drawing::Size(400, 400);
@@ -268,14 +270,14 @@ void Gallery::ImgResize(Image^ img, PictureBox^ PB, Form1^ form) {
 		double form_y = form->Height;
 		double size_x = form_x - (form_x / 2);
 		Loc = Point((form_x / 2) - (size_x / 2), 30);
+		
 		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
+		
 	}
 	PB->Location = Loc;
-	double x, y;
-	double per, out;
 	x = img->Width;
 	y = img->Height;
-	if (abs(x - y) < 50) {
+	if (abs(x - y) < 100) {
 		PB->Location = Loc;
 	}
 	else if (x > y) {
