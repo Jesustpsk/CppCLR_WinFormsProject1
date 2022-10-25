@@ -386,7 +386,8 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		Gal.min_y = form_y - (form_y / 10);
 		Gal.max_x = min_x * 3.;
 		Gal.max_y = min_y * 3.;
-		Gal.ImgResize(PB->Image, PB, form);
+		if(PB->Image != nullptr)
+			Gal.ImgResize(PB->Image, PB, form);
 	}
 	else {
 		Gal.PicView_mode = 0;
@@ -432,7 +433,8 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		back1->Visible = false;
 		back2->Visible = false;
 		listViewImages->BringToFront();
-		Gal.ImgResize(PB->Image, PB, form);
+		if (PB->Image != nullptr)
+			Gal.ImgResize(PB->Image, PB, form);
 	}
 }
 
