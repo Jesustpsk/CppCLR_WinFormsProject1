@@ -257,56 +257,12 @@ void Gallery::Search_Unfinished(ListView^ listViewImages)
 	}
 }
 
-void Gallery::ImgResize(Image^ img, PictureBox^ PB, Form1^ form) {
-	Point Loc;
-	if (Gal.PicView_mode == 0) {
-		Loc = Point(485, 27);
-		PB->Size = System::Drawing::Size(400, 400);
-	}
-	else if (Gal.PicView_mode == 1) {
-		double form_x = form->Width;
-		double form_y = form->Height;
-		double size_x = form_x - (form_x / 2);
-		Loc = Point((form_x / 2) - (size_x / 2), 30);
-		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
-	}
-	PB->Location = Loc;
-	double x, y;
-	double per, out;
-	x = img->Width;
-	y = img->Height;
-	if (abs(x - y) < 50) {
-		PB->Location = Loc;
-	}
-	else if (x > y) {
-		per = PB->Width - x;
-		per = abs(per);
-		per = per / x * 100.;
-		per = 100 - per;
-		out = y * (per / 100.);
-		PB->Height = out;
-		Point p(PB->Location.X, PB->Location.Y + ((PB->Width - PB->Height) / 2));
-		PB->Location = p;
-	}
-	else if (x < y) {
-		per = PB->Height - y;
-		per = abs(per);
-		per = per / y * 100.;
-		per = 100 - per;
-		out = x * (per / 100.);
-		PB->Width = out;
-		Point p(PB->Location.X + ((PB->Height - PB->Width) / 2), PB->Location.Y);
-		PB->Location = p;
-	}
-}
 
-void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB)
 {
 	if (listViewImages->Items->Count > 0) {
 		(listViewImages->SelectedIndices->Count > 0) ? Gal.PicView_ind = listViewImages->SelectedIndices[0] : Gal.PicView_ind = 0;
-		Image^ img = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(PicView_ind).PicturePath));
-		Gal.ImgResize(img, PB, form);
-		PB->Image = img; 
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(PicView_ind).PicturePath));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 	}
@@ -386,7 +342,6 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		Gal.min_y = form_y - (form_y / 10);
 		Gal.max_x = min_x * 3.;
 		Gal.max_y = min_y * 3.;
-		Gal.ImgResize(PB->Image, PB, form);
 	}
 	else {
 		Gal.PicView_mode = 0;
@@ -432,12 +387,11 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		back1->Visible = false;
 		back2->Visible = false;
 		listViewImages->BringToFront();
-		Gal.ImgResize(PB->Image, PB, form);
 	}
 }
 
 
-void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB)
 {
 	if (Gal.PicView_ind != 0) {
 		Gal.PicView_ind = 0;
@@ -446,11 +400,10 @@ void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 		PB->Refresh();
 		if(Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
 	}
 }
 
-void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB)
 {
 	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
 		Gal.PicView_ind = Gal.vec_Gal.size() - 1;
@@ -459,11 +412,10 @@ void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 		PB->Refresh();
 		if (Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
 	}
 }
 
-void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB)
 {
 	if (Gal.PicView_ind != 0) {
 		Gal.PicView_ind--;
@@ -472,11 +424,10 @@ void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 		PB->Refresh();
 		if (Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
 	}
 }
 
-void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB)
 {
 	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
 		Gal.PicView_ind++;
@@ -485,7 +436,6 @@ void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 		PB->Refresh();
 		if (Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
 	}
 }
 

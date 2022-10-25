@@ -139,13 +139,11 @@ System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender,
 	Gallery Gal;
 	if (BtnMode == false) {
 		this->listViewImages->Width /= 2.;
-		this->listViewImages->Width += 10;
 		this->button7->Visible = true;
 		BtnMode = true;
-		Gal.ViewMode(this->listViewImages, this->pictureBox1, this);
+		Gal.ViewMode(this->listViewImages, this->pictureBox1);
 	}
 	else if (BtnMode == true) {
-		this->listViewImages->Width -= 10;
 		this->listViewImages->Width *= 2.;
 		this->button7->Visible = false;
 		BtnMode = false;
@@ -158,7 +156,7 @@ System::Void CppCLRWinFormsProject::Form1::button2_Click(System::Object^ sender,
 {
 	try {
 		Gallery Gal;
-		Gal.GoToFirst(this->listViewImages, this->pictureBox1, this);
+		Gal.GoToFirst(this->listViewImages, this->pictureBox1);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -169,7 +167,7 @@ System::Void CppCLRWinFormsProject::Form1::button3_Click(System::Object^ sender,
 {
 	try {
 		Gallery Gal;
-		Gal.GoToLast(this->listViewImages, this->pictureBox1, this);
+		Gal.GoToLast(this->listViewImages, this->pictureBox1);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -180,7 +178,7 @@ System::Void CppCLRWinFormsProject::Form1::button4_Click(System::Object^ sender,
 {
 	try {
 		Gallery Gal;
-		Gal.Prev_Img(this->listViewImages, this->pictureBox1, this);
+		Gal.Prev_Img(this->listViewImages, this->pictureBox1);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -191,7 +189,7 @@ System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender,
 {
 	try {
 		Gallery Gal;
-		Gal.Next_Img(this->listViewImages, this->pictureBox1, this);
+		Gal.Next_Img(this->listViewImages, this->pictureBox1);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
