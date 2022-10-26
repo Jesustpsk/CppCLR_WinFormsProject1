@@ -67,7 +67,7 @@ public:
 	void Img_minus(ListView^, PictureBox^);
 	void Img_plus(ListView^, PictureBox^);
 
-	void Rotate_Img(ListView^, PictureBox^);
+	void Rotate_Img(ListView^, PictureBox^, Form1^);
 	void Flip_Img(ListView^, PictureBox^);
 
 	void AutoSave();

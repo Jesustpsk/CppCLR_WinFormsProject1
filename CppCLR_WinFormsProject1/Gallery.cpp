@@ -7,6 +7,7 @@
 #include <string>
 #include <msclr/marshal_cppstd.h>
 #include <fstream>
+#include <algorithm>
 
 using std::ifstream;
 using std::ofstream;
@@ -184,12 +185,16 @@ void Gallery::GetStats(int ind)
 	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 
-void Gallery::GetInfo() // починить!!!!!!!
+void Gallery::GetInfo()
 {
 	try {
 		String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
 		String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
-		String^ LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1)); // tut
+		String^ LastChange;
+		if (Gal.Changes.size() > 0)
+			LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
+		else
+			LastChange = "None.";
 		String^ answ = "";
 		answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
 		MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -493,10 +498,17 @@ void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 	}
 }
 
-void Gallery::Rotate_Img(ListView^ listViewImages, PictureBox^ PB)
+void Gallery::Rotate_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	PB->Image->RotateFlip(RotateFlipType::Rotate90FlipNone);
+	double x, y;
+	x = PB->Size.Width;
+	y = PB->Size.Height;
+	std::swap(x, y);
+	PB->Size = System::Drawing::Size(x, y);
+	Gal.ImgResize(PB->Image, PB, form);
 	PB->Refresh();
+
 }
 
 void Gallery::Flip_Img(ListView^ listViewImages, PictureBox^ PB)

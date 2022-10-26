@@ -220,7 +220,7 @@ System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button8_Click(System::Object^ sender, System::EventArgs^ e) //flip left
 {
 	Gallery Gal;
-	Gal.Rotate_Img(this->listViewImages, this->pictureBox1);
+	Gal.Rotate_Img(this->listViewImages, this->pictureBox1, this);
 }
 
 System::Void CppCLRWinFormsProject::Form1::button9_Click(System::Object^ sender, System::EventArgs^ e) //flip right
