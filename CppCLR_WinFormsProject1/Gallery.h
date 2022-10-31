@@ -55,7 +55,7 @@ public:
 
 	void ImgResize(Image^, PictureBox^, Form1^);
 	void ViewMode(ListView^, PictureBox^, Form1^);
-	void ChangeMode(ListView^, PictureBox^, Form1^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, Button^, PictureBox^, PictureBox^);
+	void ChangeMode(ListView^, PictureBox^, Form1^, array<Button^>^, PictureBox^, PictureBox^, Label^, TextBox^);
 
 	void GoToFirst(ListView^, PictureBox^, Form1^);
 	void GoToLast(ListView^, PictureBox^, Form1^);

@@ -180,7 +180,21 @@ System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender, System::EventArgs^ e) //change mode
 {
 	Gallery Gal;
-	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this, this->button1, this->button2, this->button3, this->button4, this->button5, this->button6, this->button7, this->btnAddImgage, this->button8, this->button9, this->button10, this->button11, this->pictureBox2, this->pictureBox3);
+	array<Button^>^ Buts = gcnew array<Button^>(13);
+	Buts[0] = this->btnAddImgage;
+	Buts[1] = this->button1;
+	Buts[2] = this->button2;
+	Buts[3] = this->button3;
+	Buts[4] = this->button4;
+	Buts[5] = this->button5;
+	Buts[6] = this->button6;
+	Buts[7] = this->button7;
+	Buts[8] = this->button8;
+	Buts[9] = this->button9;
+	Buts[10] = this->button10;
+	Buts[11] = this->button11;
+	Buts[12] = this->button12;
+	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this, Buts, this->pictureBox2, this->pictureBox3, this->label1, this->textBox1);
 }
 
 

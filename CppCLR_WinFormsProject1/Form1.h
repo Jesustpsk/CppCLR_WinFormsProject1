@@ -503,13 +503,13 @@ namespace CppCLRWinFormsProject {
 		System::Void button9_Click(System::Object^ sender, System::EventArgs^ e); //flip right
 		System::Void button10_Click(System::Object^ sender, System::EventArgs^ e); //-
 		System::Void button11_Click(System::Object^ sender, System::EventArgs^ e); //+
-
+		System::Void button12_Click(System::Object^ sender, System::EventArgs^ e); //search
+		
 		System::Void listViewImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {};
 
 		System::Void AutoLoad_Click(System::Object^ sender, System::EventArgs^ e); //autoload
 		System::Void deleteDataToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e); //delete data
 		System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {}
-		System::Void button12_Click(System::Object^ sender, System::EventArgs^ e); //search
 		System::Void searchPatternsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

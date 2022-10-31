@@ -300,7 +300,7 @@ void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 	}
 }
 
-void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, Button^ b1, Button^ b2, Button^ b3, Button^ b4, Button^ b5, Button^ b6, Button^ b7, Button^ b0, Button^ b8, Button^ b9, Button^ b10, Button^ b11, PictureBox^ back1, PictureBox^ back2)
+void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, array<Button^>^ Buts, PictureBox^ back1, PictureBox^ back2, Label^ L, TextBox^ TB)
 {
 	if (Gal.PicView_mode == 0) {
 		Gal.PicView_mode = 1;
@@ -327,51 +327,54 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 
 		Point pt(form_x - 102, form_y - 47);
 		listViewImages->Visible = false;
-		b0->Visible = false;
-		b1->Visible = false;
-		b7->Location = pt;
-		b7->BringToFront();
+		Buts[0]->Visible = false;
+		Buts[1]->Visible = false;
+		Buts[7]->Location = pt;
+		Buts[7]->BringToFront();
 		Point pt2((form_x / 2) - 50, form_y - 60);
-		b6->Size = System::Drawing::Size(50, 50);
-		b6->Location = pt2;
-		b6->BringToFront();
+		Buts[6]->Size = System::Drawing::Size(50, 50);
+		Buts[6]->Location = pt2;
+		Buts[6]->BringToFront();
 		Point pt3((form_x / 2) - 110, form_y - 60);
-		b4->Size = System::Drawing::Size(50, 50);
-		b4->Location = pt3;
-		b4->BringToFront();
+		Buts[4]->Size = System::Drawing::Size(50, 50);
+		Buts[4]->Location = pt3;
+		Buts[4]->BringToFront();
 		Point pt4((form_x / 2) + 10, form_y - 60);
-		b5->Size = System::Drawing::Size(50, 50);
-		b5->Location = pt4;
-		b5->BringToFront();
+		Buts[5]->Size = System::Drawing::Size(50, 50);
+		Buts[5]->Location = pt4;
+		Buts[5]->BringToFront();
 		Point pt5((form_x / 2) - 170, form_y - 60);
-		b2->Size = System::Drawing::Size(50, 50);
-		b2->Location = pt5;
-		b2->BringToFront();
+		Buts[2]->Size = System::Drawing::Size(50, 50);
+		Buts[2]->Location = pt5;
+		Buts[2]->BringToFront();
 		Point pt6((form_x / 2) + 70, form_y - 60);
-		b3->Size = System::Drawing::Size(50, 50);
-		b3->Location = pt6;
-		b3->BringToFront();
+		Buts[3]->Size = System::Drawing::Size(50, 50);
+		Buts[3]->Location = pt6;
+		Buts[3]->BringToFront();
 		Point pt7((form_x / 2) - 230, form_y - 60);
-		b8->Location = pt7;
-		b8->Visible = true;
-		b8->BringToFront();
+		Buts[8]->Location = pt7;
+		Buts[8]->Visible = true;
+		Buts[8]->BringToFront();
 		Point pt8((form_x / 2) + 130, form_y - 60);
-		b9->Location = pt8;
-		b9->Visible = true;
-		b9->BringToFront();
+		Buts[9]->Location = pt8;
+		Buts[9]->Visible = true;
+		Buts[9]->BringToFront();
 		Point pt9((form_x / 2) + (size_x / 2) + 20, (form_y / 2) - 60);
-		b10->Location = pt9;
-		b10->Visible = true;
-		b10->BringToFront();
+		Buts[10]->Location = pt9;
+		Buts[10]->Visible = true;
+		Buts[10]->BringToFront();
 		Point pt10((form_x / 2) + (size_x / 2) + 20, (form_y / 2) + 10);
-		b11->Location = pt10;
-		b11->Visible = true;
-		b11->BringToFront();
+		Buts[11]->Location = pt10;
+		Buts[11]->Visible = true;
+		Buts[11]->BringToFront();
+		Buts[12]->Visible = false;
+		L->Visible = false;
+		TB->Visible = false;
 		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
 		Point pb((form_x / 2) - (size_x / 2), 30);
 		PB->Location = pb;
-		Gal.min_x = form_x - (form_x / 2);
-		Gal.min_y = form_y - (form_y / 10);
+		Gal.min_x = PB->Width;
+		Gal.min_y = PB->Height;
 		Gal.max_x = min_x * 3.;
 		Gal.max_y = min_y * 3.;
 		if(PB->Image != nullptr)
@@ -384,40 +387,43 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		form->WindowState = FormWindowState::Normal;
 
 		listViewImages->Visible = true;
-		b0->Visible = true;
-		b1->Visible = true;
+		Buts[0]->Visible = true;
+		Buts[1]->Visible = true;
 
 		Point pt(792, 472);
-		b7->Location = pt;
+		Buts[7]->Location = pt;
 
 		Point pt2(673, 434);
-		b6->Size = System::Drawing::Size(21, 22);
-		b6->Location = pt2;
+		Buts[6]->Size = System::Drawing::Size(21, 22);
+		Buts[6]->Location = pt2;
 
 		Point pt3(590, 434);
-		b4->Size = System::Drawing::Size(75, 23);
-		b4->Location = pt3;
+		Buts[4]->Size = System::Drawing::Size(75, 23);
+		Buts[4]->Location = pt3;
 
 		Point pt4(701, 434);
-		b5->Size = System::Drawing::Size(75, 23);
-		b5->Location = pt4;
+		Buts[5]->Size = System::Drawing::Size(75, 23);
+		Buts[5]->Location = pt4;
 
 		Point pt5(484, 434);
-		b2->Size = System::Drawing::Size(28, 23);
-		b2->Location = pt5;
+		Buts[2]->Size = System::Drawing::Size(28, 23);
+		Buts[2]->Location = pt5;
 
 		Point pt6(856, 434);
-		b3->Size = System::Drawing::Size(28, 23);
-		b3->Location = pt6;
+		Buts[3]->Size = System::Drawing::Size(28, 23);
+		Buts[3]->Location = pt6;
 
 		Point pb(484, 27);
 		PB->Size = System::Drawing::Size(400, 400);
 		PB->Location = pb;
 
-		b8->Visible = false;
-		b9->Visible = false;
-		b10->Visible = false;
-		b11->Visible = false;
+		Buts[8]->Visible = false;
+		Buts[9]->Visible = false;
+		Buts[10]->Visible = false;
+		Buts[11]->Visible = false;
+		Buts[12]->Visible = true;
+		L->Visible = true;
+		TB->Visible = true;
 		back1->Visible = false;
 		back2->Visible = false;
 		listViewImages->BringToFront();
