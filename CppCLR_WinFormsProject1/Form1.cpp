@@ -104,13 +104,13 @@ System::Void CppCLRWinFormsProject::Form1::getInfoAboutAlbumToolStripMenuItem_Cl
 
 System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	Gallery Gal;
+	Image_ Img_;
 	if (BtnMode == false) {
 		this->listViewImages->Width /= 2.;
 		this->listViewImages->Width += 10;
 		this->button7->Visible = true;
 		BtnMode = true;
-		Gal.ViewMode(this->listViewImages, this->pictureBox1, this);
+		Img_.ViewMode(this->listViewImages, this->pictureBox1, this);
 	}
 	else if (BtnMode == true) {
 		this->listViewImages->Width -= 10;
@@ -125,8 +125,8 @@ System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button2_Click(System::Object^ sender, System::EventArgs^ e) //on first img
 {
 	try {
-		Gallery Gal;
-		Gal.GoToFirst(this->listViewImages, this->pictureBox1, this);
+		Image_ Img_;
+		Img_.GoToFirst(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -136,8 +136,8 @@ System::Void CppCLRWinFormsProject::Form1::button2_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button3_Click(System::Object^ sender, System::EventArgs^ e) //on last img
 {
 	try {
-		Gallery Gal;
-		Gal.GoToLast(this->listViewImages, this->pictureBox1, this);
+		Image_ Img_;
+		Img_.GoToLast(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -147,8 +147,8 @@ System::Void CppCLRWinFormsProject::Form1::button3_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button4_Click(System::Object^ sender, System::EventArgs^ e) //prev img
 {
 	try {
-		Gallery Gal;
-		Gal.Prev_Img(this->listViewImages, this->pictureBox1, this);
+		Image_ Img_;
+		Img_.Prev_Img(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -158,8 +158,8 @@ System::Void CppCLRWinFormsProject::Form1::button4_Click(System::Object^ sender,
 System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender, System::EventArgs^ e) //next img
 {
 	try {
-		Gallery Gal;
-		Gal.Next_Img(this->listViewImages, this->pictureBox1, this);
+		Image_ Img_;
+		Img_.Next_Img(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (Exception^ e) {
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -179,7 +179,7 @@ System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender,
 
 System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender, System::EventArgs^ e) //change mode
 {
-	Gallery Gal;
+	Image_ Img_;
 	array<Button^>^ Buts = gcnew array<Button^>(13);
 	Buts[0] = this->btnAddImgage;
 	Buts[1] = this->button1;
@@ -194,33 +194,33 @@ System::Void CppCLRWinFormsProject::Form1::button7_Click(System::Object^ sender,
 	Buts[10] = this->button10;
 	Buts[11] = this->button11;
 	Buts[12] = this->button12;
-	Gal.ChangeMode(this->listViewImages, this->pictureBox1, this, Buts, this->pictureBox2, this->pictureBox3, this->label1, this->textBox1);
+	Img_.ChangeMode(this->listViewImages, this->pictureBox1, this, Buts, this->pictureBox2, this->pictureBox3, this->label1, this->textBox1);
 }
 
 
 
 System::Void CppCLRWinFormsProject::Form1::button8_Click(System::Object^ sender, System::EventArgs^ e) //flip left
 {
-	Gallery Gal;
-	Gal.Rotate_Img(this->listViewImages, this->pictureBox1, this);
+	Image_ Img_;
+	Img_.Rotate_Img(this->listViewImages, this->pictureBox1, this);
 }
 
 System::Void CppCLRWinFormsProject::Form1::button9_Click(System::Object^ sender, System::EventArgs^ e) //flip right
 {
-	Gallery Gal;
-	Gal.Flip_Img(this->listViewImages, this->pictureBox1);
+	Image_ Img_;
+	Img_.Flip_Img(this->listViewImages, this->pictureBox1);
 }
 
 System::Void CppCLRWinFormsProject::Form1::button10_Click(System::Object^ sender, System::EventArgs^ e) //-
 {
-	Gallery Gal;
-	Gal.Img_minus(this->listViewImages, this->pictureBox1);
+	Image_ Img_;
+	Img_.Img_minus(this->listViewImages, this->pictureBox1);
 }
 
 System::Void CppCLRWinFormsProject::Form1::button11_Click(System::Object^ sender, System::EventArgs^ e) //+
 {
-	Gallery Gal;
-	Gal.Img_plus(this->listViewImages, this->pictureBox1);
+	Image_ Img_;
+	Img_.Img_plus(this->listViewImages, this->pictureBox1);
 }
 
 System::Void CppCLRWinFormsProject::Form1::AutoLoad_Click(System::Object^ sender, System::EventArgs^ e) //autoload
@@ -238,7 +238,7 @@ System::Void CppCLRWinFormsProject::Form1::deleteDataToolStripMenuItem_Click(Sys
 System::Void CppCLRWinFormsProject::Form1::button12_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	Gallery Gal;
-	Gal.Search(this->listViewImages, textBox1->Text->ToString());
+	Gal.Search(this->listViewImages, textBox1->Text->ToString(), this->pictureBox1);
 	textBox1->Text = "";
 }
 

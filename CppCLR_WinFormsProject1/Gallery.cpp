@@ -30,6 +30,7 @@ string Gallery::Gal_path = "data_Gal.txt";
 string Gallery::Changes_path = "data_Changes.txt";
 
 Gallery Gal;
+Image_ Img_;
 
 string Gallery::time_now(){
 	time_t     now = time(0);
@@ -81,7 +82,6 @@ void Gallery::ChangePictureName(int ind, ListView^ listViewImages)
 	Gal.vec_Gal.at(ind).PictureModified = time;
 	AutoSave();
 }
-
 void Gallery::ChangePictureDescription(int ind)
 {
 	String^ NewDescription = Microsoft::VisualBasic::Interaction::InputBox("Введите новое описание фото:", "New Description", "", 100, 100);
@@ -92,7 +92,6 @@ void Gallery::ChangePictureDescription(int ind)
 	Gal.vec_Gal.at(ind).PictureModified = time;
 	AutoSave();
 }
-
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
 	ImageList^ IList = gcnew ImageList();
@@ -138,7 +137,6 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	Gal.vec_Gal.at(ind).PictureModified = time;
 	AutoSave();
 }
-
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
 {
 	ImageList^ IList = gcnew ImageList();
@@ -184,7 +182,6 @@ void Gallery::GetStats(int ind)
 	answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description + "\nPath: " + path;
 	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
-
 void Gallery::GetInfo()
 {
 	try {
@@ -203,47 +200,63 @@ void Gallery::GetInfo()
 		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
-
-void Gallery::Search(ListView^ listViewImages, String^ search_in)
-{
-	for (int i = 0; i < listViewImages->Items->Count; i++)
-		listViewImages->Items[i]->Selected = false;
-	if ((search_in == "") || (search_in == " ") || (search_in == "None.")) { //Unfinished
-		for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-			if (Gal.vec_Gal[i].PictureDescription == "None.")
-				listViewImages->Items[i]->Selected = true;
-		}
-	}
-	else {
-		try {																//number
-			int num = Convert::ToInt32(search_in);
-			num--;
-			listViewImages->Items[num]->Selected = true;
-		}
-		catch (Exception^ e) {												//date creat. or mod.
-			string search = marshal_as<string>(search_in);
-			int count = 0;
-			for (int i = 0; i < search.size(); i++) {
-				if ((search[i] == '-') || (search[i] == ':'))
-					count++;
-			}
-			if (count == 4) {
-				for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-					if ((Gal.vec_Gal[i].PictureDate == search) || (Gal.vec_Gal[i].PictureModified == search))
-						listViewImages->Items[i]->Selected = true;
-				}
-			}
-			else {
-				for (int i = 0; i < Gal.vec_Gal.size(); i++) {				//description
-					if (Gal.vec_Gal[i].PictureDescription.find(search) != -1)
-						listViewImages->Items[i]->Selected = true;
-				}
-			}
-		}
-	}
+string Gallery::GetPath(int ind){
+	return Gal.vec_Gal.at(ind).PicturePath;
 }
 
-void Gallery::ImgResize(Image^ img, PictureBox^ PB, Form1^ form) {
+void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB)
+{
+	if (listViewImages->Items->Count > 0) {
+		for (int i = 0; i < listViewImages->Items->Count; i++)
+			listViewImages->Items[i]->Selected = false;
+		if ((search_in == "") || (search_in == " ") || (search_in == "None.")) { //Unfinished
+			for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+				if (Gal.vec_Gal[i].PictureDescription == "None.")
+					listViewImages->Items[i]->Selected = true;
+			}
+		}
+		else {
+			try {																//number
+				int num = Convert::ToInt32(search_in);
+				num--;
+				listViewImages->Items[num]->Selected = true;
+			}
+			catch (Exception^ e) {												//date creat. or mod.
+				string search = marshal_as<string>(search_in);
+				int count = 0;
+				for (int i = 0; i < search.size(); i++) {
+					if ((search[i] == '-') || (search[i] == ':'))
+						count++;
+				}
+				if (count == 4) {
+					for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+						if ((Gal.vec_Gal[i].PictureDate == search) || (Gal.vec_Gal[i].PictureModified == search))
+							listViewImages->Items[i]->Selected = true;
+					}
+				}
+				else {
+					for (int i = 0; i < Gal.vec_Gal.size(); i++) {				//description
+						if (Gal.vec_Gal[i].PictureDescription.find(search) != -1)
+							listViewImages->Items[i]->Selected = true;
+					}
+				}
+			}
+		}
+		Form1 f;
+		if (f.BtnMode == true) {
+			string path = Gal.GetPath(listViewImages->SelectedIndices[0]);
+			Image^ img = Image::FromFile(marshal_as<String^>(path));
+			PB->Image = img;
+			Img_.ImgResize(img, PB);
+		}
+	}
+	else MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+}
+void Gallery::SearchPatterns(){
+	MessageBox::Show("Шаблоны поиска:\n1. Для поиска по номеру изображения введите целое число.\n2. Для поиска по дате создания или изменения изображения введите дату (Format: YYYY-MM-DD HH:MM:SS)\n3. Для поиска по комментарию к изображению введите комментарий полностью или частично\n4. Для поиска незаконченых изображений не вводите ничего (Либо введите знак пробела или слово None.)", "Search Patterns", MessageBoxButtons::OK, MessageBoxIcon::Information);
+}
+
+void Image_::ImgResize(Image^ img, PictureBox^ PB, Form1^ form) {
 	Point Loc;
 	double x, y;
 	double per, out;
@@ -287,20 +300,53 @@ void Gallery::ImgResize(Image^ img, PictureBox^ PB, Form1^ form) {
 		PB->Location = p;
 	}
 }
+void Image_::ImgResize(Image^ img, PictureBox^ PB) {
+	Point Loc;
+	double x, y;
+	double per, out;
+	Loc = Point(485, 27);
+	PB->Size = System::Drawing::Size(400, 400);
+	PB->Location = Loc;
+	x = img->Width;
+	y = img->Height;
+	if (abs(x - y) < 100) {
+		PB->Location = Loc;
+	}
+	else if (x > y) {
+		per = PB->Width - x;
+		per = abs(per);
+		per = per / x * 100.;
+		per = 100 - per;
+		out = y * (per / 100.);
+		PB->Height = out;
+		Point p(PB->Location.X, PB->Location.Y + ((PB->Width - PB->Height) / 2));
+		PB->Location = p;
+	}
+	else if (x < y) {
+		per = PB->Height - y;
+		per = abs(per);
+		per = per / y * 100.;
+		per = 100 - per;
+		out = x * (per / 100.);
+		PB->Width = out;
+		Point p(PB->Location.X + ((PB->Height - PB->Width) / 2), PB->Location.Y);
+		PB->Location = p;
+	}
+}
 
-void Gallery::ViewMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Image_::ViewMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	if (listViewImages->Items->Count > 0) {
 		(listViewImages->SelectedIndices->Count > 0) ? Gal.PicView_ind = listViewImages->SelectedIndices[0] : Gal.PicView_ind = 0;
-		Image^ img = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(PicView_ind).PicturePath));
-		Gal.ImgResize(img, PB, form);
+		Image^ img = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.PicView_ind)));
+		
+		Img_.ImgResize(img, PB, form);
 		PB->Image = img; 
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 	}
 }
-
-void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, array<Button^>^ Buts, PictureBox^ back1, PictureBox^ back2, Label^ L, TextBox^ TB)
+void Image_::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, array<Button^>^ Buts, PictureBox^ back1, PictureBox^ back2, Label^ L, TextBox^ TB)
 {
 	if (Gal.PicView_mode == 0) {
 		Gal.PicView_mode = 1;
@@ -378,7 +424,7 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		Gal.max_x = min_x * 3.;
 		Gal.max_y = min_y * 3.;
 		if(PB->Image != nullptr)
-			Gal.ImgResize(PB->Image, PB, form);
+			Img_.ImgResize(PB->Image, PB, form);
 	}
 	else {
 		Gal.PicView_mode = 0;
@@ -428,69 +474,59 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		back2->Visible = false;
 		listViewImages->BringToFront();
 		if (PB->Image != nullptr)
-			Gal.ImgResize(PB->Image, PB, form);
+			Img_.ImgResize(PB->Image, PB, form);
 	}
 }
 
-void Gallery::SearchPatterns()
-{
-	MessageBox::Show("Шаблоны поиска:\n1. Для поиска по номеру изображения введите целое число.\n2. Для поиска по дате создания или изменения изображения введите дату (Format: YYYY-MM-DD HH:MM:SS)\n3. Для поиска по комментарию к изображению введите комментарий полностью или частично\n4. Для поиска незаконченых изображений не вводите ничего (Либо введите знак пробела или слово None.)", "Search Patterns", MessageBoxButtons::OK, MessageBoxIcon::Information);
-}
-
-
-void Gallery::GoToFirst(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Image_::GoToFirst(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	if (Gal.PicView_ind != 0) {
 		Gal.PicView_ind = 0;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(0).PicturePath));
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(0)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 		if(Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
+		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
-
-void Gallery::GoToLast(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Image_::GoToLast(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
 		Gal.PicView_ind = Gal.vec_Gal.size() - 1;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PicturePath));
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.vec_Gal.size() - 1)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 		if (Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
+		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
-
-void Gallery::Prev_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Image_::Prev_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	if (Gal.PicView_ind != 0) {
 		Gal.PicView_ind--;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.PicView_ind)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 		if (Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
+		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
-
-void Gallery::Next_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Image_::Next_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
 		Gal.PicView_ind++;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(Gal.PicView_ind).PicturePath));
+		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.PicView_ind)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
 		if (Gal.PicView_mode == 1)
 			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
-		Gal.ImgResize(PB->Image, PB, form);
+		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
-
-void Gallery::Rotate_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
+void Image_::Rotate_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	PB->Image->RotateFlip(RotateFlipType::Rotate90FlipNone);
 	double x, y;
@@ -498,33 +534,29 @@ void Gallery::Rotate_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 	y = PB->Size.Height;
 	std::swap(x, y);
 	PB->Size = System::Drawing::Size(x, y);
-	Gal.ImgResize(PB->Image, PB, form);
+	Img_.ImgResize(PB->Image, PB, form);
 	PB->Refresh();
 
 }
-
-void Gallery::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
+void Image_::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
 {
 	PB->Image->RotateFlip(RotateFlipType::RotateNoneFlipX);
 	PB->Refresh();
 }
-
-void Gallery::Img_minus(ListView^ listViewImages, PictureBox^ PB)
+void Image_::Img_minus(ListView^ listViewImages, PictureBox^ PB)
 {
 	if ((PB->Width >= Gal.min_x) && (PB->Height >= Gal.min_y))  {
 		PB->Width -= 50;
 		PB->Height -= 50;
 	}
 }
-
-void Gallery::Img_plus(ListView^ listViewImages, PictureBox^ PB)
+void Image_::Img_plus(ListView^ listViewImages, PictureBox^ PB)
 {
 	if ((PB->Width <= Gal.max_x) && (PB->Height <= Gal.max_y)) {
 		PB->Width += 50;
 		PB->Height += 50;
 	}
 }
-
 
 void Gallery::AutoSave()
 {
@@ -541,7 +573,6 @@ void Gallery::AutoSave()
 		ofile2.close();
 	}
 }
-
 void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
 {
 	ifstream ifile;
@@ -610,7 +641,6 @@ void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
 	}
 	ifile2.close();
 }
-
 void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages, PictureBox^ PB)
 {
 	ofstream ofile;

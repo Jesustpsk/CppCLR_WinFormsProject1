@@ -50,10 +50,42 @@ public:
 	void GetStats(int ind);
 	void GetInfo();
 
-	void Search(ListView^, String^);
+	void Search(ListView^, String^, PictureBox^);
 	void SearchPatterns();
 
+	/*void ImgResize(Image^, PictureBox^, Form1^);
+	void ViewMode(ListView^, PictureBox^, Form1^);
+	void ChangeMode(ListView^, PictureBox^, Form1^, array<Button^>^, PictureBox^, PictureBox^, Label^, TextBox^);
+
+	void GoToFirst(ListView^, PictureBox^, Form1^);
+	void GoToLast(ListView^, PictureBox^, Form1^);
+	void Prev_Img(ListView^, PictureBox^, Form1^);
+	void Next_Img(ListView^, PictureBox^, Form1^);
+	void Img_minus(ListView^, PictureBox^);
+	void Img_plus(ListView^, PictureBox^);
+
+	void Rotate_Img(ListView^, PictureBox^, Form1^);
+	void Flip_Img(ListView^, PictureBox^);*/
+
+	void AutoSave();
+	void AutoLoad(ImageList^, ListView^);
+	void DeleteData(ImageList^, ListView^, PictureBox^);
+
+	string GetPath(int);
+private:
+	string PictureName;
+	string PictureDescription;
+	string PictureDate;
+	string PicturePath;
+	string PictureModified;
+};
+
+class Image_ : public Gallery {
+public:
+	Image_(){}
+	~Image_(){}
 	void ImgResize(Image^, PictureBox^, Form1^);
+	void ImgResize(Image^, PictureBox^);
 	void ViewMode(ListView^, PictureBox^, Form1^);
 	void ChangeMode(ListView^, PictureBox^, Form1^, array<Button^>^, PictureBox^, PictureBox^, Label^, TextBox^);
 
@@ -66,15 +98,4 @@ public:
 
 	void Rotate_Img(ListView^, PictureBox^, Form1^);
 	void Flip_Img(ListView^, PictureBox^);
-
-	void AutoSave();
-	void AutoLoad(ImageList^, ListView^);
-	void DeleteData(ImageList^, ListView^, PictureBox^);
-
-private:
-	string PictureName;
-	string PictureDescription;
-	string PictureDate;
-	string PicturePath;
-	string PictureModified;
 };
