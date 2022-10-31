@@ -100,38 +100,6 @@ System::Void CppCLRWinFormsProject::Form1::getInfoAboutAlbumToolStripMenuItem_Cl
 	Gal.GetInfo();
 }
 
-//SEARCH
-
-System::Void CppCLRWinFormsProject::Form1::searchByNumberToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY NUMBER
-{
-	Gallery Gal;
-	Gal.Search_Num(this->listViewImages);
-}
-
-System::Void CppCLRWinFormsProject::Form1::searchByDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY DESCRIPTION
-{
-	Gallery Gal;
-	Gal.Search_Desc(this->listViewImages);
-}
-
-System::Void CppCLRWinFormsProject::Form1::searchByCreationDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY CREATION DATE
-{
-	Gallery Gal;
-	Gal.Search_Creation(this->listViewImages);
-}
-
-System::Void CppCLRWinFormsProject::Form1::modifiedDateToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // BY MODIFIED DATE
-{
-	Gallery Gal;
-	Gal.Search_Modified(this->listViewImages);
-}
-
-System::Void CppCLRWinFormsProject::Form1::unfinishedImagesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) // UNFINISHED
-{
-	Gallery Gal;
-	Gal.Search_Unfinished(this->listViewImages);
-}
-
 //VIEW MODE
 
 System::Void CppCLRWinFormsProject::Form1::button1_Click(System::Object^ sender, System::EventArgs^ e)
@@ -251,5 +219,18 @@ System::Void CppCLRWinFormsProject::Form1::deleteDataToolStripMenuItem_Click(Sys
 {
 	Gallery Gal;
 	Gal.DeleteData(this->imageList, this->listViewImages, this->pictureBox1);
+}
+
+System::Void CppCLRWinFormsProject::Form1::button12_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Gallery Gal;
+	Gal.Search(this->listViewImages, textBox1->Text->ToString());
+	textBox1->Text = "";
+}
+
+System::Void CppCLRWinFormsProject::Form1::searchPatternsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Gallery Gal;
+	Gal.SearchPatterns();
 }
 

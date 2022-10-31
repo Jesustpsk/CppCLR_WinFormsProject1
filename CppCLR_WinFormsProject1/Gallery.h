@@ -50,11 +50,8 @@ public:
 	void GetStats(int ind);
 	void GetInfo();
 
-	void Search_Num(ListView^);
-	void Search_Desc(ListView^);
-	void Search_Creation(ListView^);
-	void Search_Modified(ListView^);
-	void Search_Unfinished(ListView^);
+	void Search(ListView^, String^);
+	void SearchPatterns();
 
 	void ImgResize(Image^, PictureBox^, Form1^);
 	void ViewMode(ListView^, PictureBox^, Form1^);

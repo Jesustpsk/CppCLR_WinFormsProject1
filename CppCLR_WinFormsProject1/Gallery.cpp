@@ -204,61 +204,42 @@ void Gallery::GetInfo()
 	}
 }
 
-
-void Gallery::Search_Num(ListView^ listViewImages)
-{
-	for(int i = 0; i < listViewImages->Items->Count; i++)
-		listViewImages->Items[i]->Selected = false;
-	String^ Num = Microsoft::VisualBasic::Interaction::InputBox("Введите номер изображения для поиска: ", "Input number", "", 100, 100);
-	int num = Convert::ToInt32(Num);
-	num--;
-	
-	listViewImages->Items[num]->Selected = true;
-}
-
-void Gallery::Search_Desc(ListView^ listViewImages)
+void Gallery::Search(ListView^ listViewImages, String^ search_in)
 {
 	for (int i = 0; i < listViewImages->Items->Count; i++)
 		listViewImages->Items[i]->Selected = false;
-	String^ Description = Microsoft::VisualBasic::Interaction::InputBox("Введите описание изображения для поиска: ", "Input description", "", 100, 100);
-	string std_desc = marshal_as<string>(Description);
-	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-		if (Gal.vec_Gal[i].PictureDescription.find(std_desc) != -1)
-			listViewImages->Items[i]->Selected = true;
+	if ((search_in == "") || (search_in == " ") || (search_in == "None.")) { //Unfinished
+		for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+			if (Gal.vec_Gal[i].PictureDescription == "None.")
+				listViewImages->Items[i]->Selected = true;
+		}
 	}
-}
-
-void Gallery::Search_Creation(ListView^ listViewImages)
-{
-	for (int i = 0; i < listViewImages->Items->Count; i++)
-		listViewImages->Items[i]->Selected = false;
-	String^ Creation = Microsoft::VisualBasic::Interaction::InputBox("Введите дату создания изображения для поиска: \nFormat: YYYY-MM-DD HH:MM:SS", "Input creation date", "", 100, 100);
-	string std_creat = marshal_as<string>(Creation);
-	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-		if (Gal.vec_Gal[i].PictureDate == std_creat)
-			listViewImages->Items[i]->Selected = true;
-	}
-}
-
-void Gallery::Search_Modified(ListView^ listViewImages)
-{
-	for (int i = 0; i < listViewImages->Items->Count; i++)
-		listViewImages->Items[i]->Selected = false;
-	String^ Modified = Microsoft::VisualBasic::Interaction::InputBox("Введите дату изменения изображения для поиска: \nFormat: YYYY-MM-DD HH:MM:SS", "Input modified date", "", 100, 100);
-	string std_mod = marshal_as<string>(Modified);
-	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-		if ((Gal.vec_Gal[i].PictureModified == std_mod) && (Gal.vec_Gal[i].PictureModified != ""))
-			listViewImages->Items[i]->Selected = true;
-	}
-}
-
-void Gallery::Search_Unfinished(ListView^ listViewImages)
-{
-	for (int i = 0; i < listViewImages->Items->Count; i++)
-		listViewImages->Items[i]->Selected = false;
-	for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-		if (Gal.vec_Gal[i].PictureDescription == "None.")
-			listViewImages->Items[i]->Selected = true;
+	else {
+		try {																//number
+			int num = Convert::ToInt32(search_in);
+			num--;
+			listViewImages->Items[num]->Selected = true;
+		}
+		catch (Exception^ e) {												//date creat. or mod.
+			string search = marshal_as<string>(search_in);
+			int count = 0;
+			for (int i = 0; i < search.size(); i++) {
+				if ((search[i] == '-') || (search[i] == ':'))
+					count++;
+			}
+			if (count == 4) {
+				for (int i = 0; i < Gal.vec_Gal.size(); i++) {
+					if ((Gal.vec_Gal[i].PictureDate == search) || (Gal.vec_Gal[i].PictureModified == search))
+						listViewImages->Items[i]->Selected = true;
+				}
+			}
+			else {
+				for (int i = 0; i < Gal.vec_Gal.size(); i++) {				//description
+					if (Gal.vec_Gal[i].PictureDescription.find(search) != -1)
+						listViewImages->Items[i]->Selected = true;
+				}
+			}
+		}
 	}
 }
 
@@ -443,6 +424,11 @@ void Gallery::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, 
 		if (PB->Image != nullptr)
 			Gal.ImgResize(PB->Image, PB, form);
 	}
+}
+
+void Gallery::SearchPatterns()
+{
+	MessageBox::Show("Шаблоны поиска:\n1. Для поиска по номеру изображения введите целое число.\n2. Для поиска по дате создания или изменения изображения введите дату (Format: YYYY-MM-DD HH:MM:SS)\n3. Для поиска по комментарию к изображению введите комментарий полностью или частично\n4. Для поиска незаконченых изображений не вводите ничего (Либо введите знак пробела или слово None.)", "Search Patterns", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 
 
