@@ -222,12 +222,18 @@ void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB
 			}
 			catch (Exception^ e) {												//date creat. or mod.
 				string search = marshal_as<string>(search_in);
-				int count = 0;
+				int hyphen = 0;
+				int colon = 0;
+				int space = 0;
 				for (int i = 0; i < search.size(); i++) {
-					if ((search[i] == '-') || (search[i] == ':'))
-						count++;
+					if (search[i] == '-')
+						hyphen++;
+					if (search[i] == ':')
+						colon++;
+					if (search[i] == ' ')
+						space++;
 				}
-				if (count == 4) {
+				if ((hyphen == 2) && (colon == 2) && (space == 1)) {
 					for (int i = 0; i < vec_Gal.size(); i++) {
 						if ((vec_Gal[i].PictureDate == search) || (vec_Gal[i].PictureModified == search))
 							listViewImages->Items[i]->Selected = true;
