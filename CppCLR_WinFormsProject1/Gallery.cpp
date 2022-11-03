@@ -29,7 +29,6 @@ double Gallery::max_y = 0;
 string Gallery::Gal_path = "data_Gal.txt";
 string Gallery::Changes_path = "data_Changes.txt";
 
-Gallery Gal;
 Image_ Img_;
 
 string Gallery::time_now(){
@@ -60,7 +59,7 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 				std_description = "None.";
 			String^ path = images[i];
 			string std_path = marshal_as<string>(path);
-			Gal.vec_Gal.push_back(Gallery(std_name, std_description, std_time, std_path));
+			vec_Gal.push_back(Gallery(std_name, std_description, std_time, std_path));
 		
 			item->ImageIndex = imageList->Images->Count - 1;
 			listViewImages->EndUpdate();
@@ -75,21 +74,21 @@ void Gallery::ChangePictureName(int ind, ListView^ listViewImages)
 {
 	String^ NewName = Microsoft::VisualBasic::Interaction::InputBox("¬ведите новое им€ фото:", "New Name", "", 100, 100);
 	string NName = marshal_as<string>(NewName);
-	Gal.vec_Gal.at(ind).PictureName = NName;
+	vec_Gal.at(ind).PictureName = NName;
 	listViewImages->Items[ind]->Text = NewName;
 	string time = time_now();
-	Gal.Changes.push_back(time);
-	Gal.vec_Gal.at(ind).PictureModified = time;
+	Changes.push_back(time);
+	vec_Gal.at(ind).PictureModified = time;
 	AutoSave();
 }
 void Gallery::ChangePictureDescription(int ind)
 {
 	String^ NewDescription = Microsoft::VisualBasic::Interaction::InputBox("¬ведите новое описание фото:", "New Description", "", 100, 100);
 	string NDesc = marshal_as<string>(NewDescription);
-	Gal.vec_Gal.at(ind).PictureDescription = NDesc;
+	vec_Gal.at(ind).PictureDescription = NDesc;
 	string time = time_now();
-	Gal.Changes.push_back(time);
-	Gal.vec_Gal.at(ind).PictureModified = time;
+	Changes.push_back(time);
+	vec_Gal.at(ind).PictureModified = time;
 	AutoSave();
 }
 void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -105,20 +104,20 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 		for (int i = 0; i < imageList->Images->Count; i++) {
 			if (i != ind) {
-				string path = Gal.vec_Gal.at(i).PicturePath;
+				string path = vec_Gal.at(i).PicturePath;
 				Image^ img = Image::FromFile(marshal_as<String^>(path));
 				IList->Images->Add(img);
 			}
 			else {
 				Image^ img = Image::FromFile(ofd->FileName);
 				IList->Images->Add(img);
-				Gal.vec_Gal.at(i).PicturePath = marshal_as<string>(ofd->FileName);
+				vec_Gal.at(i).PicturePath = marshal_as<string>(ofd->FileName);
 			}
 		}
 
 		imageList->Images->Clear();
 		for (int i = 0; i < IList->Images->Count; i++) {
-			string path = Gal.vec_Gal.at(i).PicturePath;
+			string path = vec_Gal.at(i).PicturePath;
 			Image^ img = Image::FromFile(marshal_as<String^>(path));
 			imageList->Images->Add(img);
 		}
@@ -126,15 +125,15 @@ void Gallery::ChangePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 		listViewImages->BeginUpdate();
 		listViewImages->Items->Clear();
 		for (int i = 0; i < imageList->Images->Count; i++) {
-			ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal.at(i).PictureName), i));
+			ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(vec_Gal.at(i).PictureName), i));
 			item->ImageIndex = i;
 		}
 		listViewImages->EndUpdate();
 		listViewImages->Refresh();
 	}
 	string time = time_now();
-	Gal.Changes.push_back(time);
-	Gal.vec_Gal.at(ind).PictureModified = time;
+	Changes.push_back(time);
+	vec_Gal.at(ind).PictureModified = time;
 	AutoSave();
 }
 void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewImages)
@@ -144,16 +143,16 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 
 	for (int i = 0; i < imageList->Images->Count; i++) {
 		if (i != ind) {
-			string path = Gal.vec_Gal.at(i).PicturePath;
+			string path = vec_Gal.at(i).PicturePath;
 			Image^ img = Image::FromFile(marshal_as<String^>(path));
 			IList->Images->Add(img);
 		}
 	}
-	Gal.vec_Gal.erase(vec_Gal.begin() + ind);
+	vec_Gal.erase(vec_Gal.begin() + ind);
 
 	imageList->Images->Clear();
 	for (int i = 0; i < IList->Images->Count; i++) {
-		string path = Gal.vec_Gal.at(i).PicturePath;
+		string path = vec_Gal.at(i).PicturePath;
 		Image^ img = Image::FromFile(marshal_as<String^>(path));
 		imageList->Images->Add(img);
 	}
@@ -161,23 +160,23 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 	listViewImages->BeginUpdate();
 	listViewImages->Items->Clear();
 	for (int i = 0; i < imageList->Images->Count; i++) {
-		ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal.at(i).PictureName), i));
+		ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(vec_Gal.at(i).PictureName), i));
 		item->ImageIndex = i;
 	}
 	listViewImages->EndUpdate();
 	listViewImages->Refresh();
 	string time = time_now();
-	Gal.Changes.push_back(time);
+	Changes.push_back(time);
 	AutoSave();
 }
 
 void Gallery::GetStats(int ind)
 {
 	String^ answ = "";
-	String^ name = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureName);
-	String^ date = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureDate);
-	String^ description = marshal_as<String^>(Gal.vec_Gal.at(ind).PictureDescription);
-	String^ path = marshal_as<String^>(Gal.vec_Gal.at(ind).PicturePath);
+	String^ name = marshal_as<String^>(vec_Gal.at(ind).PictureName);
+	String^ date = marshal_as<String^>(vec_Gal.at(ind).PictureDate);
+	String^ description = marshal_as<String^>(vec_Gal.at(ind).PictureDescription);
+	String^ path = marshal_as<String^>(vec_Gal.at(ind).PicturePath);
 
 	answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description + "\nPath: " + path;
 	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -185,11 +184,11 @@ void Gallery::GetStats(int ind)
 void Gallery::GetInfo()
 {
 	try {
-		String^ ImageCount = Convert::ToString(Gal.vec_Gal.size());
-		String^ LastAdd = marshal_as<String^>(Gal.vec_Gal.at(Gal.vec_Gal.size() - 1).PictureDate);
+		String^ ImageCount = Convert::ToString(vec_Gal.size());
+		String^ LastAdd = marshal_as<String^>(vec_Gal.at(vec_Gal.size() - 1).PictureDate);
 		String^ LastChange;
-		if (Gal.Changes.size() > 0)
-			LastChange = marshal_as<String^>(Gal.Changes.at(Gal.Changes.size() - 1));
+		if (Changes.size() > 0)
+			LastChange = marshal_as<String^>(Changes.at(Changes.size() - 1));
 		else
 			LastChange = "None.";
 		String^ answ = "";
@@ -201,7 +200,7 @@ void Gallery::GetInfo()
 	}
 }
 string Gallery::GetPath(int ind){
-	return Gal.vec_Gal.at(ind).PicturePath;
+	return vec_Gal.at(ind).PicturePath;
 }
 
 void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB)
@@ -210,8 +209,8 @@ void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB
 		for (int i = 0; i < listViewImages->Items->Count; i++)
 			listViewImages->Items[i]->Selected = false;
 		if ((search_in == "") || (search_in == " ") || (search_in == "None.")) { //Unfinished
-			for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-				if (Gal.vec_Gal[i].PictureDescription == "None.")
+			for (int i = 0; i < vec_Gal.size(); i++) {
+				if (vec_Gal[i].PictureDescription == "None.")
 					listViewImages->Items[i]->Selected = true;
 			}
 		}
@@ -229,14 +228,14 @@ void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB
 						count++;
 				}
 				if (count == 4) {
-					for (int i = 0; i < Gal.vec_Gal.size(); i++) {
-						if ((Gal.vec_Gal[i].PictureDate == search) || (Gal.vec_Gal[i].PictureModified == search))
+					for (int i = 0; i < vec_Gal.size(); i++) {
+						if ((vec_Gal[i].PictureDate == search) || (vec_Gal[i].PictureModified == search))
 							listViewImages->Items[i]->Selected = true;
 					}
 				}
 				else {
-					for (int i = 0; i < Gal.vec_Gal.size(); i++) {				//description
-						if (Gal.vec_Gal[i].PictureDescription.find(search) != -1)
+					for (int i = 0; i < vec_Gal.size(); i++) {				//description
+						if (vec_Gal[i].PictureDescription.find(search) != -1)
 							listViewImages->Items[i]->Selected = true;
 					}
 				}
@@ -244,7 +243,7 @@ void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB
 		}
 		Form1 f;
 		if (f.BtnMode == true) {
-			string path = Gal.GetPath(listViewImages->SelectedIndices[0]);
+			string path = GetPath(listViewImages->SelectedIndices[0]);
 			Image^ img = Image::FromFile(marshal_as<String^>(path));
 			PB->Image = img;
 			Img_.ImgResize(img, PB);
@@ -260,11 +259,11 @@ void Image_::ImgResize(Image^ img, PictureBox^ PB, Form1^ form) {
 	Point Loc;
 	double x, y;
 	double per, out;
-	if (Gal.PicView_mode == 0) {
+	if (PicView_mode == 0) {
 		Loc = Point(485, 27);
 		PB->Size = System::Drawing::Size(400, 400);
 	}
-	else if (Gal.PicView_mode == 1) {
+	else if (PicView_mode == 1) {
 		double form_x = form->Width;
 		double form_y = form->Height;
 		double size_x = form_x - (form_x / 2);
@@ -337,8 +336,8 @@ void Image_::ImgResize(Image^ img, PictureBox^ PB) {
 void Image_::ViewMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
 	if (listViewImages->Items->Count > 0) {
-		(listViewImages->SelectedIndices->Count > 0) ? Gal.PicView_ind = listViewImages->SelectedIndices[0] : Gal.PicView_ind = 0;
-		Image^ img = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.PicView_ind)));
+		(listViewImages->SelectedIndices->Count > 0) ? PicView_ind = listViewImages->SelectedIndices[0] : PicView_ind = 0;
+		Image^ img = Image::FromFile(marshal_as<String^>(GetPath(PicView_ind)));
 		
 		Img_.ImgResize(img, PB, form);
 		PB->Image = img; 
@@ -348,8 +347,8 @@ void Image_::ViewMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 }
 void Image_::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, array<Button^>^ Buts, PictureBox^ back1, PictureBox^ back2, Label^ L, TextBox^ TB)
 {
-	if (Gal.PicView_mode == 0) {
-		Gal.PicView_mode = 1;
+	if (PicView_mode == 0) {
+		PicView_mode = 1;
 
 		form->TopMost = true;
 		form->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -419,15 +418,15 @@ void Image_::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, a
 		PB->Size = System::Drawing::Size(form_x - (form_x / 2), form_y - (form_y / 10));
 		Point pb((form_x / 2) - (size_x / 2), 30);
 		PB->Location = pb;
-		Gal.min_x = PB->Width;
-		Gal.min_y = PB->Height;
-		Gal.max_x = min_x * 3.;
-		Gal.max_y = min_y * 3.;
+		min_x = PB->Width;
+		min_y = PB->Height;
+		max_x = min_x * 3.;
+		max_y = min_y * 3.;
 		if(PB->Image != nullptr)
 			Img_.ImgResize(PB->Image, PB, form);
 	}
 	else {
-		Gal.PicView_mode = 0;
+		PicView_mode = 0;
 
 		form->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Sizable;
 		form->WindowState = FormWindowState::Normal;
@@ -480,49 +479,49 @@ void Image_::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, a
 
 void Image_::GoToFirst(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (Gal.PicView_ind != 0) {
-		Gal.PicView_ind = 0;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(0)));
+	if (PicView_ind != 0) {
+		PicView_ind = 0;
+		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(0)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
-		if(Gal.PicView_mode == 1)
-			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
+		if(PicView_mode == 1)
+			PB->Size = System::Drawing::Size(min_x, min_y);
 		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
 void Image_::GoToLast(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
-		Gal.PicView_ind = Gal.vec_Gal.size() - 1;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.vec_Gal.size() - 1)));
+	if (PicView_ind != vec_Gal.size() - 1) {
+		PicView_ind = vec_Gal.size() - 1;
+		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(vec_Gal.size() - 1)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
-		if (Gal.PicView_mode == 1)
-			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
+		if (PicView_mode == 1)
+			PB->Size = System::Drawing::Size(min_x, min_y);
 		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
 void Image_::Prev_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (Gal.PicView_ind != 0) {
-		Gal.PicView_ind--;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.PicView_ind)));
+	if (PicView_ind != 0) {
+		PicView_ind--;
+		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(PicView_ind)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
-		if (Gal.PicView_mode == 1)
-			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
+		if (PicView_mode == 1)
+			PB->Size = System::Drawing::Size(min_x, min_y);
 		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
 void Image_::Next_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (Gal.PicView_ind != Gal.vec_Gal.size() - 1) {
-		Gal.PicView_ind++;
-		PB->Image = Image::FromFile(marshal_as<String^>(Gal.GetPath(Gal.PicView_ind)));
+	if (PicView_ind != vec_Gal.size() - 1) {
+		PicView_ind++;
+		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(PicView_ind)));
 		PB->SizeMode = PictureBoxSizeMode::StretchImage;
 		PB->Refresh();
-		if (Gal.PicView_mode == 1)
-			PB->Size = System::Drawing::Size(Gal.min_x, Gal.min_y);
+		if (PicView_mode == 1)
+			PB->Size = System::Drawing::Size(min_x, min_y);
 		Img_.ImgResize(PB->Image, PB, form);
 	}
 }
@@ -545,14 +544,14 @@ void Image_::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
 }
 void Image_::Img_minus(ListView^ listViewImages, PictureBox^ PB)
 {
-	if ((PB->Width >= Gal.min_x) && (PB->Height >= Gal.min_y))  {
+	if ((PB->Width >= min_x) && (PB->Height >= min_y))  {
 		PB->Width -= 50;
 		PB->Height -= 50;
 	}
 }
 void Image_::Img_plus(ListView^ listViewImages, PictureBox^ PB)
 {
-	if ((PB->Width <= Gal.max_x) && (PB->Height <= Gal.max_y)) {
+	if ((PB->Width <= max_x) && (PB->Height <= max_y)) {
 		PB->Width += 50;
 		PB->Height += 50;
 	}
@@ -562,14 +561,14 @@ void Gallery::AutoSave()
 {
 	ofstream ofile;
 	ofstream ofile2;
-	ofile.open(Gal.Gal_path, std::ios::out);
-	for (int i = 0; i < Gal.vec_Gal.size(); i++)
-		ofile << Gal.vec_Gal.at(i).PictureName << '\n' << Gal.vec_Gal.at(i).PictureDescription << '\n' << Gal.vec_Gal.at(i).PictureDate << '\n' << Gal.vec_Gal.at(i).PicturePath << '\n' << Gal.vec_Gal.at(i).PictureModified << '\n';
+	ofile.open(Gal_path, std::ios::out);
+	for (int i = 0; i < vec_Gal.size(); i++)
+		ofile << vec_Gal.at(i).PictureName << '\n' << vec_Gal.at(i).PictureDescription << '\n' << vec_Gal.at(i).PictureDate << '\n' << vec_Gal.at(i).PicturePath << '\n' << vec_Gal.at(i).PictureModified << '\n';
 	ofile.close();
-	if (Gal.Changes.size() > 0) {
-		ofile2.open(Gal.Changes_path, std::ios::out);
-		for (int i = 0; i < Gal.Changes.size(); i++)
-			ofile2 << Gal.Changes.at(i) << '\n';
+	if (Changes.size() > 0) {
+		ofile2.open(Changes_path, std::ios::out);
+		for (int i = 0; i < Changes.size(); i++)
+			ofile2 << Changes.at(i) << '\n';
 		ofile2.close();
 	}
 }
@@ -581,7 +580,7 @@ void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
 	int count = 0;
 	int x = 0;
 	int size = 0;
-	ifile.open(Gal.Gal_path);
+	ifile.open(Gal_path);
 	if (ifile.peek() != EOF) {
 		while (!ifile.eof()) {
 			std::getline(ifile, line);
@@ -590,25 +589,25 @@ void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
 		size--; //потому что последн€€ строка пуста€ и не относитс€ ни к одному из файлов
 		size /= 5;
 		for (int i = 0; i < size; i++)
-			Gal.vec_Gal.push_back(Gallery());
+			vec_Gal.push_back(Gallery());
 		ifile.close();
-		ifile.open(Gal.Gal_path);
+		ifile.open(Gal_path);
 		while (x < size) {
 			std::getline(ifile, line);
 			if (count == 0) {
-				Gal.vec_Gal.at(x).PictureName = line;
+				vec_Gal.at(x).PictureName = line;
 			}
 			else if (count == 1) {
-				Gal.vec_Gal.at(x).PictureDescription = line;
+				vec_Gal.at(x).PictureDescription = line;
 			}
 			else if (count == 2) {
-				Gal.vec_Gal.at(x).PictureDate = line;
+				vec_Gal.at(x).PictureDate = line;
 			}
 			else if (count == 3) {
-				Gal.vec_Gal.at(x).PicturePath = line;
+				vec_Gal.at(x).PicturePath = line;
 			}
 			else if (count == 4) {
-				Gal.vec_Gal.at(x).PictureModified = line;
+				vec_Gal.at(x).PictureModified = line;
 			}
 			if (count < 4)
 				count++;
@@ -619,12 +618,12 @@ void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
 		}
 
 		for (int i = 0; i < size; i++) {
-			string std_time = Gal.vec_Gal.at(i).PictureDate;
-			if (Gal.vec_Gal.at(i).PicturePath != "")
+			string std_time = vec_Gal.at(i).PictureDate;
+			if (vec_Gal.at(i).PicturePath != "")
 			{
-				imageList->Images->Add(Image::FromFile(marshal_as<String^>(Gal.vec_Gal.at(i).PicturePath)));
+				imageList->Images->Add(Image::FromFile(marshal_as<String^>(vec_Gal.at(i).PicturePath)));
 				listViewImages->BeginUpdate();
-				ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(Gal.vec_Gal.at(i).PictureName), imageList->Images->Count - 1));
+				ListViewItem^ item = listViewImages->Items->Add(gcnew ListViewItem(marshal_as<String^>(vec_Gal.at(i).PictureName), imageList->Images->Count - 1));
 				item->ImageIndex = imageList->Images->Count - 1;
 				listViewImages->EndUpdate();
 				listViewImages->LargeImageList = imageList;
@@ -633,10 +632,10 @@ void Gallery::AutoLoad(ImageList^ imageList, ListView^ listViewImages)
 		}
 	}
 	ifile.close();
-	ifile2.open(Gal.Changes_path);
+	ifile2.open(Changes_path);
 	if (ifile2.peek() != EOF) {
 		while (std::getline(ifile2, line)) {
-			Gal.Changes.push_back(line);
+			Changes.push_back(line);
 		}
 	}
 	ifile2.close();
@@ -645,13 +644,13 @@ void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages, Picture
 {
 	ofstream ofile;
 	ofstream ofile2;
-	ofile.open(Gal.Gal_path, std::ios::out);
+	ofile.open(Gal_path, std::ios::out);
 	ofile.close();
-	ofile2.open(Gal.Changes_path, std::ios::out);
+	ofile2.open(Changes_path, std::ios::out);
 	ofile2.close();
 	MessageBox::Show("—охраненные данные были очищены!", "Delete data", MessageBoxButtons::OK, MessageBoxIcon::Information);
-	Gal.vec_Gal.clear();
-	Gal.Changes.clear();
+	vec_Gal.clear();
+	Changes.clear();
 	imageList->Images->Clear();
 	listViewImages->Clear();
 	PB->Image = nullptr;
