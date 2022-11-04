@@ -550,7 +550,7 @@ void Image_::Flip_Img(ListView^ listViewImages, PictureBox^ PB)
 }
 void Image_::Img_minus(ListView^ listViewImages, PictureBox^ PB)
 {
-	if ((PB->Width >= min_x) && (PB->Height >= min_y))  {
+	if ((PB->Width > min_x) && (PB->Height > min_y))  {
 		PB->Width -= 50;
 		PB->Height -= 50;
 	}
