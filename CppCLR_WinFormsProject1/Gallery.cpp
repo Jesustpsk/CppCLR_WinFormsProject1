@@ -7,7 +7,7 @@
 #include <string>
 #include <msclr/marshal_cppstd.h>
 #include <fstream>
-#include <algorithm>
+//#include <algorithm>
 
 using std::ifstream;
 using std::ofstream;
@@ -19,6 +19,7 @@ using namespace CppCLRWinFormsProject;
 
 vector <Gallery> Gallery::vec_Gal;
 vector <string> Gallery::Changes;
+vector <My_Exceptions> My_Exceptions::V_My_Exceptions;
 
 int Gallery::PicView_ind = 0;
 int Gallery::PicView_mode = 0;
@@ -183,7 +184,7 @@ void Gallery::GetStats(int ind)
 }
 void Gallery::GetInfo()
 {
-	try {
+	if(vec_Gal.size() != 0){
 		String^ ImageCount = Convert::ToString(vec_Gal.size());
 		String^ LastAdd = marshal_as<String^>(vec_Gal.at(vec_Gal.size() - 1).PictureDate);
 		String^ LastChange;
@@ -195,8 +196,9 @@ void Gallery::GetInfo()
 		answ += "Количество изображений в альбоме: " + ImageCount + "\nДата последнего добавления: " + LastAdd + "\nДата последнего изменения: " + LastChange;
 		MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
-	catch (Exception^ e) {
-		MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	else {
+		My_Exceptions e;
+		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 string Gallery::GetPath(int ind){
@@ -660,4 +662,13 @@ void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages, Picture
 	imageList->Images->Clear();
 	listViewImages->Clear();
 	PB->Image = nullptr;
+}
+
+void My_Exceptions::SetExceptions() {
+	V_My_Exceptions.push_back(My_Exceptions("Альбом пустой"));
+	V_My_Exceptions.push_back(My_Exceptions("Не выбрано изображение!"));
+	V_My_Exceptions.push_back(My_Exceptions("Выбрано несколько фото!"));
+}
+String^ My_Exceptions::GetException(int E_Index) {
+	return marshal_as<String^>(V_My_Exceptions[E_Index].Exception_String);
 }

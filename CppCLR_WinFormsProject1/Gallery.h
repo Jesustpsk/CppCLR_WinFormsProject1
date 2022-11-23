@@ -87,3 +87,19 @@ public:
 	void Rotate_Img(ListView^, PictureBox^, Form1^);
 	void Flip_Img(ListView^, PictureBox^);
 };
+
+class My_Exceptions {
+public:
+	My_Exceptions(){}
+	My_Exceptions(string E) {
+		Exception_String = E;
+	}
+	~My_Exceptions(){}
+
+	static vector <My_Exceptions> V_My_Exceptions;
+
+	void SetExceptions();
+	String^ GetException(int);
+private:
+	string Exception_String;
+};
