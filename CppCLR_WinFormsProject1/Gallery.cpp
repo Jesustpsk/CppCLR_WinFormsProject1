@@ -257,7 +257,11 @@ void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB
 			Img_.ImgResize(img, PB);
 		}
 	}
-	else MessageBox::Show("Альбом пустой!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	else {
+		//throw My_Exceptions(тип исключения) //для того чтобы ловить через try - catch
+		My_Exceptions e;
+		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 void Gallery::SearchPatterns(){
 	MessageBox::Show("Шаблоны поиска:\n1. Для поиска по номеру изображения введите целое число.\n2. Для поиска по дате создания или изменения изображения введите дату (Format: YYYY-MM-DD HH:MM:SS)\n3. Для поиска по комментарию к изображению введите комментарий полностью или частично\n4. Для поиска незаконченых изображений не вводите ничего (Либо введите знак пробела или слово None.)", "Search Patterns", MessageBoxButtons::OK, MessageBoxIcon::Information);
