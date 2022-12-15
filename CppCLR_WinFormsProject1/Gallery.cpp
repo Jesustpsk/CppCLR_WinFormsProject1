@@ -173,14 +173,18 @@ void Gallery::DeletePicture(int ind, ImageList^ imageList, ListView^ listViewIma
 
 void Gallery::GetStats(int ind)
 {
-	String^ answ = "";
-	String^ name = marshal_as<String^>(vec_Gal.at(ind).PictureName);
-	String^ date = marshal_as<String^>(vec_Gal.at(ind).PictureDate);
-	String^ description = marshal_as<String^>(vec_Gal.at(ind).PictureDescription);
-	String^ path = marshal_as<String^>(vec_Gal.at(ind).PicturePath);
+	if (vec_Gal.size() > 0) {
+		String^ answ = "";
+		String^ name = marshal_as<String^>(vec_Gal.at(ind).PictureName);
+		String^ date = marshal_as<String^>(vec_Gal.at(ind).PictureDate);
+		String^ description = marshal_as<String^>(vec_Gal.at(ind).PictureDescription);
+		String^ path = marshal_as<String^>(vec_Gal.at(ind).PicturePath);
 
-	answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description + "\nPath: " + path;
-	MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		answ += "Name: " + name + "\nDate: " + date + "\nDescription: " + description + "\nPath: " + path;
+		MessageBox::Show(answ, "Stats", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	else
+		throw My_Exceptions("Альбом пустой!");
 }
 void Gallery::GetInfo()
 {
@@ -491,50 +495,70 @@ void Image_::ChangeMode(ListView^ listViewImages, PictureBox^ PB, Form1^ form, a
 
 void Image_::GoToFirst(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (PicView_ind != 0) {
-		PicView_ind = 0;
-		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(0)));
-		PB->SizeMode = PictureBoxSizeMode::StretchImage;
-		PB->Refresh();
-		if(PicView_mode == 1)
-			PB->Size = System::Drawing::Size(min_x, min_y);
-		Img_.ImgResize(PB->Image, PB, form);
+	if (listViewImages->Items->Count == 0) {
+		throw My_Exceptions("Альбом пустой!");
+	}
+	else {
+		if (PicView_ind != 0) {
+			PicView_ind = 0;
+			PB->Image = Image::FromFile(marshal_as<String^>(GetPath(0)));
+			PB->SizeMode = PictureBoxSizeMode::StretchImage;
+			PB->Refresh();
+			if (PicView_mode == 1)
+				PB->Size = System::Drawing::Size(min_x, min_y);
+			Img_.ImgResize(PB->Image, PB, form);
+		}
 	}
 }
 void Image_::GoToLast(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (PicView_ind != vec_Gal.size() - 1) {
-		PicView_ind = vec_Gal.size() - 1;
-		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(vec_Gal.size() - 1)));
-		PB->SizeMode = PictureBoxSizeMode::StretchImage;
-		PB->Refresh();
-		if (PicView_mode == 1)
-			PB->Size = System::Drawing::Size(min_x, min_y);
-		Img_.ImgResize(PB->Image, PB, form);
+	if (listViewImages->Items->Count == 0) {
+		throw My_Exceptions("Альбом пустой!");
+	}
+	else {
+		if (PicView_ind != vec_Gal.size() - 1) {
+			PicView_ind = vec_Gal.size() - 1;
+			PB->Image = Image::FromFile(marshal_as<String^>(GetPath(vec_Gal.size() - 1)));
+			PB->SizeMode = PictureBoxSizeMode::StretchImage;
+			PB->Refresh();
+			if (PicView_mode == 1)
+				PB->Size = System::Drawing::Size(min_x, min_y);
+			Img_.ImgResize(PB->Image, PB, form);
+		}
 	}
 }
 void Image_::Prev_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (PicView_ind != 0) {
-		PicView_ind--;
-		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(PicView_ind)));
-		PB->SizeMode = PictureBoxSizeMode::StretchImage;
-		PB->Refresh();
-		if (PicView_mode == 1)
-			PB->Size = System::Drawing::Size(min_x, min_y);
-		Img_.ImgResize(PB->Image, PB, form);
+	if (listViewImages->Items->Count == 0) {
+		throw My_Exceptions("Альбом пустой!");
+	}
+	else {
+		if (PicView_ind != 0) {
+			PicView_ind--;
+			PB->Image = Image::FromFile(marshal_as<String^>(GetPath(PicView_ind)));
+			PB->SizeMode = PictureBoxSizeMode::StretchImage;
+			PB->Refresh();
+			if (PicView_mode == 1)
+				PB->Size = System::Drawing::Size(min_x, min_y);
+			Img_.ImgResize(PB->Image, PB, form);
+		}
 	}
 }
 void Image_::Next_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)
 {
-	if (PicView_ind != vec_Gal.size() - 1) {
-		PicView_ind++;
-		PB->Image = Image::FromFile(marshal_as<String^>(GetPath(PicView_ind)));
-		PB->SizeMode = PictureBoxSizeMode::StretchImage;
-		PB->Refresh();
-		if (PicView_mode == 1)
-			PB->Size = System::Drawing::Size(min_x, min_y);
-		Img_.ImgResize(PB->Image, PB, form);
+	if (listViewImages->Items->Count == 0) {
+		throw My_Exceptions("Альбом пустой!");
+	}
+	else {
+		if (PicView_ind != vec_Gal.size() - 1) {
+			PicView_ind++;
+			PB->Image = Image::FromFile(marshal_as<String^>(GetPath(PicView_ind)));
+			PB->SizeMode = PictureBoxSizeMode::StretchImage;
+			PB->Refresh();
+			if (PicView_mode == 1)
+				PB->Size = System::Drawing::Size(min_x, min_y);
+			Img_.ImgResize(PB->Image, PB, form);
+		}
 	}
 }
 void Image_::Rotate_Img(ListView^ listViewImages, PictureBox^ PB, Form1^ form)

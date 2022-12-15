@@ -21,93 +21,69 @@ System::Void CppCLRWinFormsProject::Form1::btnAddImgage_Click(System::Object^ se
 
 System::Void CppCLRWinFormsProject::Form1::changePictureNameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic name
 {
-	try {
 		Gallery Gal;
 		int ind = listViewImages->SelectedIndices[0];
 		if (listViewImages->SelectedIndices->Count > 1) {
-			My_Exceptions e;
-			MessageBox::Show(e.GetException(1), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Выбрано несколько фото!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else
 			Gal.ChangePictureName(ind, this->listViewImages);
-	}
-	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(2), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::changePictureDescriptionToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic description
 {
-	try {
 		Gallery Gal;
 		int ind = listViewImages->SelectedIndices[0];
 		if (listViewImages->SelectedIndices->Count > 1) {
-			My_Exceptions e;
-			MessageBox::Show(e.GetException(1), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Выбрано несколько фото!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else
 			Gal.ChangePictureDescription(ind);
-	}
-	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(2), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::changePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context change pic
 {
-	try {
 		Gallery Gal;
 		int ind = listViewImages->SelectedIndices[0];
 		if (listViewImages->SelectedIndices->Count > 1) {
-			My_Exceptions e;
-			MessageBox::Show(e.GetException(1), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Выбрано несколько фото!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else
 			Gal.ChangePicture(ind, this->imageList, this->listViewImages);
-	}
-	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(2), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::deletePictureToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Context delete pic
 {
-	try {
 		Gallery Gal;
 		int ind = listViewImages->SelectedIndices[0];
 		if (listViewImages->SelectedIndices->Count > 1) {
-			My_Exceptions e;
-			MessageBox::Show(e.GetException(1), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Выбрано несколько фото!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else
 			Gal.DeletePicture(ind, this->imageList, this->listViewImages);
-	}
-	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(2), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::showPictureStatsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Show picture stats
 {
-	try {
 		Gallery Gal;
 		int ind = listViewImages->SelectedIndices[0];
 		if (listViewImages->SelectedIndices->Count > 1) {
 			My_Exceptions e;
-			MessageBox::Show(e.GetException(1), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Выбрано несколько фото!", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else
 			Gal.GetStats(ind);
-	}
-	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(2), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}
 }
 
 System::Void CppCLRWinFormsProject::Form1::getInfoAboutAlbumToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) //Get info about album
 {
 	Gallery Gal;
-	Gal.GetInfo();
+	try {
+		Gal.GetInfo();
+	}
+	catch (My_Exceptions e) {
+		MessageBox::Show(e.GetException(), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 //VIEW MODE
@@ -139,7 +115,7 @@ System::Void CppCLRWinFormsProject::Form1::button2_Click(System::Object^ sender,
 		Img_.GoToFirst(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(e.GetException(), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 
@@ -150,7 +126,7 @@ System::Void CppCLRWinFormsProject::Form1::button3_Click(System::Object^ sender,
 		Img_.GoToLast(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(e.GetException(), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 
@@ -161,7 +137,7 @@ System::Void CppCLRWinFormsProject::Form1::button4_Click(System::Object^ sender,
 		Img_.Prev_Img(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(e.GetException(), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 
@@ -172,7 +148,7 @@ System::Void CppCLRWinFormsProject::Form1::button5_Click(System::Object^ sender,
 		Img_.Next_Img(this->listViewImages, this->pictureBox1, this);
 	}
 	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(e.GetException(), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 
@@ -183,7 +159,7 @@ System::Void CppCLRWinFormsProject::Form1::button6_Click(System::Object^ sender,
 		Gal.GetStats(Gal.PicView_ind);
 	}
 	catch (My_Exceptions e) {
-		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(e.GetException(), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 
