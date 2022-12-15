@@ -15,7 +15,12 @@ System::Void CppCLRWinFormsProject::Form1::btnAddImgage_Click(System::Object^ se
 
 	if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 	{
-		Gal.addImage(ofd->FileNames, this->imageList, this->listViewImages);
+		try {
+			Gal.addImage(ofd->FileNames, this->imageList, this->listViewImages);
+		}
+		catch (My_Exceptions e) {
+			MessageBox::Show(e.GetException(), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 	}
 }
 
@@ -211,8 +216,6 @@ System::Void CppCLRWinFormsProject::Form1::button11_Click(System::Object^ sender
 
 System::Void CppCLRWinFormsProject::Form1::AutoLoad_Click(System::Object^ sender, System::EventArgs^ e) //autoload
 {
-	My_Exceptions ME;
-	ME.SetExceptions();
 	Gallery Gal;
 	Gal.AutoLoad(this->imageList, this->listViewImages);
 }

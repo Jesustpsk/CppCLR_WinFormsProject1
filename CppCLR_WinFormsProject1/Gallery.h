@@ -96,10 +96,7 @@ public:
 	}
 	~My_Exceptions(){}
 
-	static vector <My_Exceptions> V_My_Exceptions;
-
-	void SetExceptions();
-	String^ GetException(int);
+	String^ GetException();
 private:
 	string Exception_String;
 };

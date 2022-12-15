@@ -19,7 +19,6 @@ using namespace CppCLRWinFormsProject;
 
 vector <Gallery> Gallery::vec_Gal;
 vector <string> Gallery::Changes;
-vector <My_Exceptions> My_Exceptions::V_My_Exceptions;
 
 int Gallery::PicView_ind = 0;
 int Gallery::PicView_mode = 0;
@@ -61,12 +60,14 @@ void Gallery::addImage(array<String^>^ images, ImageList^ imageList, ListView ^l
 			String^ path = images[i];
 			string std_path = marshal_as<string>(path);
 			vec_Gal.push_back(Gallery(std_name, std_description, std_time, std_path));
-		
+
 			item->ImageIndex = imageList->Images->Count - 1;
 			listViewImages->EndUpdate();
-			listViewImages->LargeImageList = imageList;	
+			listViewImages->LargeImageList = imageList;
 			listViewImages->Refresh();
 		}
+		else
+			throw My_Exceptions("Фото не выбрано!");
 	}
 	AutoSave();
 }
@@ -201,8 +202,7 @@ void Gallery::GetInfo()
 		MessageBox::Show(answ, "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 	else {
-		My_Exceptions e;
-		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		throw My_Exceptions("Альбом пустой!");
 	}
 }
 string Gallery::GetPath(int ind){
@@ -262,9 +262,7 @@ void Gallery::Search(ListView^ listViewImages, String^ search_in, PictureBox^ PB
 		}
 	}
 	else {
-		//throw My_Exceptions(тип исключения) //для того чтобы ловить через try - catch
-		My_Exceptions e;
-		MessageBox::Show(e.GetException(0), "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		throw My_Exceptions("Альбом пустой!");
 	}
 }
 void Gallery::SearchPatterns(){
@@ -692,11 +690,6 @@ void Gallery::DeleteData(ImageList^ imageList, ListView^ listViewImages, Picture
 	PB->Image = nullptr;
 }
 
-void My_Exceptions::SetExceptions() {
-	V_My_Exceptions.push_back(My_Exceptions("Альбом пустой"));
-	V_My_Exceptions.push_back(My_Exceptions("Не выбрано изображение!"));
-	V_My_Exceptions.push_back(My_Exceptions("Выбрано несколько фото!"));
-}
-String^ My_Exceptions::GetException(int E_Index) {
-	return marshal_as<String^>(V_My_Exceptions[E_Index].Exception_String);
+String^ My_Exceptions::GetException() {
+	return marshal_as<String^>(Exception_String);
 }
